@@ -62,7 +62,7 @@ export const AreaTip = z.strictObject({
 export type AreaTip = z.infer<typeof AreaTip>;
 
 export const EmergencyNumber = z.strictObject({
-  id, who: z.string(), number: z.string(), dial: z.string().regex(/^\+?[0-9]+$/), note: z.string(),
+  id, who: z.string(), number: z.string(), dial: z.string().regex(/^(\+?[0-9]+|%23[0-9]+)$/), note: z.string(),
   source: sources, sourceUrl: url.optional(), verified: z.boolean()
 });
 export type EmergencyNumber = z.infer<typeof EmergencyNumber>;
