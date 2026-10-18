@@ -9,7 +9,7 @@ export async function cachedRate(): Promise<Rate | undefined> {
 }
 
 async function fromFrankfurter(): Promise<Rate> {
-  const r = await fetch('https://api.frankfurter.dev/v1/latest?base=JPY&symbols=USD');
+  const r = await fetch('https://api.frankfurter.dev/v1/latest?base=JPY&symbols=USD', { signal: AbortSignal.timeout(8000) });
   if (!r.ok) throw new Error('frankfurter ' + r.status);
   const j = await r.json();
   const v = j?.rates?.USD;
@@ -18,7 +18,7 @@ async function fromFrankfurter(): Promise<Rate> {
 }
 
 async function fromErApi(): Promise<Rate> {
-  const r = await fetch('https://open.er-api.com/v6/latest/JPY');
+  const r = await fetch('https://open.er-api.com/v6/latest/JPY', { signal: AbortSignal.timeout(8000) });
   if (!r.ok) throw new Error('er-api ' + r.status);
   const j = await r.json();
   const v = j?.rates?.USD;

@@ -32,7 +32,7 @@ export async function refreshWeather(c: City, ymd: string): Promise<CityWeather>
     try {
       const u = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lng}` +
         '&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunset&timezone=Asia%2FTokyo&forecast_days=16';
-      const r = await fetch(u);
+      const r = await fetch(u, { signal: AbortSignal.timeout(8000) });
       if (r.ok) {
         const j = await r.json();
         const d = j.daily;
