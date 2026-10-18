@@ -8,10 +8,10 @@ export const MODULES: ModuleInfo[] = [
   { path: 'currency', label: 'Currency', ic: '¥', blurb: 'Rate, table, calculator, units', ready: true },
   { path: 'emergency', label: 'Emergency', ic: '🚑', blurb: 'Numbers, pharmacy, earthquakes', ready: true },
   { path: 'purchases', label: 'Souvenirs & tax-free', ic: '🛍️', blurb: 'What we bought, claim log', ready: true },
-  { path: 'konbini', label: 'Konbini', ic: '🏪', blurb: 'Nearest stores', ready: false },
-  { path: 'decoder', label: 'Signs & menus', ic: '🔤', blurb: 'Decode words', ready: false },
-  { path: 'transit', label: 'Transit', ic: '🚄', blurb: 'Tickets, IC cards, taxis', ready: false },
-  { path: 'numbers', label: 'Numbers', ic: '🔢', blurb: 'Prices aloud, counters', ready: false },
+  { path: 'konbini', label: 'Konbini', ic: '🏪', blurb: 'Nearest stores', ready: true },
+  { path: 'decoder', label: 'Signs & menus', ic: '🔤', blurb: 'Decode words', ready: true },
+  { path: 'transit', label: 'Transit', ic: '🚄', blurb: 'Tickets, IC cards, taxis', ready: true },
+  { path: 'numbers', label: 'Numbers', ic: '🔢', blurb: 'Prices aloud, counters', ready: true },
   { path: 'shopping', label: 'Shopping', ic: '🧾', blurb: 'Tax-free rules, sizes', ready: true },
   { path: 'settings', label: 'Settings', ic: '⚙️', blurb: 'Name, units, sync', ready: true }
 ];

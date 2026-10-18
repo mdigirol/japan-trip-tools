@@ -16,6 +16,10 @@ export const PHRASE_TABS = [
   { id: 'emergency', label: 'Emergency' }
 ] as const;
 
+// Phrase ids a native speaker has checked (D9). `npm run review-import` adds to this list.
+export const REVIEWED_PHRASES: string[] = [
+];
+
 interface Opts {
   mvp?: boolean; note?: string; sit?: Situation[]; venues?: Venue[]; places?: Place[]; slots?: string[]; sourceUrl?: string;
 }
@@ -39,7 +43,7 @@ function p(tab: string, id: string, en: string, ja: string, romaji: string, sour
   const d = TAB_DEFAULTS[tab];
   const slots = o.slots ?? (ja.includes('[X]') ? ['X'] : undefined);
   return {
-    id, tab, en, ja, romaji, source, mvp: !!o.mvp, reviewed: false,
+    id, tab, en, ja, romaji, source, mvp: !!o.mvp, reviewed: REVIEWED_PHRASES.includes(id),
     situations: o.sit ?? d.sit, venues: o.venues ?? d.venues,
     ...(o.places ? { places: o.places } : {}),
     ...(slots ? { slots } : {}),

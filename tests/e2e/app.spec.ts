@@ -35,7 +35,8 @@ test('each MVP route renders', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   for (const [hash, h1] of [['', 'Sat, Nov 21 · Kyoto'], ['#/phrases', 'Phrases'], ['#/cards', 'Show cards'], ['#/etiquette', 'Etiquette'],
-    ['#/currency', 'Currency'], ['#/emergency', 'Emergency'], ['#/more', 'More'], ['#/settings', 'Settings'], ['#/shopping', 'Shopping & tax-free'], ['#/purchases', 'Souvenirs & tax-free']]) {
+    ['#/currency', 'Currency'], ['#/emergency', 'Emergency'], ['#/more', 'More'], ['#/settings', 'Settings'], ['#/shopping', 'Shopping & tax-free'], ['#/purchases', 'Souvenirs & tax-free'],
+    ['#/konbini', 'Konbini'], ['#/decoder', 'Signs & menus'], ['#/transit', 'Transit'], ['#/numbers', 'Numbers']]) {
     await page.goto(at('2026-11-21T08:00+09:00', hash));
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(h1);
   }
@@ -132,4 +133,17 @@ test('sync is off with no token, and the claim-log checklist ticks', async ({ pa
   await page.reload();
   await expect(page.getByLabel('Shown at customs: Knife')).toBeChecked();
   await expect(page.getByText('Checklist: 1 of 1 shown')).toBeVisible();
+});
+
+test('konbini "Near me" degrades to the saved list with a message', async ({ page, context }) => {
+  await page.goto(at('2026-11-21T08:00+09:00', '#/konbini'));
+  await context.setOffline(true);
+  await page.getByRole('button', { name: /Near me/ }).click();
+  await expect(page.getByTestId('konbini-msg')).toContainText('Showing today’s saved list');
+  await expect(page.getByRole('heading', { name: /Near today’s areas/ })).toBeVisible();
+});
+
+test('numbers reads prices aloud in romaji', async ({ page }) => {
+  await page.goto(at('2026-11-21T08:00+09:00', '#/numbers'));
+  await expect(page.getByTestId('yen-romaji')).toHaveText('sanzen yonhyaku hachijuu en');
 });

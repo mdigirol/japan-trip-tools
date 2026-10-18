@@ -52,7 +52,7 @@ export default defineConfig({
         runtimeCaching: [
           networkFirst('rates', /^https:\/\/(api\.frankfurter\.(app|dev)|open\.er-api\.com)\//, 30),
           networkFirst('weather', /^https:\/\/api\.open-meteo\.com\//, 10),
-          networkFirst('overpass', /^https:\/\/(overpass-api\.de|overpass\.kumi\.systems|overpass\.private\.coffee)\//, 2)
+          networkFirst('overpass', /^https:\/\/(overpass-api\.de|overpass\.kumi\.systems|maps\.mail\.ru)\//, 2)
         ]
       }
     })

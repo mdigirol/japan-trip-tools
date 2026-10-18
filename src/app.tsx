@@ -4,14 +4,18 @@ import { UpdatePrompt } from './components/UpdatePrompt';
 import { href, useRoute } from './lib/router';
 import { Cards } from './routes/Cards';
 import { Currency } from './routes/Currency';
+import { Decoder } from './routes/Decoder';
 import { Emergency } from './routes/Emergency';
 import { Etiquette } from './routes/Etiquette';
+import { Konbini } from './routes/Konbini';
 import { More } from './routes/More';
+import { Numbers } from './routes/Numbers';
 import { Phrases } from './routes/Phrases';
 import { Purchases } from './routes/Purchases';
 import { Settings } from './routes/Settings';
 import { Shopping } from './routes/Shopping';
 import { Today } from './routes/Today';
+import { Transit } from './routes/Transit';
 
 const NAV = [
   { path: '', label: 'Today', ic: '☀︎' },
@@ -20,7 +24,7 @@ const NAV = [
   { path: 'etiquette', label: 'Etiquette', ic: '🙇' },
   { path: 'more', label: 'More', ic: '☰' }
 ];
-const IN_MORE = new Set(['more', 'currency', 'emergency', 'settings', 'shopping', 'purchases']);
+const IN_MORE = new Set(['more', 'currency', 'emergency', 'settings', 'shopping', 'purchases', 'konbini', 'decoder', 'transit', 'numbers']);
 
 export function App() {
   const route = useRoute();
@@ -36,6 +40,10 @@ export function App() {
     case 'settings': page = <Settings />; break;
     case 'shopping': page = <Shopping />; break;
     case 'purchases': page = <Purchases route={route} />; break;
+    case 'konbini': page = <Konbini />; break;
+    case 'decoder': page = <Decoder />; break;
+    case 'transit': page = <Transit />; break;
+    case 'numbers': page = <Numbers />; break;
     default: page = <Today />;
   }
   const current = IN_MORE.has(p) ? 'more' : NAV.some((n) => n.path === p) ? p : '';
