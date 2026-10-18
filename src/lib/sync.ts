@@ -32,7 +32,8 @@ export function useSyncState() {
 
 // ---- issue body encoding ----
 export function encodeBody(p: Purchase): string {
-  return `<!-- companion ${JSON.stringify(p)} -->\n\n${p.item}${p.forWhom?.length ? ' · for ' + p.forWhom.join(', ') : ''}${p.taxFree ? ' · tax-free' : ''}`;
+  // "--" is escaped so text like "-->" in a note can't end the HTML comment early.
+  return `<!-- companion ${JSON.stringify(p).replace(/--/g, '-\\u002d')} -->\n\n${p.item}${p.forWhom?.length ? ' · for ' + p.forWhom.join(', ') : ''}${p.taxFree ? ' · tax-free' : ''}`;
 }
 
 export function decodeBody(body: string | null | undefined): Purchase | null {
