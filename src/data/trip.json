@@ -1,0 +1,1118 @@
+{
+  "generatedAt": "2026-10-18T20:51:12.572Z",
+  "stays": [
+    {
+      "id": "prince",
+      "name": "The Prince Gallery Tokyo Kioicho",
+      "nameJa": "ザ・プリンスギャラリー 東京紀尾井町",
+      "addrEn": "1-2 Kioi-cho, Chiyoda-ku, Tokyo 102-8585",
+      "addrJa": "〒102-8585 東京都千代田区紀尾井町1-2",
+      "tel": "+81 3-3234-1111",
+      "lat": 35.6796441,
+      "lng": 139.7371118,
+      "from": "2026-11-12",
+      "to": "2026-11-17",
+      "checkIn": "18:30"
+    },
+    {
+      "id": "kinnotake",
+      "name": "Kinnotake Tonosawa",
+      "nameJa": "金乃竹 塔ノ澤",
+      "addrEn": "191 Tonosawa, Hakone-machi, Ashigarashimo-gun, Kanagawa 250-0315",
+      "addrJa": "〒250-0315 神奈川県足柄下郡箱根町塔之澤191",
+      "tel": "+81 460-85-9800",
+      "lat": 35.2337704,
+      "lng": 139.0889513,
+      "from": "2026-11-17",
+      "to": "2026-11-19",
+      "checkIn": "15:15"
+    },
+    {
+      "id": "nol",
+      "name": "nol kyoto sanjo",
+      "nameJa": "nol kyoto sanjo（ノル京都三条）",
+      "addrEn": "700 Osakazaimokucho, Nakagyo-ku, Kyoto 604-8182",
+      "addrJa": "〒604-8182 京都市中京区堺町通姉小路下る大阪材木町700番",
+      "tel": "+81 75-223-0190",
+      "lat": 35.009149,
+      "lng": 135.763336,
+      "from": "2026-11-19",
+      "to": "2026-11-23",
+      "checkIn": "15:00"
+    },
+    {
+      "id": "edition",
+      "name": "The Tokyo EDITION, Toranomon",
+      "nameJa": "東京エディション虎ノ門",
+      "addrEn": "4-1-1 Toranomon, Minato-ku, Tokyo 105-0001",
+      "addrJa": "〒105-0001 東京都港区虎ノ門4-1-1",
+      "tel": "+81 3-5422-1600",
+      "lat": 35.6646936,
+      "lng": 139.7455442,
+      "from": "2026-11-23",
+      "to": "2026-11-27",
+      "checkIn": "15:00"
+    }
+  ],
+  "days": [
+    {
+      "date": "2026-11-11",
+      "dow": "Wed",
+      "seg": "air",
+      "places": [],
+      "area": "New York → over the Pacific",
+      "hoods": [],
+      "venues": [],
+      "points": [],
+      "stayTonight": "air"
+    },
+    {
+      "date": "2026-11-12",
+      "dow": "Thu",
+      "seg": "t1",
+      "places": [
+        "tokyo"
+      ],
+      "area": "Haneda → Kioicho",
+      "hoods": [
+        {
+          "name": "Kioicho and Akasaka",
+          "blurb": "A quiet hilltop district of hotels and embassies around Tokyo Garden Terrace. Downhill, Akasaka-Mitsuke is a dense grid of ramen shops, izakaya and late-night places for office workers.",
+          "slug": "kioicho"
+        }
+      ],
+      "venues": [
+        "shop"
+      ],
+      "points": [
+        {
+          "lat": 35.54546,
+          "lng": 139.76872
+        },
+        {
+          "lat": 35.67964,
+          "lng": 139.73711
+        },
+        {
+          "lat": 35.69078,
+          "lng": 139.70111
+        }
+      ],
+      "stayTonight": "prince"
+    },
+    {
+      "date": "2026-11-13",
+      "dow": "Fri",
+      "seg": "t1",
+      "places": [
+        "tokyo"
+      ],
+      "area": "Tsukiji → Ginza",
+      "hoods": [
+        {
+          "name": "Tsukiji",
+          "blurb": "The old fish-market district. The wholesale market moved to Toyosu in 2018, but the outer-market streets still sell seafood, knives and tea, and serve breakfast from 7.",
+          "slug": "tsukiji"
+        },
+        {
+          "name": "Ginza",
+          "blurb": "Tokyo's upmarket shopping district: flagship stores, department-store food halls, and the city's most famous small cocktail bars, many hidden on upper floors and basements.",
+          "slug": "ginza"
+        }
+      ],
+      "venues": [
+        "market",
+        "restaurant",
+        "shop",
+        "cocktail-bar",
+        "cafe",
+        "sushi-counter"
+      ],
+      "points": [
+        {
+          "lat": 35.66477,
+          "lng": 139.77025
+        },
+        {
+          "lat": 35.66505,
+          "lng": 139.7715
+        },
+        {
+          "lat": 35.67093,
+          "lng": 139.76189
+        },
+        {
+          "lat": 35.66539,
+          "lng": 139.77009
+        },
+        {
+          "lat": 35.6712,
+          "lng": 139.76133
+        },
+        {
+          "lat": 35.67276,
+          "lng": 139.77129
+        },
+        {
+          "lat": 35.67028,
+          "lng": 139.7698
+        },
+        {
+          "lat": 35.67459,
+          "lng": 139.76698
+        },
+        {
+          "lat": 35.67164,
+          "lng": 139.76294
+        },
+        {
+          "lat": 35.67264,
+          "lng": 139.76756
+        }
+      ],
+      "stayTonight": "prince",
+      "stayLastNight": "prince"
+    },
+    {
+      "date": "2026-11-14",
+      "dow": "Sat",
+      "seg": "t1",
+      "places": [
+        "tokyo"
+      ],
+      "area": "Asakusa → Yanaka and Nezu → Shinjuku",
+      "hoods": [
+        {
+          "name": "Asakusa",
+          "blurb": "Old downtown Tokyo, built around Senso-ji. Rickshaws, craft shops, traditional sweets and the Sumida River, with Skytree across the water.",
+          "slug": "asakusa"
+        },
+        {
+          "name": "Yanaka and Nezu",
+          "blurb": "One of the few areas that escaped wartime bombing: wooden houses, temples, cats and small cafes. Slow and residential.",
+          "slug": "yanaka-nezu"
+        },
+        {
+          "name": "Nishi-Shinjuku and Kabukicho",
+          "blurb": "Skyscrapers and the world's busiest station. Beside it, the postwar alleys of Omoide Yokocho (yakitori) and Golden Gai (tiny bars) keep the old night-time Tokyo.",
+          "slug": "shinjuku"
+        }
+      ],
+      "venues": [
+        "temple",
+        "restaurant",
+        "cafe",
+        "sushi-counter",
+        "shrine",
+        "izakaya",
+        "cocktail-bar"
+      ],
+      "points": [
+        {
+          "lat": 35.71477,
+          "lng": 139.79666
+        },
+        {
+          "lat": 35.71161,
+          "lng": 139.79373
+        },
+        {
+          "lat": 35.71634,
+          "lng": 139.79694
+        },
+        {
+          "lat": 35.71289,
+          "lng": 139.79297
+        },
+        {
+          "lat": 35.72116,
+          "lng": 139.77072
+        },
+        {
+          "lat": 35.72014,
+          "lng": 139.76077
+        },
+        {
+          "lat": 35.6927,
+          "lng": 139.69958
+        },
+        {
+          "lat": 35.68948,
+          "lng": 139.69661
+        },
+        {
+          "lat": 35.69411,
+          "lng": 139.70476
+        }
+      ],
+      "stayTonight": "prince",
+      "stayLastNight": "prince"
+    },
+    {
+      "date": "2026-11-15",
+      "dow": "Sun",
+      "seg": "t1",
+      "places": [
+        "tokyo"
+      ],
+      "area": "Kichijoji → Shimokitazawa → Shibuya",
+      "hoods": [
+        {
+          "name": "Kichijoji",
+          "blurb": "A relaxed western suburb that Tokyoites often rank as the best place to live: Inokashira Park, the Ghibli Museum, and market alleys by the station.",
+          "slug": "kichijoji"
+        },
+        {
+          "name": "Shimokitazawa",
+          "blurb": "The bohemian neighbourhood: vintage clothes, record shops, small theatres, live music and coffee.",
+          "slug": "shimokitazawa"
+        },
+        {
+          "name": "Shibuya",
+          "blurb": "Youth culture, the scramble crossing and the big entertainment district, with a cluster of record and vinyl bars on its quieter side streets.",
+          "slug": "shibuya"
+        }
+      ],
+      "venues": [
+        "cafe",
+        "izakaya",
+        "restaurant",
+        "shop",
+        "cocktail-bar"
+      ],
+      "points": [
+        {
+          "lat": 35.70145,
+          "lng": 139.58257
+        },
+        {
+          "lat": 35.7046,
+          "lng": 139.57469
+        },
+        {
+          "lat": 35.70375,
+          "lng": 139.57917
+        },
+        {
+          "lat": 35.66158,
+          "lng": 139.66689
+        },
+        {
+          "lat": 35.65914,
+          "lng": 139.6676
+        },
+        {
+          "lat": 35.66058,
+          "lng": 139.702
+        }
+      ],
+      "stayTonight": "prince",
+      "stayLastNight": "prince"
+    },
+    {
+      "date": "2026-11-16",
+      "dow": "Mon",
+      "seg": "t1",
+      "places": [
+        "tokyo"
+      ],
+      "area": "Harajuku → Shibuya → Ebisu",
+      "hoods": [
+        {
+          "name": "Harajuku and Omotesando",
+          "blurb": "Teen fashion and sweets on Takeshita Street; Cat Street's independent boutiques; and Omotesando's designer architecture a block away.",
+          "slug": "harajuku"
+        },
+        {
+          "name": "Shibuya",
+          "blurb": "Shopping towers, Shibuya Sky, and a dense nightlife district around Dogenzaka and Jinnan.",
+          "slug": "shibuya"
+        },
+        {
+          "name": "Ebisu",
+          "blurb": "A grown-up, food-and-drink neighbourhood one stop south of Shibuya: izakaya, wine bars and small cocktail and record bars.",
+          "slug": "ebisu"
+        }
+      ],
+      "venues": [
+        "cafe",
+        "shop",
+        "restaurant",
+        "cocktail-bar"
+      ],
+      "points": [
+        {
+          "lat": 35.67103,
+          "lng": 139.70518
+        },
+        {
+          "lat": 35.67065,
+          "lng": 139.70331
+        },
+        {
+          "lat": 35.66196,
+          "lng": 139.69844
+        },
+        {
+          "lat": 35.65931,
+          "lng": 139.69755
+        },
+        {
+          "lat": 35.68932,
+          "lng": 139.69181
+        },
+        {
+          "lat": 35.66424,
+          "lng": 139.69923
+        },
+        {
+          "lat": 35.64732,
+          "lng": 139.71045
+        },
+        {
+          "lat": 35.64649,
+          "lng": 139.70865
+        },
+        {
+          "lat": 35.64733,
+          "lng": 139.70735
+        }
+      ],
+      "stayTonight": "prince",
+      "stayLastNight": "prince"
+    },
+    {
+      "date": "2026-11-17",
+      "dow": "Tue",
+      "seg": "hk",
+      "places": [
+        "hakone",
+        "tokyo"
+      ],
+      "area": "Chiyoda morning → Hakone",
+      "hoods": [
+        {
+          "name": "Jimbocho",
+          "blurb": "Tokyo's book town: over a hundred used and antique booksellers, plus curry shops and old coffee houses.",
+          "slug": "jimbocho"
+        },
+        {
+          "name": "Marunouchi and the Imperial Palace",
+          "blurb": "The business district between Tokyo Station and the palace moats, with the free East Gardens on the old Edo Castle site.",
+          "slug": "marunouchi"
+        },
+        {
+          "name": "Hakone (Tonosawa)",
+          "blurb": "A hot-spring valley in the mountains southwest of Tokyo. Tonosawa is a small riverside onsen village one stop above Hakone-Yumoto.",
+          "slug": "hakone"
+        }
+      ],
+      "venues": [
+        "cafe",
+        "train",
+        "taxi",
+        "ryokan",
+        "onsen",
+        "shop"
+      ],
+      "points": [
+        {
+          "lat": 35.69374,
+          "lng": 139.7613
+        },
+        {
+          "lat": 35.68678,
+          "lng": 139.75714
+        },
+        {
+          "lat": 35.67964,
+          "lng": 139.73711
+        },
+        {
+          "lat": 35.69247,
+          "lng": 139.69873
+        },
+        {
+          "lat": 35.2332,
+          "lng": 139.1035
+        },
+        {
+          "lat": 35.23377,
+          "lng": 139.08895
+        },
+        {
+          "lat": 35.23299,
+          "lng": 139.10368
+        }
+      ],
+      "stayTonight": "kinnotake",
+      "stayLastNight": "prince"
+    },
+    {
+      "date": "2026-11-18",
+      "dow": "Wed",
+      "seg": "hk",
+      "places": [
+        "hakone"
+      ],
+      "area": "Ryokan day · optional Lake Ashi loop",
+      "hoods": [
+        {
+          "name": "Gora and Owakudani",
+          "blurb": "The upper Hakone valley: art museums, gardens and the volcanic vents of Owakudani, linked by cable car and ropeway.",
+          "slug": "hakone-upper"
+        },
+        {
+          "name": "Lake Ashi and Motohakone",
+          "blurb": "A crater lake with sightseeing ships, Hakone Shrine's torii in the water, and the classic view of Mt. Fuji on a clear day.",
+          "slug": "hakone-upper"
+        }
+      ],
+      "venues": [
+        "train",
+        "shrine",
+        "ryokan",
+        "onsen"
+      ],
+      "points": [
+        {
+          "lat": 35.23377,
+          "lng": 139.08895
+        },
+        {
+          "lat": 35.25085,
+          "lng": 139.0482
+        },
+        {
+          "lat": 35.24516,
+          "lng": 139.05073
+        },
+        {
+          "lat": 35.24447,
+          "lng": 139.01985
+        },
+        {
+          "lat": 35.23744,
+          "lng": 138.99449
+        },
+        {
+          "lat": 35.20483,
+          "lng": 139.02538
+        },
+        {
+          "lat": 35.20095,
+          "lng": 139.03053
+        }
+      ],
+      "stayTonight": "kinnotake",
+      "stayLastNight": "kinnotake"
+    },
+    {
+      "date": "2026-11-19",
+      "dow": "Thu",
+      "seg": "ky",
+      "places": [
+        "kyoto",
+        "hakone"
+      ],
+      "area": "Hakone → Kyoto · Nishiki, Higashiyama, Gion",
+      "hoods": [
+        {
+          "name": "Downtown Kyoto (Sanjo and Nishiki)",
+          "blurb": "The flat grid around the hotel: covered shopping arcades, Nishiki Market and the Kamo River.",
+          "slug": "kyoto-downtown"
+        },
+        {
+          "name": "Higashiyama",
+          "blurb": "The eastern hills: Kiyomizu-dera, stone lanes of wooden shops, and the Yasaka Pagoda. Kyoto at its most traditional.",
+          "slug": "higashiyama"
+        },
+        {
+          "name": "Gion and Pontocho",
+          "blurb": "The geisha districts: teahouses on Hanamikoji, the willow-lined Shirakawa canal, and Pontocho's lantern-lit lane of restaurants by the river.",
+          "slug": "gion"
+        }
+      ],
+      "venues": [
+        "taxi",
+        "shinkansen",
+        "market",
+        "restaurant",
+        "cocktail-bar"
+      ],
+      "points": [
+        {
+          "lat": 35.23377,
+          "lng": 139.08895
+        },
+        {
+          "lat": 35.2562,
+          "lng": 139.1554
+        },
+        {
+          "lat": 35.00915,
+          "lng": 135.76334
+        },
+        {
+          "lat": 35.00503,
+          "lng": 135.76472
+        },
+        {
+          "lat": 34.99666,
+          "lng": 135.78101
+        },
+        {
+          "lat": 35.00361,
+          "lng": 135.77504
+        },
+        {
+          "lat": 35.00607,
+          "lng": 135.77109
+        },
+        {
+          "lat": 35.00501,
+          "lng": 135.7703
+        }
+      ],
+      "stayTonight": "nol",
+      "stayLastNight": "kinnotake"
+    },
+    {
+      "date": "2026-11-20",
+      "dow": "Fri",
+      "seg": "ky",
+      "places": [
+        "kyoto",
+        "osaka"
+      ],
+      "area": "Fushimi Inari at dawn → Osaka",
+      "hoods": [
+        {
+          "name": "Fushimi",
+          "blurb": "South Kyoto, home to Fushimi Inari's torii mountain and old sake breweries.",
+          "slug": "fushimi"
+        },
+        {
+          "name": "Minami: Namba and Dotonbori",
+          "blurb": "Osaka's neon heart: the canal with the giant signs, takoyaki and okonomiyaki, and the narrow food alleys of Hozenji Yokocho and Ura-Namba.",
+          "slug": "namba"
+        },
+        {
+          "name": "Amerikamura and Shinsaibashi",
+          "blurb": "Youth fashion and vintage west of the Midosuji boulevard, with good cocktail bars tucked into its towers.",
+          "slug": "shinsaibashi"
+        },
+        {
+          "name": "Umeda (Kita)",
+          "blurb": "Osaka's business and rail hub. Under the station buildings is a maze of basement bars and restaurants.",
+          "slug": "umeda"
+        }
+      ],
+      "venues": [
+        "shrine",
+        "train",
+        "restaurant",
+        "izakaya",
+        "shop",
+        "cocktail-bar"
+      ],
+      "points": [
+        {
+          "lat": 34.96769,
+          "lng": 135.77919
+        },
+        {
+          "lat": 35.00369,
+          "lng": 135.76045
+        },
+        {
+          "lat": 34.66535,
+          "lng": 135.50624
+        },
+        {
+          "lat": 34.66879,
+          "lng": 135.50096
+        },
+        {
+          "lat": 34.66613,
+          "lng": 135.50157
+        },
+        {
+          "lat": 34.6653,
+          "lng": 135.50229
+        },
+        {
+          "lat": 34.66812,
+          "lng": 135.50261
+        },
+        {
+          "lat": 34.67289,
+          "lng": 135.49857
+        },
+        {
+          "lat": 34.66835,
+          "lng": 135.50322
+        },
+        {
+          "lat": 34.67203,
+          "lng": 135.49833
+        },
+        {
+          "lat": 34.69861,
+          "lng": 135.49613
+        },
+        {
+          "lat": 34.7052,
+          "lng": 135.4984
+        }
+      ],
+      "stayTonight": "nol",
+      "stayLastNight": "nol"
+    },
+    {
+      "date": "2026-11-21",
+      "dow": "Sat",
+      "seg": "ky",
+      "places": [
+        "kyoto",
+        "nara"
+      ],
+      "area": "Kinkaku-ji → Nara → Kyoto bars",
+      "hoods": [
+        {
+          "name": "Kinugasa (northwest Kyoto)",
+          "blurb": "Temple country at the foot of the hills: Kinkaku-ji, Ryoan-ji and Ninna-ji.",
+          "slug": "kinugasa"
+        },
+        {
+          "name": "Nara",
+          "blurb": "Japan's capital in the 700s. The temples and shrines of Nara Park sit among freely roaming deer.",
+          "slug": "nara"
+        },
+        {
+          "name": "Higashiyama and Kiyamachi",
+          "blurb": "Back in Kyoto: the temple hills for the night illumination, then Kiyamachi's canal-side bars near the hotel.",
+          "slug": "higashiyama"
+        }
+      ],
+      "venues": [
+        "temple",
+        "shrine",
+        "cocktail-bar",
+        "restaurant"
+      ],
+      "points": [
+        {
+          "lat": 35.03937,
+          "lng": 135.72924
+        },
+        {
+          "lat": 34.985,
+          "lng": 135.7575
+        },
+        {
+          "lat": 34.68505,
+          "lng": 135.84301
+        },
+        {
+          "lat": 34.68899,
+          "lng": 135.83982
+        },
+        {
+          "lat": 34.68155,
+          "lng": 135.84847
+        },
+        {
+          "lat": 34.68418,
+          "lng": 135.82643
+        },
+        {
+          "lat": 34.99764,
+          "lng": 135.77971
+        },
+        {
+          "lat": 34.99467,
+          "lng": 135.78466
+        },
+        {
+          "lat": 35.00133,
+          "lng": 135.76696
+        },
+        {
+          "lat": 35.01332,
+          "lng": 135.77056
+        }
+      ],
+      "stayTonight": "nol",
+      "stayLastNight": "nol"
+    },
+    {
+      "date": "2026-11-22",
+      "dow": "Sun",
+      "seg": "ky",
+      "places": [
+        "kyoto"
+      ],
+      "area": "Arashiyama",
+      "hoods": [
+        {
+          "name": "Arashiyama and Sagano",
+          "blurb": "Kyoto's western edge: the bamboo grove, Zen temples, the Togetsukyo Bridge and maple-covered hills. Busiest district in Kyoto in autumn.",
+          "slug": "arashiyama"
+        },
+        {
+          "name": "Kameoka and the Hozu gorge",
+          "blurb": "A rural town over the mountain, reached by the Sagano train and left by river boat through the gorge.",
+          "slug": "hozu"
+        },
+        {
+          "name": "Kiyamachi",
+          "blurb": "Back by the hotel: a canal street of small restaurants and bars, for an easy dinner.",
+          "slug": "kyoto-downtown"
+        }
+      ],
+      "venues": [
+        "train",
+        "temple",
+        "restaurant"
+      ],
+      "points": [
+        {
+          "lat": 35.01878,
+          "lng": 135.68141
+        },
+        {
+          "lat": 35.01682,
+          "lng": 135.6713
+        },
+        {
+          "lat": 35.01584,
+          "lng": 135.67377
+        },
+        {
+          "lat": 35.01857,
+          "lng": 135.68078
+        },
+        {
+          "lat": 35.01317,
+          "lng": 135.60676
+        },
+        {
+          "lat": 35.0172,
+          "lng": 135.58686
+        },
+        {
+          "lat": 35.01288,
+          "lng": 135.67777
+        },
+        {
+          "lat": 35.00915,
+          "lng": 135.76334
+        },
+        {
+          "lat": 35.00847,
+          "lng": 135.77057
+        }
+      ],
+      "stayTonight": "nol",
+      "stayLastNight": "nol"
+    },
+    {
+      "date": "2026-11-23",
+      "dow": "Mon",
+      "seg": "t2",
+      "places": [
+        "tokyo",
+        "kyoto"
+      ],
+      "area": "Kyoto → Tokyo Station → Toranomon → Azabu-Juban",
+      "hoods": [
+        {
+          "name": "Marunouchi and Otemachi",
+          "blurb": "The business district around Tokyo Station's red-brick building, with luxury hotels on its upper floors.",
+          "slug": "marunouchi"
+        },
+        {
+          "name": "Toranomon",
+          "blurb": "The new business district by the EDITION: Toranomon Hills towers and Azabudai Hills, a short walk from Tokyo Tower.",
+          "slug": "toranomon"
+        },
+        {
+          "name": "Higashi-Ginza",
+          "blurb": "The theatre end of Ginza around Kabuki-za, with more relaxed izakaya than the main strip.",
+          "slug": "ginza"
+        },
+        {
+          "name": "Azabu-Juban",
+          "blurb": "An old shopping street turned upscale neighbourhood, with some of Tokyo's best small cocktail bars within a block of each other.",
+          "slug": "azabu-juban"
+        }
+      ],
+      "venues": [
+        "shinkansen",
+        "shop",
+        "cocktail-bar",
+        "restaurant"
+      ],
+      "points": [
+        {
+          "lat": 35.00915,
+          "lng": 135.76334
+        },
+        {
+          "lat": 34.9858,
+          "lng": 135.7588
+        },
+        {
+          "lat": 35.6825,
+          "lng": 139.76868
+        },
+        {
+          "lat": 35.66469,
+          "lng": 139.74554
+        },
+        {
+          "lat": 35.688,
+          "lng": 139.76322
+        },
+        {
+          "lat": 35.6705,
+          "lng": 139.76835
+        },
+        {
+          "lat": 35.65638,
+          "lng": 139.73425
+        }
+      ],
+      "stayTonight": "edition",
+      "stayLastNight": "nol",
+      "note": "Public holiday (Labor Thanksgiving Day)"
+    },
+    {
+      "date": "2026-11-24",
+      "dow": "Tue",
+      "seg": "t2",
+      "places": [
+        "tokyo"
+      ],
+      "area": "Shiba Park → Ginza → Hama-rikyu → Nihonbashi → Azabu-Juban",
+      "hoods": [
+        {
+          "name": "Shiba Park and Hama-rikyu",
+          "blurb": "Zojo-ji, the Tokugawa family temple under Tokyo Tower, and a former shogun's seaside garden by the old Tsukiji waterfront.",
+          "slug": "hama-rikyu"
+        },
+        {
+          "name": "Ginza",
+          "blurb": "Department stores and flagship shops, with rooftop and upper-floor bars.",
+          "slug": "ginza"
+        },
+        {
+          "name": "Nihonbashi",
+          "blurb": "The old merchants' quarter north of Ginza, built around Takashimaya's 1933 department store.",
+          "slug": "nihonbashi"
+        },
+        {
+          "name": "Azabu-Juban",
+          "blurb": "Tonight's base for dinner and both bars, all within a block.",
+          "slug": "azabu-juban"
+        }
+      ],
+      "venues": [
+        "temple",
+        "restaurant",
+        "cafe",
+        "cocktail-bar"
+      ],
+      "points": [
+        {
+          "lat": 35.65748,
+          "lng": 139.74829
+        },
+        {
+          "lat": 35.67062,
+          "lng": 139.76522
+        },
+        {
+          "lat": 35.65966,
+          "lng": 139.76341
+        },
+        {
+          "lat": 35.68064,
+          "lng": 139.77444
+        },
+        {
+          "lat": 35.669,
+          "lng": 139.76436
+        },
+        {
+          "lat": 35.65503,
+          "lng": 139.73472
+        },
+        {
+          "lat": 35.65649,
+          "lng": 139.73426
+        },
+        {
+          "lat": 35.65674,
+          "lng": 139.73435
+        }
+      ],
+      "stayTonight": "edition",
+      "stayLastNight": "edition"
+    },
+    {
+      "date": "2026-11-25",
+      "dow": "Wed",
+      "seg": "t2",
+      "places": [
+        "tokyo",
+        "maihama"
+      ],
+      "area": "Tokyo DisneySea",
+      "hoods": [
+        {
+          "name": "Maihama (Tokyo Bay)",
+          "blurb": "The Tokyo Disney Resort on reclaimed land in Chiba, about 40 minutes from the hotel.",
+          "slug": "maihama"
+        }
+      ],
+      "venues": [
+        "theme-park",
+        "cocktail-bar"
+      ],
+      "points": [
+        {
+          "lat": 35.62671,
+          "lng": 139.88508
+        },
+        {
+          "lat": 35.66485,
+          "lng": 139.74547
+        }
+      ],
+      "stayTonight": "edition",
+      "stayLastNight": "edition"
+    },
+    {
+      "date": "2026-11-26",
+      "dow": "Thu",
+      "seg": "t2",
+      "places": [
+        "tokyo"
+      ],
+      "area": "Meiji Jingu → Shinjuku Gyoen → Shinjuku farewell",
+      "hoods": [
+        {
+          "name": "Harajuku and Yoyogi",
+          "blurb": "Meiji Jingu's forest and Yoyogi Park's ginkgo avenue, beside the fashion streets.",
+          "slug": "meiji-jingu"
+        },
+        {
+          "name": "Nishi-Shinjuku",
+          "blurb": "The skyscraper district, with the free City Hall observation deck and the Park Hyatt.",
+          "slug": "shinjuku"
+        },
+        {
+          "name": "Shinjuku Gyoen and Sendagaya",
+          "blurb": "The great imperial garden and the quiet streets around it, with good ramen.",
+          "slug": "shinjuku-gyoen"
+        },
+        {
+          "name": "Roppongi",
+          "blurb": "Nightlife, art museums and Roppongi Hills, where the Jiro branch is.",
+          "slug": "roppongi"
+        }
+      ],
+      "venues": [
+        "shrine",
+        "ramen",
+        "restaurant",
+        "cocktail-bar"
+      ],
+      "points": [
+        {
+          "lat": 35.6764,
+          "lng": 139.69933
+        },
+        {
+          "lat": 35.67006,
+          "lng": 139.69497
+        },
+        {
+          "lat": 35.68932,
+          "lng": 139.69181
+        },
+        {
+          "lat": 35.68735,
+          "lng": 139.70386
+        },
+        {
+          "lat": 35.68518,
+          "lng": 139.71005
+        },
+        {
+          "lat": 35.66469,
+          "lng": 139.74554
+        },
+        {
+          "lat": 35.6587,
+          "lng": 139.72914
+        },
+        {
+          "lat": 35.68611,
+          "lng": 139.6904
+        }
+      ],
+      "stayTonight": "edition",
+      "stayLastNight": "edition",
+      "note": "US Thanksgiving"
+    },
+    {
+      "date": "2026-11-27",
+      "dow": "Fri",
+      "seg": "t2",
+      "places": [
+        "tokyo"
+      ],
+      "area": "Kappabashi → Toranomon → Haneda",
+      "hoods": [
+        {
+          "name": "Kappabashi",
+          "blurb": "The kitchen-supply street between Ueno and Asakusa: knives, ceramics, lacquer and plastic food models.",
+          "slug": "kappabashi"
+        },
+        {
+          "name": "Toranomon",
+          "blurb": "The hotel's neighbourhood, for the last lunch and bag pick-up.",
+          "slug": "toranomon"
+        }
+      ],
+      "venues": [
+        "shop",
+        "sushi-counter",
+        "restaurant"
+      ],
+      "points": [
+        {
+          "lat": 35.71058,
+          "lng": 139.78796
+        },
+        {
+          "lat": 35.66748,
+          "lng": 139.74748
+        },
+        {
+          "lat": 35.66469,
+          "lng": 139.74554
+        },
+        {
+          "lat": 35.54546,
+          "lng": 139.76872
+        }
+      ],
+      "stayTonight": "air",
+      "stayLastNight": "edition"
+    }
+  ]
+}
