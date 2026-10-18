@@ -15,9 +15,9 @@ describe('konbini', () => {
 
   // AC §6.12. Skipped only until `npm run build-konbini` has filled Nov 21.
   it.skipIf(!nov21.length)('Nov 21 lists stores near Kinkaku-ji, Nara Park and the Kyoto hotel', () => {
-    const near = (lat: number, lng: number) => nov21.some((k) => distM(k, { lat, lng }) <= 700);
+    const near = (lat: number, lng: number, m = 700) => nov21.some((k) => distM(k, { lat, lng }) <= m);
     expect(nov21.some((k) => k.nearHotel)).toBe(true);
     expect(near(35.0394, 135.7292)).toBe(true);   // Kinkaku-ji
-    expect(near(34.6851, 135.8430)).toBe(true);   // Nara Park
+    expect(near(34.6851, 135.8430, 1500)).toBe(true);   // Nara Park: no store inside the park; nearest are by Kintetsu Nara
   });
 });

@@ -6,7 +6,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { distM, overpass, type Konbini } from '../src/lib/overpass';
 
 const trip = JSON.parse(readFileSync('src/data/trip.json', 'utf8'));
-const RADIUS = 600, PER_DAY = 40;
+const RADIUS = 600, PER_DAY = 50;
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 interface Pt { lat: number; lng: number; hotel?: boolean }
@@ -35,11 +35,16 @@ for (const day of trip.days) {
       const dPoint = Math.min(...pts.map((p) => distM(k, p)));
       return { ...k, dist: Math.round(Math.min(dHotel, dPoint)), nearHotel: dHotel <= RADIUS };
     })
-    // Keep the nearest to the hotel, plus the nearest to the day's points.
-    .sort((a, b) => (+b.nearHotel - +a.nearHotel) || a.dist - b.dist);
-  const hotelSide = ranked.filter((k) => k.nearHotel).slice(0, 8);
-  const daySide = ranked.filter((k) => !k.nearHotel).slice(0, PER_DAY - hotelSide.length);
-  out.days[day.date] = [...hotelSide, ...daySide];
+    .sort((a, b) => a.dist - b.dist);
+  // Keep up to 8 nearest the hotel, then the 3 nearest each of the day's points, so every area gets some.
+  const keep = new Map<string, (typeof ranked)[number]>();
+  const key = (k: Konbini) => k.lat.toFixed(5) + k.lng.toFixed(5);
+  for (const k of ranked.filter((x) => x.nearHotel).slice(0, 8)) keep.set(key(k), k);
+  for (const p of day.points as Pt[]) {
+    ranked.filter((k) => !keep.has(key(k))).sort((a, b) => distM(a, p) - distM(b, p)).filter((k) => distM(k, p) <= RADIUS).slice(0, 3)
+      .forEach((k) => keep.set(key(k), k));
+  }
+  out.days[day.date] = [...keep.values()].slice(0, PER_DAY).sort((a, b) => (+b.nearHotel - +a.nearHotel) || a.dist - b.dist);
   console.log(`${day.date}: ${list.length} found, kept ${out.days[day.date].length}`);
   await sleep(3000);
 }
