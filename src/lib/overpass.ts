@@ -5,8 +5,7 @@ export interface Konbini { name: string; brand: string; lat: number; lng: number
 // The main server first, then public mirrors. Each gets a short timeout.
 export const OVERPASS_ENDPOINTS = [
   'https://overpass-api.de/api/interpreter',
-  'https://overpass.kumi.systems/api/interpreter',
-  'https://maps.mail.ru/osm/tools/overpass/api/interpreter'
+  'https://overpass.kumi.systems/api/interpreter'
 ];
 
 export async function overpass(query: string, timeoutMs = 25000, headers: Record<string, string> = {}): Promise<Konbini[]> {

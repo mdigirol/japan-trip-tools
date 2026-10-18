@@ -11,7 +11,7 @@ Numbers must be verified against an official source before shipping, and shown a
 | Japan Visitor Hotline (JNTO) | 050-3816-2787 | Free, English, 24/7. Accidents, disasters, general trouble. | [N] |
 | US Embassy Tokyo | 03-3224-5000 | American Citizen Services. | [V] |
 | US Consulate General Osaka-Kobe | 06-6315-5900 | Covers Kyoto, Osaka, Nara. | [V] |
-| AMDA International Medical Information Center | 03-6233-9266 | Finds clinics that speak English. | [V] |
+| AMDA International Medical Information Center | 0120-339-266 (toll-free; alt. 03-6233-9266) | Finds clinics that speak English. | [V] |
 | Tokyo "Himawari" medical information | 03-5285-8181 | English help finding a doctor in Tokyo. | [V] |
 | Hotels | see `show-cards.md` | Front desks can call a doctor or a taxi. | [I] |
 

@@ -8,9 +8,9 @@ export const numbers: EmergencyNumber[] = [
   { id: 'jnto', who: 'Japan Visitor Hotline (JNTO)', number: '050-3816-2787', dial: '+815038162787', note: 'English, 24/7. Illness, accidents, disasters, general help.', source: ['N'], sourceUrl: 'https://www.japan.travel/en/plan/hotline/', verified: true },
   { id: 'tokyo-police-advice', who: 'Tokyo police advice line (non-emergency)', number: '#9110', dial: '%239110', note: 'Inside Tokyo. From elsewhere: 03-3501-0110. Japanese, English and more.', source: ['V'], sourceUrl: 'https://www.keishicho.metro.tokyo.lg.jp/multilingual/english/finding_services/help_desk/hotline_info.html', verified: true },
   { id: 'himawari', who: 'Tokyo "Himawari" medical information', number: '03-5285-8181', dial: '+81352858181', note: 'English help finding a doctor in Tokyo. 9 AM–8 PM daily.', source: ['V'], sourceUrl: 'https://www.hokeniryo.metro.tokyo.lg.jp/iryo/iryo_hoken/medical_info_eng/himawari', verified: true },
-  { id: 'amda', who: 'AMDA International Medical Information Center', number: '03-6233-9266', dial: '+81362339266', note: 'Finds clinics that speak English. Weekdays 10 AM–4 PM.', source: ['V'], sourceUrl: 'https://www.amdamedicalcenter.com/inquiry', verified: true },
-  { id: 'us-embassy', who: 'US Embassy Tokyo', number: '03-3224-5000', dial: '+81332245000', note: 'American Citizen Services, and after-hours emergencies.', source: ['V'], sourceUrl: 'https://jp.usembassy.gov/', verified: false },
-  { id: 'us-osaka', who: 'US Consulate General Osaka-Kobe', number: '06-6315-5900', dial: '+81663155900', note: 'Covers Kyoto, Osaka, Nara.', source: ['V'], sourceUrl: 'https://jp.usembassy.gov/embassy-consulates/osaka/', verified: false }
+  { id: 'amda', who: 'AMDA International Medical Information Center', number: '0120-339-266', dial: '0120339266', note: 'Finds clinics that speak English. Weekdays 10 AM–4 PM. Toll-free; if it won’t connect, call 03-6233-9266.', source: ['V'], sourceUrl: 'https://www.amdamedicalcenter.com/inquiry', verified: true },
+  { id: 'us-embassy', who: 'US Embassy Tokyo', number: '03-3224-5000', dial: '+81332245000', note: 'American Citizen Services, and after-hours emergencies.', source: ['V'], sourceUrl: 'https://jp.usembassy.gov/contact/', verified: true },
+  { id: 'us-osaka', who: 'US Consulate General Osaka-Kobe', number: '06-6315-5900', dial: '+81663155900', note: 'Covers Kyoto, Osaka, Nara.', source: ['V'], sourceUrl: 'https://jp.usembassy.gov/contact/', verified: true }
 ];
 
 export const EARTHQUAKE = [
