@@ -1,7 +1,32 @@
-// Draws the app icons (a red sun over a cream ground with an indigo wave) as PNGs, with no image tools.
+// Draws the app icons (a red sun rising over indigo water on a cream ground) as PNGs and an SVG, with no image tools.
 // Run once: node scripts/make-icons.mjs
 import { writeFileSync } from 'node:fs';
 import { deflateSync } from 'node:zlib';
+
+// Geometry in a 100×100 box, shared by the PNGs and the SVG.
+const CREAM = [250, 247, 242], RED = [183, 40, 46], INDIGO = [38, 52, 99];
+const hex = (c) => '#' + c.map((v) => v.toString(16).padStart(2, '0')).join('');
+const SUN = { cx: 50, cy: 64, r: 24 };            // half disc sitting on the horizon (y = 64)
+const RAY_W = 6, RAY_IN = 31, RAY_OUT = 41;       // short detached rays, kept inside the maskable safe zone
+const rays = [30, 60, 90, 120, 150].map((deg) => {
+  const a = (deg * Math.PI) / 180;
+  return [SUN.cx + Math.cos(a) * RAY_IN, SUN.cy - Math.sin(a) * RAY_IN, SUN.cx + Math.cos(a) * RAY_OUT, SUN.cy - Math.sin(a) * RAY_OUT];
+});
+const GLINT_W = 4;
+const glints = [[34, 76, 66, 76], [42, 86, 58, 86]]; // sun's reflection on the water
+
+const segDist = (px, py, [x1, y1, x2, y2]) => {
+  const dx = x2 - x1, dy = y2 - y1;
+  const t = Math.max(0, Math.min(1, ((px - x1) * dx + (py - y1) * dy) / (dx * dx + dy * dy)));
+  return Math.hypot(px - (x1 + t * dx), py - (y1 + t * dy));
+};
+
+function colorAt(x, y) {
+  if (y > SUN.cy) return glints.some((g) => segDist(x, y, g) < GLINT_W / 2) ? CREAM : INDIGO;
+  if ((x - SUN.cx) ** 2 + (y - SUN.cy) ** 2 < SUN.r ** 2) return RED;
+  if (rays.some((r) => segDist(x, y, r) < RAY_W / 2)) return RED;
+  return CREAM;
+}
 
 const crcTable = Array.from({ length: 256 }, (_, n) => {
   let c = n;
@@ -17,20 +42,15 @@ const chunk = (type, data) => {
 };
 
 function png(size) {
-  const cream = [250, 247, 242], red = [183, 40, 46], indigo = [38, 52, 99];
   const rows = [];
-  const cx = size * 0.5, cy = size * 0.44, r = size * 0.24;
+  const k = 100 / size;
   for (let y = 0; y < size; y++) {
     const row = Buffer.alloc(1 + size * 3);
     for (let x = 0; x < size; x++) {
       // 3x3 supersampling for smooth edges
       let acc = [0, 0, 0];
       for (let sy = 0; sy < 3; sy++) for (let sx = 0; sx < 3; sx++) {
-        const px = x + (sx + 0.5) / 3, py = y + (sy + 0.5) / 3;
-        const wave = size * 0.72 + Math.sin((px / size) * Math.PI * 4) * size * 0.025;
-        let c = cream;
-        if ((px - cx) ** 2 + (py - cy) ** 2 < r * r) c = red;
-        if (py > wave) c = indigo;
+        const c = colorAt((x + (sx + 0.5) / 3) * k, (y + (sy + 0.5) / 3) * k);
         acc = acc.map((v, i) => v + c[i]);
       }
       acc.forEach((v, i) => { row[1 + x * 3 + i] = Math.round(v / 9); });
@@ -46,8 +66,18 @@ function png(size) {
   ]);
 }
 
+const n = (v) => +v.toFixed(2);
+const line = ([x1, y1, x2, y2]) => `<line x1="${n(x1)}" y1="${n(y1)}" x2="${n(x2)}" y2="${n(y2)}"/>`;
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">`
+  + `<rect width="100" height="100" rx="22" fill="${hex(CREAM)}"/>`
+  + `<path d="M${SUN.cx - SUN.r} ${SUN.cy} A${SUN.r} ${SUN.r} 0 0 1 ${SUN.cx + SUN.r} ${SUN.cy}Z" fill="${hex(RED)}"/>`
+  + `<g stroke="${hex(RED)}" stroke-width="${RAY_W}" stroke-linecap="round">${rays.map(line).join('')}</g>`
+  + `<path d="M0 ${SUN.cy}H100V78A22 22 0 0 1 78 100H22A22 22 0 0 1 0 78Z" fill="${hex(INDIGO)}"/>`
+  + `<g stroke="${hex(CREAM)}" stroke-width="${GLINT_W}" stroke-linecap="round">${glints.map(line).join('')}</g>`
+  + `</svg>\n`;
+
 writeFileSync('public/icons/icon-192.png', png(192));
 writeFileSync('public/icons/icon-512.png', png(512));
 writeFileSync('public/icons/apple-touch-icon.png', png(180));
-writeFileSync('public/icons/icon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#faf7f2"/><circle cx="50" cy="44" r="24" fill="#b7282e"/><path d="M0 72 Q12.5 64 25 72 T50 72 T75 72 T100 72 V100 H0Z" fill="#263463"/></svg>\n`);
+writeFileSync('public/icons/icon.svg', svg);
 console.log('icons written');
