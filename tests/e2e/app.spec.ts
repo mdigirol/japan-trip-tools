@@ -83,6 +83,16 @@ test('hotel show cards use the exact addrJa, and request a wake lock', async ({ 
   expect(await page.evaluate(() => (window as unknown as { __wl: number }).__wl)).toBeGreaterThanOrEqual(4);
 });
 
+test('fixed show cards show romaji, with the slot filled in', async ({ page }) => {
+  await page.goto(at('2026-11-21T08:00+09:00', '#/cards'));
+  await page.getByTestId('card-call-taxi').click();
+  await expect(page.getByTestId('sc-romaji')).toHaveText('Takushii o yonde itadakemasu ka?');
+  await page.getByRole('button', { name: 'Close card' }).click();
+  await page.getByRole('button', { name: 'wallet' }).click();
+  await page.getByTestId('card-lost-item').click();
+  await expect(page.getByTestId('sc-romaji')).toHaveText('saifu o nakushimashita. Todoite imasen ka?');
+});
+
 test('currency says "Set a rate" with no rate, and works with a manual one', async ({ page }) => {
   await page.goto(at('2026-11-21T08:00+09:00', '#/currency'));
   await expect(page.getByTestId('set-rate')).toBeVisible();

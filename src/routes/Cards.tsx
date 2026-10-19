@@ -39,14 +39,15 @@ export function Cards() {
 }
 
 function CardRow({ c }: { c: ShowCard }) {
-  const [pick, setPick] = useState<{ ja: string; en: string } | null>(null);
+  const [pick, setPick] = useState<{ ja: string; en: string; romaji: string } | null>(null);
   const slot = c.slots?.[0];
-  const options = slot === 'hotel' ? trip.stays.map((s) => ({ ja: s.nameJa, en: s.name })) : slot === 'X' ? LOST_ITEMS : [];
+  const options = slot === 'hotel' ? trip.stays.map((s) => ({ ja: s.nameJa, en: s.name, romaji: s.name })) : slot === 'X' ? LOST_ITEMS : [];
   const ja = slot ? c.ja.replace(`[${slot}]`, pick?.ja ?? `[${slot}]`) : c.ja;
   const en = slot ? c.en.replace(`[${slot}]`, pick?.en ?? `[${slot}]`) : c.en;
+  const romaji = slot ? c.romaji.replace(`[${slot}]`, pick?.romaji ?? `[${slot}]`) : c.romaji;
   return (
     <div class="card">
-      <button class="card-btn" style="background:none;border:0;padding:0" onClick={() => showCard({ ja, en })} data-testid={`card-${c.id}`}>
+      <button class="card-btn" style="background:none;border:0;padding:0" onClick={() => showCard({ ja, en, romaji })} data-testid={`card-${c.id}`}>
         <h3>{c.title}</h3>
         <div lang="ja" style="font-size:1.15em">{ja}<Dot reviewed={c.reviewed} /></div>
         <div class="small muted">{en}</div>

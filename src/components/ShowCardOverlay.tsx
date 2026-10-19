@@ -44,7 +44,7 @@ export function ShowCardOverlay() {
         {v.sub && <div class="sc-head" style="font-size:max(22px,5vw)">{v.sub}</div>}
         {v.tel && <a class="sc-tel" href={telHref(v.tel)}>☎ {v.telLabel ?? v.tel}</a>}
       </div>
-      <div class="sc-en" lang="en">{v.en}{v.romaji ? <><br /><i>{v.romaji}</i></> : null}</div>
+      <div class="sc-en" lang="en">{v.en}{v.romaji ? <><br /><i data-testid="sc-romaji">{v.romaji}</i></> : null}</div>
     </div>
   );
 }

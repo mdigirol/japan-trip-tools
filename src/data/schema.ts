@@ -42,7 +42,7 @@ export const EtiquetteCard = z.strictObject({
 export type EtiquetteCard = z.infer<typeof EtiquetteCard>;
 
 export const ShowCard = z.strictObject({
-  id, title: z.string().min(1), ja: z.string().min(1), en: z.string().min(1), romaji: z.string().optional(),
+  id, title: z.string().min(1), ja: z.string().min(1), en: z.string().min(1), romaji: z.string().min(1),
   kind: z.enum(['hotel', 'dining', 'bath', 'other']),
   stayId: z.string().optional(), slots: z.array(z.string()).optional(), source: sources, reviewed: z.boolean()
 });
