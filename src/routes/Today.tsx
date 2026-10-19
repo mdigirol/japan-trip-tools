@@ -8,7 +8,7 @@ import { href } from '../lib/router';
 import { useSettings } from '../lib/settings';
 import { showCard, telDisplay } from '../lib/showcard';
 import { hotelCard } from '../lib/hotelCard';
-import { itineraryDayUrl, stayById, todayState, weatherCities, type TodayState } from '../lib/trip';
+import { itineraryDayUrl, stayById, trip, todayState, weatherCities, type TodayState } from '../lib/trip';
 import { cachedWeather, cToF, refreshWeather, type CityWeather } from '../lib/weather';
 import { stamp } from '../lib/now';
 import { Tiles } from '../components/Tiles';
@@ -39,7 +39,7 @@ function Header({ st }: { st: TodayState }) {
     return (
       <header class="today-head">
         <h1>{longDate(st.ymd)} · In the air</h1>
-        <p class="leg">JL 5 to Haneda. You land tomorrow, Nov 12.</p>
+        <p class="leg">You land tomorrow, Nov 12.</p>
       </header>
     );
   }
@@ -75,6 +75,7 @@ function DayBody({ st }: { st: TodayState }) {
   const ymd = preview ? '2026-11-12' : st.ymd;
   const shownDay = preview ? undefined : day;
   const previewDay = preview ? (st.phase === 'air-out' ? undefined : day) : day;
+  const itineraryLink = itineraryDayUrl(ymd);
   return (
     <>
       {day.note && !preview && <div class="card tight small">{day.note}</div>}
@@ -82,8 +83,12 @@ function DayBody({ st }: { st: TodayState }) {
       {previewDay && <Hoods day={previewDay} />}
       <Hotels st={st} />
       {st.flightHome && <UnclaimedNotice nov27 />}
-      <a class="btn block" href={itineraryDayUrl(ymd)} target="_blank" rel="noopener">Open this day in the itinerary ↗</a>
-      <p class="small faint" style="margin-top:4px">The itinerary asks for its password. If it lands on the top, pick {longDate(ymd).replace(/^\w+, /, '')}.</p>
+      {itineraryLink && (
+        <>
+          <a class="btn block" href={itineraryLink} target="_blank" rel="noopener">Open this day in the itinerary ↗</a>
+          <p class="small faint" style="margin-top:4px">The itinerary asks for its password. If it lands on the top, pick {longDate(ymd).replace(/^\w+, /, '')}.</p>
+        </>
+      )}
       <Suggested st={st} />
     </>
   );
@@ -174,7 +179,7 @@ function HotelCompact({ s, label, secondary }: { s: Stay; label: string; seconda
 
 function Hotels({ st }: { st: TodayState }) {
   if (st.phase === 'before' || st.phase === 'air-out') {
-    const first = stayById('prince');
+    const first = stayById(trip.stays[0]?.id);
     return first ? <section><h2>First hotel</h2><HotelCompact s={first} label="Nov 12–17" /></section> : null;
   }
   if (!st.primary) return null;

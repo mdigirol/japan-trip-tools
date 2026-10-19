@@ -7,7 +7,7 @@ set -euo pipefail
 
 ITIN="${ITINERARY_DIR:-$HOME/Documents/japan-trip-itinerary}"
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
-OUT="$HERE/src/data/trip.json"
+OUT="$HERE/data/local/trip.json"
 
 if [ ! -f "$ITIN/scripts/export-trip.mjs" ]; then
   echo "!! $ITIN/scripts/export-trip.mjs not found" >&2; exit 1

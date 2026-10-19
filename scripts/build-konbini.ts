@@ -1,11 +1,12 @@
-// Builds src/data/konbini-near-stops.json: convenience stores within ~600 m of each day's points and
+// Builds konbini-near-stops.json next to the active trip.json (data/local/ if present, else data/sample/): convenience stores within ~600 m of each day's points and
 // that night's hotel, from OpenStreetMap via Overpass. Coordinates only come from trip.json (§2).
 // Run: npm run build-konbini           (refetches only days that are empty; --all refetches every day)
 //      OVERPASS_URL=<mirror> npm run build-konbini   (when the main Overpass server is down)
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { distM, overpass, type Konbini } from '../src/lib/overpass';
+import { dataFile } from './build-env';
 
-const trip = JSON.parse(readFileSync('src/data/trip.json', 'utf8'));
+const trip = JSON.parse(readFileSync(dataFile('trip.json'), 'utf8'));
 const RADIUS = 600, PER_DAY = 50;
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -13,7 +14,7 @@ interface Pt { lat: number; lng: number; hotel?: boolean }
 const out: { generatedAt: string; attribution: string; days: Record<string, (Konbini & { dist: number; nearHotel: boolean })[]> } = {
   generatedAt: new Date().toISOString(), attribution: '© OpenStreetMap contributors (ODbL)', days: {}
 };
-const OUT = 'src/data/konbini-near-stops.json';
+const OUT = dataFile('konbini-near-stops.json');
 const prev = existsSync(OUT) ? JSON.parse(readFileSync(OUT, 'utf8')) : { days: {} };
 const all = process.argv.includes('--all');
 
@@ -25,7 +26,7 @@ for (const day of trip.days) {
   const q = `[out:json][timeout:60];(${pts.map((p) => `nwr["shop"="convenience"](around:${RADIUS},${p.lat},${p.lng});`).join('')});out center tags;`;
   let list: Konbini[] = [];
   for (let attempt = 0; attempt < 3; attempt++) {
-    try { list = await overpass(q, 60_000, { 'User-Agent': 'japan-trip-tools/0.1 (personal trip app build script)' }); break; }
+    try { list = await overpass(q, 60_000, { 'User-Agent': 'japan-trip-companion/0.1 (app build script)' }); break; }
     catch (e) { console.warn(`${day.date}: ${(e as Error).message}, retrying`); await sleep(10_000 * (attempt + 1)); }
   }
   const seen = new Set<string>();

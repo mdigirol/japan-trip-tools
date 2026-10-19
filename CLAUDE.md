@@ -7,7 +7,14 @@ Phone-first offline web app for Matt and Katherine's Japan trip, Nov 11–27, 20
 - **This repo and site are public.** Commit nothing confidential: no booking or confirmation numbers, reservation names, prices paid, tokens or keys, and no personal names beyond what's already in `SPEC.md`.
 - The sync token lives only on the phones (localStorage). Never in source, the build, the workflow or a test fixture.
 - Souvenir recipients and purchases live only on the phones and in the private `mdigirol/japan-trip-tools-data` repo.
-- `src/data/trip.json` comes from the itinerary via `npm run sync-trip`. `tests/unit/trip.test.ts` fails the build on anything outside the schema or anything that looks like a booking number, price, token or clock time. Don't loosen it to make an export pass; fix the export.
+- `data/local/trip.json` comes from the itinerary via `npm run sync-trip`. `tests/unit/trip.test.ts` fails the build on anything outside the schema or anything that looks like a booking number, price, token or clock time. Don't loosen it to make an export pass; fix the export.
+
+## Shared code
+
+- Shared code comes from `japan-trip-tools-public` by `git fetch public && git merge public/main` (push to `public` is disabled). Nothing goes from here to public.
+- On conflicts: public wins for code; this repo wins for `README.md`, `CLAUDE.md`, `SPEC.md`, `context/` and `package.json` (name, `sync-trip`).
+- Real data lives in `data/local/` (tracked here via `data/local/.tracked-ok`). Build settings are in the tracked `.env` (`VITE_DATA_REPO`, `VITE_ITINERARY_URL`).
+- Checks that only apply to this itinerary go in files public doesn't have (`tests/unit/local-trip.test.ts`), so merges never conflict on them.
 
 ## Content
 

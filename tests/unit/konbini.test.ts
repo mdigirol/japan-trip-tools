@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import data from '../../src/data/konbini-near-stops.json';
+import data from '@data/konbini-near-stops.json';
 import { brandOf, distM } from '../../src/lib/overpass';
 
 const days = (data as { days: Record<string, { lat: number; lng: number; nearHotel: boolean; brand: string }[]> }).days;

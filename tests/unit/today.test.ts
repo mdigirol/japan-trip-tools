@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { longDate, parseNowParam, tokyo } from '../../src/lib/now';
-import { todayState, weatherCities, itineraryDayUrl } from '../../src/lib/trip';
+import { todayState, weatherCities } from '../../src/lib/trip';
 
 const at = (s: string) => new Date(s);
 
@@ -19,12 +19,12 @@ describe('trip clock', () => {
 describe('todayState', () => {
   const cases: [string, string, string, string | undefined][] = [
     // now (JST), city, primary hotel, checking out
-    ['2026-11-12T18:00+09:00', 'Tokyo', 'prince', undefined],
-    ['2026-11-17T10:00+09:00', 'Hakone', 'kinnotake', 'prince'],
-    ['2026-11-17T16:00+09:00', 'Hakone', 'kinnotake', undefined],
-    ['2026-11-20T09:00+09:00', 'Kyoto', 'nol', undefined],
-    ['2026-11-25T12:00+09:00', 'Tokyo', 'edition', undefined],
-    ['2026-11-27T08:00+09:00', 'Tokyo', 'edition', undefined]
+    ['2026-11-12T18:00+09:00', 'Tokyo', 'tokyo-1', undefined],
+    ['2026-11-17T10:00+09:00', 'Hakone', 'hakone', 'tokyo-1'],
+    ['2026-11-17T16:00+09:00', 'Hakone', 'hakone', undefined],
+    ['2026-11-20T09:00+09:00', 'Kyoto', 'kyoto', undefined],
+    ['2026-11-25T12:00+09:00', 'Tokyo', 'tokyo-2', undefined],
+    ['2026-11-27T08:00+09:00', 'Tokyo', 'tokyo-2', undefined]
   ];
   for (const [when, city, primary, out] of cases) {
     it(`${when} → ${city}, ${primary}${out ? `, checking out of ${out}` : ''}`, () => {
@@ -37,9 +37,9 @@ describe('todayState', () => {
   }
 
   it('switches on Nov 19 and Nov 23 at check-in', () => {
-    expect(todayState(at('2026-11-19T09:00+09:00')).checkingOut?.id).toBe('kinnotake');
+    expect(todayState(at('2026-11-19T09:00+09:00')).checkingOut?.id).toBe('hakone');
     expect(todayState(at('2026-11-19T15:30+09:00')).checkingOut).toBeUndefined();
-    expect(todayState(at('2026-11-23T11:00+09:00')).checkingOut?.id).toBe('nol');
+    expect(todayState(at('2026-11-23T11:00+09:00')).checkingOut?.id).toBe('kyoto');
   });
 
   it('counts nights in a leg', () => {
@@ -65,9 +65,5 @@ describe('todayState', () => {
     expect(weatherCities(d20).map((c) => c.id)).toEqual(['kyoto', 'osaka']);
     const d25 = todayState(at('2026-11-25T09:00+09:00')).day;
     expect(weatherCities(d25).map((c) => c.id)).toEqual(['tokyo']);
-  });
-
-  it('links to the itinerary day anchor', () => {
-    expect(itineraryDayUrl('2026-11-21')).toBe('https://mdigirol.github.io/japan-trip-2026-site/#d21');
   });
 });

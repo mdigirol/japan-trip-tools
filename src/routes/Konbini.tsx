@@ -1,5 +1,5 @@
 import { useState } from 'preact/hooks';
-import offline from '../data/konbini-near-stops.json';
+import offline from '@data/konbini-near-stops.json';
 import { CHAINS, KONBINI_USES } from '../data/konbini';
 import { now } from '../lib/now';
 import { distM, mapsLink, MAPS_SEARCH_KONBINI, nearMe, type Konbini as K } from '../lib/overpass';

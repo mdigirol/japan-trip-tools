@@ -11,7 +11,7 @@ export const transit: TransitSection[] = [
     t('iPhone: Suica in Apple Wallet, topped up with a card from the phone.', 'N', 'T'),
     t('Top up a physical card at any station machine: look for チャージ (charge). Machines have English.', 'N', 'T'),
     t('Also pays at konbini, vending machines and some restaurants.', 'K', 'T'),
-    t('Romancecar (Nov 17): the limited-express seat is separate. Tap Suica at the gate for the base fare.', 'I')
+    t('Romancecar: the limited-express seat is separate. Tap Suica at the gate for the base fare.', 'I')
   ] },
   { id: 'riding', title: 'Riding trains', items: [
     t('Google Maps gives the platform, the best car for transfers, and local vs rapid.', 'T'),
@@ -51,7 +51,7 @@ export const transit: TransitSection[] = [
     t('Station coin lockers hold shopping bags for the day. Ecbo Cloak books storage in shops.', 'T')
   ] },
   { id: 'hakone', title: 'Hakone', items: [
-    t('The ropeway and cable car can close for volcanic gas or wind. Check the status the morning of Nov 18.', 'V'),
+    t('The ropeway and cable car can close for volcanic gas or wind. Check the status the morning you go.', 'V'),
     t('Fares and the Hakone Freepass are in the itinerary.', 'I')
   ] }
 ];

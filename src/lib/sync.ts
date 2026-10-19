@@ -9,7 +9,8 @@ import { cacheGet, cachePut, db } from './db';
 import { mergePurchase, notifyPurchases } from './purchases';
 import { getSettings } from './settings';
 
-export const DATA_REPO = 'mdigirol/japan-trip-tools-data';
+// Set VITE_DATA_REPO=owner/repo at build time to turn sync on; without it the app stays local-only.
+export const DATA_REPO: string = import.meta.env.VITE_DATA_REPO ?? '';
 const API = 'https://api.github.com';
 const MAP_KEY = 'sync:issue-map';      // uuid → issue number
 const SINCE_KEY = 'sync:since';
@@ -126,7 +127,7 @@ let backoffUntil = 0, backoffMs = 60_000;
 export async function syncNow(force = false): Promise<void> {
   const token = getSettings().syncToken;
   const pending = await pendingCount();
-  if (!token) { setState({ kind: 'off' }); return; }
+  if (!token || !DATA_REPO) { setState({ kind: 'off' }); return; }
   if (typeof navigator !== 'undefined' && navigator.onLine === false) { setState({ kind: 'idle', at: lastAt(), pending }); return; }
   if (!force && Date.now() < backoffUntil) return;
   if (running) return running;

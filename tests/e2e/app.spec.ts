@@ -1,9 +1,8 @@
 import { expect, test, type Page } from '@playwright/test';
-import { existsSync, readFileSync } from 'node:fs';
-import { homedir } from 'node:os';
-import { join } from 'node:path';
+import { readFileSync } from 'node:fs';
+import { dataFile } from '../../scripts/build-env';
 
-const trip = JSON.parse(readFileSync(new URL('../../src/data/trip.json', import.meta.url), 'utf8')) as {
+const trip = JSON.parse(readFileSync(dataFile('trip.json', 'sample'), 'utf8')) as {
   stays: { id: string; addrJa: string }[]; days: { hoods: { name: string; blurb: string }[] }[];
 };
 
@@ -44,12 +43,12 @@ test('each MVP route renders', async ({ page }) => {
 });
 
 const scenarios: [string, string, string, string[], string?][] = [
-  ['2026-11-12T18:00+09:00', 'Thu, Nov 12 · Tokyo', 'prince', ['Kioicho and Akasaka']],
-  ['2026-11-17T10:00+09:00', 'Tue, Nov 17 · Hakone', 'kinnotake', ['Jimbocho', 'Hakone (Tonosawa)'], 'prince'],
-  ['2026-11-17T16:00+09:00', 'Tue, Nov 17 · Hakone', 'kinnotake', ['Hakone (Tonosawa)']],
-  ['2026-11-20T09:00+09:00', 'Fri, Nov 20 · Kyoto', 'nol', ['Fushimi', 'Minami: Namba and Dotonbori']],
-  ['2026-11-25T12:00+09:00', 'Wed, Nov 25 · Tokyo', 'edition', ['Maihama (Tokyo Bay)']],
-  ['2026-11-27T08:00+09:00', 'Fri, Nov 27 · Tokyo', 'edition', ['Kappabashi']]
+  ['2026-11-12T18:00+09:00', 'Thu, Nov 12 · Tokyo', 'tokyo-1', ['Shinjuku']],
+  ['2026-11-17T10:00+09:00', 'Tue, Nov 17 · Hakone', 'hakone', ['Hakone'], 'tokyo-1'],
+  ['2026-11-17T16:00+09:00', 'Tue, Nov 17 · Hakone', 'hakone', ['Hakone']],
+  ['2026-11-20T09:00+09:00', 'Fri, Nov 20 · Kyoto', 'kyoto', ['Fushimi Inari', 'Namba and Dotonbori']],
+  ['2026-11-25T12:00+09:00', 'Wed, Nov 25 · Tokyo', 'tokyo-2', ['Maihama (Tokyo Bay)']],
+  ['2026-11-27T08:00+09:00', 'Fri, Nov 27 · Tokyo', 'tokyo-2', ['Kappabashi']]
 ];
 
 for (const [when, h1, hotel, hoods, checkingOut] of scenarios) {
@@ -67,21 +66,6 @@ for (const [when, h1, hotel, hoods, checkingOut] of scenarios) {
   });
 }
 
-const itin = join(homedir(), 'Documents/japan-trip-itinerary/index.html');
-test('no itinerary stop names on Today', async ({ page }) => {
-  test.skip(!existsSync(itin), 'itinerary repo not present');
-  const html = readFileSync(itin, 'utf8');
-  const stops = [...html.matchAll(/S\("[^"]*", "[^"]*", "([^"]+)"/g)].map((m) => m[1]);
-  const hoodText = trip.days.flatMap((d) => d.hoods.flatMap((h) => [h.name, h.blurb])).join(' ');
-  const checkable = [...new Set(stops)].filter((s) => !hoodText.includes(s) && s.length > 4);
-  expect(checkable.length).toBeGreaterThan(30);
-  for (const [when] of scenarios) {
-    await page.goto(at(when));
-    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-    const text = await page.locator('main').innerText();
-    for (const s of checkable) expect(text.includes(s), `${when}: ${s}`).toBe(false);
-  }
-});
 
 test('hotel show cards use the exact addrJa, and request a wake lock', async ({ page }) => {
   await page.addInitScript(() => {

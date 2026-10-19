@@ -10,6 +10,7 @@
     "noUnusedLocals": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    "paths": { "@data/*": ["./data/sample/*"] },
     "isolatedModules": true,
     "noEmit": true,
     "types": ["vite/client", "vite-plugin-pwa/client", "node"]

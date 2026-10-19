@@ -42,7 +42,7 @@ npm install
 npm run dev          # http://localhost:5173/japan-trip-tools/
 npm test             # Vitest
 npm run test:e2e     # Playwright (builds and serves the production bundle)
-npm run sync-trip    # refresh src/data/trip.json from the itinerary
+npm run sync-trip    # refresh data/local/trip.json from the itinerary
 npm run build-konbini
 npm run review-sheet # Japanese strings → review/japanese-strings.csv
 ```

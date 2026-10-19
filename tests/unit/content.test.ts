@@ -9,7 +9,7 @@ import { showCards } from '../../src/data/showCards';
 import { glossary } from '../../src/data/glossary';
 import { areaTips } from '../../src/data/places';
 import { numbers } from '../../src/data/emergency';
-import trip from '../../src/data/trip.json';
+import trip from '@data/trip.json';
 import { matchPhrase } from '../../src/routes/Phrases';
 
 const ctx = (f: string) => readFileSync(new URL(`../../context/${f}`, import.meta.url), 'utf8');
@@ -70,8 +70,7 @@ describe('area tips', () => {
     const slugs = new Set(areaTips.map((a) => a.slug));
     const used = new Set(trip.days.flatMap((d) => d.hoods.map((h) => h.slug)));
     const missing = [...used].filter((s) => !slugs.has(s));
-    // These hoods have no notes in context/places.md yet.
-    expect(missing.sort()).toEqual(['kioicho', 'nihonbashi', 'roppongi', 'shinjuku-gyoen']);
+    expect(missing).toEqual([]);
   });
 });
 

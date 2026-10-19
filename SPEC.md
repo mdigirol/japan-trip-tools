@@ -139,7 +139,7 @@ src/
   sw.ts
 scripts/
   sync-trip.sh             # runs the itinerary's export script, copies trip.json here
-  build-konbini.ts         # Overpass → src/data/konbini-near-stops.json
+  build-konbini.ts         # Overpass → data/local/konbini-near-stops.json
   review-sheet.ts          # exports Japanese strings to CSV for the after-build check
 tests/
 ```
@@ -347,7 +347,7 @@ Both are views of one `Purchase` store.
 
 ## 7. `trip.json` export (in the itinerary repo)
 
-Write `scripts/export-trip.mjs` in **`~/Documents/japan-trip-itinerary`** (read-only use of `index.html`). `scripts/sync-trip.sh` here runs it and copies the output to `src/data/trip.json`. Several sessions edit the itinerary's `index.html`, so the script must never write to it.
+Write `scripts/export-trip.mjs` in **`~/Documents/japan-trip-itinerary`** (read-only use of `index.html`). `scripts/sync-trip.sh` here runs it and copies the output to `data/local/trip.json`. Several sessions edit the itinerary's `index.html`, so the script must never write to it.
 
 - **Inputs** (all JS literals inside `index.html`):
   - `STAYS` (around line 1093)

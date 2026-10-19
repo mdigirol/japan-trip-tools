@@ -1,13 +1,14 @@
 // Today's day and tonight's stay, from trip.json.
-import tripJson from '../data/trip.json';
+import tripJson from '@data/trip.json';
 import type { Place, Stay, TripDay, TripFile } from '../data/schema';
 import { daysBetween, hhmmToMinutes, tokyo } from './now';
 
 export const trip = tripJson as TripFile;
 export const TRIP_START = '2026-11-11';
 export const TRIP_END = '2026-11-27';
-export const ITINERARY_URL = 'https://mdigirol.github.io/japan-trip-2026-site/';
 export const DEFAULT_CHECKIN = '15:00';
+// Optional: set VITE_ITINERARY_URL at build time to show an "Open this day in the itinerary" link on Today.
+export const ITINERARY_URL: string = import.meta.env.VITE_ITINERARY_URL ?? '';
 
 export const SEG_CITY: Record<TripDay['seg'], string> = { air: 'In transit', t1: 'Tokyo', hk: 'Hakone', ky: 'Kyoto', t2: 'Tokyo' };
 
@@ -86,6 +87,6 @@ export function todayContext(day?: TripDay): { places: Place[]; venues: string[]
   return { places: day.places, venues: day.venues };
 }
 
-export function itineraryDayUrl(ymd: string): string {
-  return `${ITINERARY_URL}#d${+ymd.slice(8, 10)}`;
+export function itineraryDayUrl(ymd: string, base: string = ITINERARY_URL): string | undefined {
+  return base ? `${base}#d${+ymd.slice(8, 10)}` : undefined;
 }

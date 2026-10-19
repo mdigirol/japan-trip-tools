@@ -2,11 +2,11 @@ import { EARTHQUAKE, numbers, PHARMACY, PHARMACY_INTRO, PHARMACY_NOTES, WHEN_WRO
 import { now } from '../lib/now';
 import { href } from '../lib/router';
 import { showCard, telDisplay } from '../lib/showcard';
-import { todayState, stayById } from '../lib/trip';
+import { todayState, stayById, trip } from '../lib/trip';
 
 export function Emergency() {
   const st = todayState(now());
-  const hotel = st.primary ?? stayById('prince');
+  const hotel = st.primary ?? stayById(trip.stays[0]?.id);
   const openAmbulance = () => showCard({
     head: '救急車を呼んでください。',
     ja: hotel ? hotel.addrJa : '救急車を呼んでください。',
