@@ -147,6 +147,33 @@ test('konbini "Near me" degrades to the saved list with a message', async ({ pag
   await expect(page.getByRole('heading', { name: /Near today’s areas/ })).toBeVisible();
 });
 
+test('weather cards link to the JMA page for the day’s area', async ({ page }) => {
+  await page.goto(at('2026-11-15T08:00+09:00'));
+  const card = page.getByTestId('wx-tokyo');
+  await expect(card).toHaveAttribute('href', /area_type=class20s&area_code=\d{7}$/);
+  await expect(card).toHaveAttribute('target', '_blank');
+  await expect(card).toHaveAttribute('rel', /noopener/);
+  await expect(card).toContainText('JMA forecast,');
+});
+
+test('"Forecast where I am" offers the JMA page for the nearest area', async ({ page, context }) => {
+  await context.grantPermissions(['geolocation']);
+  await context.setGeolocation({ latitude: 35.6595, longitude: 139.7005 });
+  await page.goto(at('2026-11-15T08:00+09:00'));
+  await page.getByRole('button', { name: /Forecast where I am/ }).click();
+  await expect(page.getByTestId('wx-here')).toHaveAttribute('href', /area_code=1311300$/);
+  await expect(page.getByTestId('wx-here')).toContainText('Shibuya City');
+});
+
+test('"Forecast where I am" outside Japan says so and links the JMA map', async ({ page, context }) => {
+  await context.grantPermissions(['geolocation']);
+  await context.setGeolocation({ latitude: 40.7128, longitude: -74.006 });
+  await page.goto(at('2026-11-15T08:00+09:00'));
+  await page.getByRole('button', { name: /Forecast where I am/ }).click();
+  await expect(page.getByTestId('wx-here-msg')).toContainText('outside the areas');
+  await expect(page.getByRole('link', { name: /JMA’s map/ })).toBeVisible();
+});
+
 test('numbers reads prices aloud in romaji', async ({ page }) => {
   await page.goto(at('2026-11-21T08:00+09:00', '#/numbers'));
   await expect(page.getByTestId('yen-romaji')).toHaveText('sanzen yonhyaku hachijuu en');

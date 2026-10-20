@@ -8,6 +8,7 @@ import { href } from '../lib/router';
 import { useSettings } from '../lib/settings';
 import { showCard, telDisplay } from '../lib/showcard';
 import { hotelCard } from '../lib/hotelCard';
+import { jmaAreaForCity, jmaUrl, JMA_MAP_URL, nearestJmaArea, type JmaArea } from '../lib/jma';
 import { itineraryDayUrl, stayById, trip, todayState, weatherCities, type TodayState } from '../lib/trip';
 import { cachedWeather, cToF, refreshWeather, type CityWeather } from '../lib/weather';
 import { stamp } from '../lib/now';
@@ -112,11 +113,14 @@ function Weather({ ymd, day }: { ymd: string; day?: TodayState['day'] }) {
   }, [key]);
   if (!wx) return <div class="card tight muted small">Weather…</div>;
   return (
+    <>
     <section aria-label="Weather" class="wx">
       {wx.map((w) => {
         const [hi, hi2] = fmtTemp(w.day.hiC, s.tempFirst), [lo, lo2] = fmtTemp(w.day.loC, s.tempFirst);
+        const area = jmaAreaForCity(w.city, day);
         return (
-          <div class="card tight" key={w.city.id}>
+          <a class="card tight card-btn" key={w.city.id} href={jmaUrl(area.code)} target="_blank" rel="noopener"
+            style="text-decoration:none;color:inherit" data-testid={`wx-${w.city.id}`}>
             <div class="row" style="justify-content:space-between"><b>{w.city.name}</b>{w.typical && <span class="pill">typical</span>}</div>
             <div class="temp">{hi} <span class="muted" style="font-weight:400">/ {lo}</span></div>
             <div class="small faint">{hi2} / {lo2}</div>
@@ -126,10 +130,39 @@ function Weather({ ymd, day }: { ymd: string; day?: TodayState['day'] }) {
             </div>
             {w.at && <div class="small faint">Forecast from {stamp(w.at)}</div>}
             {w.typical && <div class="small faint">Mid-November average. No forecast yet.</div>}
-          </div>
+            <div class="small" style="color:var(--indigo)">JMA forecast, {area.name} ↗</div>
+          </a>
         );
       })}
     </section>
+    <ForecastHere />
+    </>
+  );
+}
+
+// Asks for location only on tap, then offers the JMA page for the nearest area.
+function ForecastHere() {
+  const [busy, setBusy] = useState(false);
+  const [area, setArea] = useState<JmaArea | null>(null);
+  const [msg, setMsg] = useState('');
+  const locate = () => {
+    setMsg(''); setArea(null);
+    if (!('geolocation' in navigator)) { setMsg('Location isn’t available.'); return; }
+    setBusy(true);
+    navigator.geolocation.getCurrentPosition((pos) => {
+      setBusy(false);
+      const a = nearestJmaArea({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+      if (a) setArea(a); else setMsg('You’re outside the areas this app knows.');
+    }, () => { setBusy(false); setMsg('Location was blocked or timed out.'); }, { timeout: 10000, maximumAge: 60000 });
+  };
+  return (
+    <div style="margin-top:10px">
+      <div class="row">
+        <button class="btn grow" onClick={locate} disabled={busy}>{busy ? 'Looking…' : '📍 Forecast where I am'}</button>
+        {area && <a class="btn grow" href={jmaUrl(area.code)} target="_blank" rel="noopener" data-testid="wx-here">JMA, {area.name} ↗</a>}
+      </div>
+      {msg && <p class="small" role="status" data-testid="wx-here-msg">{msg} <a href={JMA_MAP_URL} target="_blank" rel="noopener">Open JMA’s map ↗</a></p>}
+    </div>
   );
 }
 
