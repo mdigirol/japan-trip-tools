@@ -11,7 +11,7 @@ Cards by place type. Each card has a severity: **must** (it causes real offense 
 - **should · Shoes off at any step up.** Entryways, ryokan, some restaurants and temple halls. Slippers wait at the step. Wear decent socks. [N]
 - **nice · Keep perfume light.** Small spaces and crowded trains. The value at work is *meiwaku*: don't trouble the people around you. [N]
 - **should · Smoke only in marked areas.** Street smoking is banned in big cities, with fines of about ¥1,000–2,000. Many small bars still allow smoking inside. [N]
-- **nice · Drinking outside is legal.** Being loudly drunk is not welcome. [N]
+- **nice · Drinking outside: check local rules.** Many places allow it, but rules are local. In the designated area around Shibuya Station, public drinking is banned daily 6 p.m.–5 a.m. Being loudly drunk is not welcome. [N][V]
 - **must · Ignore street touts.** In Shinjuku and Shibuya at night, never follow anyone pulling you into a bar. Why: overcharging and pressure to pay. [T]
 - **should · Carry tissues and a hand towel.** Some restrooms lack paper, and most lack paper towels. [N][T]
 - **should · Use the restroom before leaving the gates.** Exiting means paying again to re-enter. [T]
@@ -20,7 +20,7 @@ Cards by place type. Each card has a severity: **must** (it causes real offense 
 
 - **must · Call the server.** Say "sumimasen!" when ready to order. They won't come until you do. [N]
 - **must · Chopsticks.** Never stand them upright in rice, and never pass food chopstick to chopstick. Why: both echo funeral rites. [N]
-- **should · Ask for the check.** The bill won't come on its own. Say "okaikei onegaishimasu", then pay at the register. [N][T]
+- **should · Ask for the check.** At many casual places you ask for the check and pay at the register; follow the venue's instructions. Say "okaikei onegaishimasu", then pay at the register. [N][T]
 - **should · Eat and go at busy places.** Ramen counters especially are built for turnover. Don't linger after eating. [T]
 - **should · Use the ramen ticket machine.** Pick, pay, and hand the ticket to staff. Most buttons have photos. [N]
 - **should · Expect a table charge (otoshi).** Izakaya often bring a small dish you didn't order and charge for it, about ¥300–600 each. It's normal, not a scam. [V]
@@ -88,7 +88,7 @@ Cards by place type. Each card has a severity: **must** (it causes real offense 
 - **should · No eating on local trains.** Eating on the Shinkansen is normal, so bring an ekiben. [N]
 - **should · Let people off first and queue at the floor markings.** [N]
 - **should · Backpack on your front in crowds.** [T]
-- **should · Escalators: stand left in Tokyo, right in Osaka.** Kyoto is mixed, so copy the people ahead of you. [N]
+- **should · Escalators: stand still.** Hold the handrail and follow station signs; operators ask riders not to walk. Many locals still stand left in Tokyo and right in Osaka, but the open side isn't a walking lane. [N][V]
 - **nice · Women-only cars** are marked in pink, usually the first or last car at rush hour. [N]
 
 ## Taxis

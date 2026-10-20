@@ -38,7 +38,7 @@ export const areaTips: AreaTip[] = [
   a('arashiyama', 'Arashiyama and Sagano', 'kyoto', ['K', 'I'], 'The bamboo grove is quiet only before 7 AM.', 'Walk five minutes past the grove exit to Jojakko-ji for leaves with no crowd.', 'Late November is peak season, the busiest it gets.'),
   a('hozu', 'Kameoka and the Hozu gorge', 'kyoto', ['K', 'I'], 'The boat ride is about two hours.', 'Nothing to buy on board until the end. Bring water and a layer.'),
   // Osaka
-  a('namba', 'Namba and Dotonbori', 'osaka', ['N', 'V'], 'Stand on the right on escalators.', 'Kushikatsu shops share one sauce pot: dip once, never twice.', 'Takoyaki is molten inside. Let it cool.', 'Ura-Namba is a maze of standing bars (tachinomi).'),
+  a('namba', 'Namba and Dotonbori', 'osaka', ['N', 'V'], 'Osaka custom is to stand on the right. Hold the handrail and don’t walk.', 'Kushikatsu shops share one sauce pot: dip once, never twice.', 'Takoyaki is molten inside. Let it cool.', 'Ura-Namba is a maze of standing bars (tachinomi).'),
   a('shinsaibashi', 'Amerikamura and Shinsaibashi', 'osaka', ['N', 'T'], 'Youth fashion and vintage. Busy, so watch your bag.'),
   a('umeda', 'Umeda', 'osaka', ['I', 'V'], 'Huge underground maze. Use exit numbers.'),
   // Nara

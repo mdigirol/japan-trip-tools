@@ -27,8 +27,9 @@ export const CASH_TIPS = [
 
 // The Nov 1, 2026 refund system. Safety-relevant: verify against the Japan Tourism Agency before the freeze.
 export const TAX_FREE_RULES = [
-  'Shops charge the full price, including 10% tax.',
-  'You get the tax back at customs on departure, before check-in.',
+  'Through Oct 31, 2026 the old process applies: the shop takes the tax off at the register.',
+  'For purchases from Nov 1, 2026, you pay the tax-inclusive price. The rate is 10%, or 8% for qualifying food and non-alcoholic drinks.',
+  'You then show the goods to customs on departure, before check-in. The shop or its refund service pays you back after customs confirms. Customs itself doesn’t hand out cash.',
   'The goods must be with you and shown at customs. Shipped items don’t count.',
   'Keep every receipt. No receipt, no refund.',
   'Minimum ¥5,000 before tax, per store, per day. Bundle small buys at one store.',
@@ -49,7 +50,7 @@ export const WORTH_BUYING = [
 ];
 
 export const SIZE_NOTES = [
-  'Clothing runs small. Size up once: US M → JP L.',
+  'Japanese and US sizes have no reliable conversion. Check each brand’s size chart and garment measurements, and try items on when you can.',
   'Shoes are in centimeters. Try on to be sure.'
 ];
 

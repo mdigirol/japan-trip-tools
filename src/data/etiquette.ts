@@ -81,8 +81,8 @@ export const etiquette: EtiquetteCard[] = [
   c('everywhere', 'perfume', 'nice', 'Keep perfume light', ['N'], {
     why: "Small spaces and crowded trains. The value is meiwaku: don't trouble the people around you."
   }),
-  c('everywhere', 'drinking-outside', 'nice', 'Drinking outside is legal', ['N'], {
-    dont: ['Get loudly drunk'], why: 'A can on a bench is fine. Rowdiness is not welcome.'
+  c('everywhere', 'drinking-outside', 'nice', 'Drinking outside: check local rules', ['N', 'V'], {
+    dont: ['Get loudly drunk', 'Drink in public around Shibuya Station from 6 p.m. to 5 a.m.'], why: 'Many places allow it, but rules are local. Shibuya bans it in its station area every night. Follow posted signs. Rowdiness is not welcome anywhere.'
   }),
 
   // ---- Restaurants and izakaya ----
@@ -95,7 +95,7 @@ export const etiquette: EtiquetteCard[] = [
     why: 'Both echo funeral rites.', venues: ['restaurant', 'izakaya', 'yakitori', 'ramen', 'sushi-counter', 'ryokan']
   }),
   c('restaurants', 'ask-check', 'should', 'Ask for the check', ['N', 'T'], {
-    do: ['Say "okaikei onegaishimasu"', 'Pay at the register'], why: "The bill won't come on its own."
+    do: ['Say "okaikei onegaishimasu"', 'Pay at the register'], why: "At many casual places you ask for the check and pay at the register. Follow the venue’s instructions; some use table payment."
   }),
   c('restaurants', 'eat-and-go', 'should', 'Eat and go at busy places', ['T'], {
     dont: ['Linger after eating at a ramen counter'], why: 'Counters are built for turnover.', venues: ['ramen']
@@ -222,8 +222,8 @@ export const etiquette: EtiquetteCard[] = [
   }),
   c('trains', 'queue', 'should', 'Let people off first', ['N'], { do: ['Queue at the floor markings'], why: 'Boarding is orderly and fast.' }),
   c('trains', 'backpack-front', 'should', 'Backpack on your front in crowds', ['T'], { why: 'It saves space and bumps.' }),
-  c('trains', 'escalators', 'should', 'Escalators: which side', ['N'], {
-    do: ['Tokyo: stand left', 'Osaka: stand right', 'Kyoto: copy the people ahead'], why: 'Leave the other side for walkers.'
+  c('trains', 'escalators', 'should', 'Escalators: stand still', ['N', 'V'], {
+    do: ['Stand still and hold the handrail', 'Follow posted station signs', 'Use stairs to go faster'], dont: ['Walk on escalators'], why: 'Railway operators ask riders not to walk. Many locals still stand left in Tokyo and right in Osaka, but the open side is not a walking lane.'
   }),
   c('trains', 'women-only', 'nice', 'Women-only cars', ['N'], { why: 'Marked in pink, usually the first or last car at rush hour.' }),
 

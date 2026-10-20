@@ -39,7 +39,7 @@ Priority marks for the MVP set: ★ = must ship.
 | A draft beer, please | 生ビールをお願いします | Nama biiru o onegaishimasu | [N] | |
 | Do you have non-smoking seats? | 禁煙席はありますか？ | Kin'en seki wa arimasu ka? | [N] | Small old izakaya often allow smoking. |
 | ★ Can I pay by card? | カードは使えますか？ | Kaado wa tsukaemasu ka? | [V] | Ask before ordering in small places. |
-| ★ Check, please | お会計お願いします | Okaikei onegaishimasu | [N][T] | The bill never comes on its own. Pay at the register. |
+| ★ Check, please | お会計お願いします | Okaikei onegaishimasu | [N][T] | At many casual places you ask for the check and pay at the register. Follow the venue's instructions. |
 | It was delicious | おいしかったです | Oishikatta desu | [N] | "Oishii!" mid-meal works too. |
 | Thank you for the meal (leaving) | ごちそうさまでした | Gochisousama deshita | [N] | |
 | (Before eating) | いただきます | Itadakimasu | [V] | |

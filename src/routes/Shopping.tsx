@@ -10,7 +10,7 @@ export function Shopping() {
       <h1>Shopping & tax-free</h1>
       <h2>Tax-free from Nov 1, 2026</h2>
       <div class="card">
-        <p><b>Japan now refunds the tax at departure</b> instead of taking it off at the shop.</p>
+        <p><b>Timing matters.</b> Through Oct 31, 2026 the old tax-free process applies. For eligible purchases from Nov 1, 2026, Japan refunds the tax at departure instead of taking it off at the shop.</p>
         <ul class="list-plain small">{TAX_FREE_RULES.map((r) => <li key={r}>{r}</li>)}</ul>
         <p class="small">Source: <a href={JNTO_TAX_FREE_URL} target="_blank" rel="noopener">JNTO: Changes are coming to Japan’s tax-free shopping ↗</a></p>
         <p class="small faint">Check the Japan Tourism Agency’s final procedure before the trip.</p>

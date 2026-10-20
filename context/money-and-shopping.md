@@ -21,7 +21,7 @@ Feeds Currency, Shopping and tax-free, the Tax-free claim log, and the Souvenir 
 
 From **November 1, 2026**, Japan switches to a refund system. [N][JNTO]
 
-- Shops charge the full price, including 10% tax. You get the tax back at **customs on departure, before check-in**.
+- Through Oct 31, 2026 the old process applies (tax taken off at the shop). For purchases from Nov 1, 2026, you pay the tax-inclusive price: 10%, or 8% for qualifying food and non-alcoholic drinks. Customs confirms the goods on departure, before check-in, and the shop or its refund service pays you back after confirmation. Customs doesn't hand out cash. [N][JNTO][V]
 - The goods must be with you and shown at customs. Items shipped home separately don't count. [N][JNTO]
 - Keep **every receipt**. No receipt, no refund. [N]
 - The **¥5,000 minimum (before tax) per store per day** stays the same. Bundle small purchases at one store to reach it. [N]
@@ -34,7 +34,7 @@ From **November 1, 2026**, Japan switches to a refund system. [N][JNTO]
 
 ## Sizes
 
-- Japanese clothing runs small. Size up once from US sizes, for example US M → JP L. [T]
+- Japanese and US clothing sizes have no reliable conversion. Sizing varies by brand, cut and garment, so check size charts and measurements and try items on. [T]
 - Shoes are labeled in centimeters. Rough guide: US men's + 18 = cm (US 9 → 27); US women's + 17 = cm (US 7 → 24). Try on to be sure. [V]
 
 ## What's worth buying (for the souvenir tracker's suggestions)

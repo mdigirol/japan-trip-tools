@@ -44,7 +44,7 @@ Kyoto as a whole: carry more cash than in Tokyo. Many temples, small restaurants
 
 ## Osaka (Nov 20)
 
-- **Namba and Dotonbori (`namba`)** · Stand on the right on escalators. Kushikatsu shops share one dipping-sauce pot, so dip once and never twice. Takoyaki is molten inside; let it cool. Ura-Namba is a maze of standing bars (tachinomi). [N][V]
+- **Namba and Dotonbori (`namba`)** · Osaka custom is to stand on the right; hold the handrail and don't walk. Kushikatsu shops share one dipping-sauce pot, so dip once and never twice. Takoyaki is molten inside; let it cool. Ura-Namba is a maze of standing bars (tachinomi). [N][V]
 - **Amerikamura and Shinsaibashi (`shinsaibashi`)** · Youth fashion and vintage. Busy, so watch your bag. [N][T]
 - **Umeda (`umeda`)** · Huge underground maze. Use exit numbers. [I][V]
 

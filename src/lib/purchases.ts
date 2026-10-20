@@ -53,7 +53,7 @@ export function mergePurchase(local: Purchase | undefined, remote: Purchase): Pu
 }
 
 // ---- totals and claim-log math ----
-// Shops charge the full price including 10% tax; the refund is that tax.
+// Under the Nov 1, 2026 refund method shops charge the tax-inclusive price (10%, or 8% on qualifying food); the refund is that tax.
 export const taxDue = (p: Purchase) => p.taxPaidYen ?? taxIn(p.priceYen, TAX.standard);
 
 export function claimTotals(list: Purchase[]) {
