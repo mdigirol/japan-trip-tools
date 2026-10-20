@@ -16,6 +16,7 @@ import { Settings } from './routes/Settings';
 import { Shopping } from './routes/Shopping';
 import { Today } from './routes/Today';
 import { Transit } from './routes/Transit';
+import { Units } from './routes/Units';
 
 const NAV = [
   { path: '', label: 'Today', ic: '☀︎' },
@@ -24,7 +25,7 @@ const NAV = [
   { path: 'etiquette', label: 'Etiquette', ic: '🙇' },
   { path: 'more', label: 'More', ic: '☰' }
 ];
-const IN_MORE = new Set(['more', 'currency', 'emergency', 'settings', 'shopping', 'purchases', 'konbini', 'decoder', 'transit', 'numbers']);
+const IN_MORE = new Set(['more', 'currency', 'emergency', 'settings', 'shopping', 'purchases', 'konbini', 'decoder', 'transit', 'numbers', 'units']);
 
 export function App() {
   const route = useRoute();
@@ -44,6 +45,7 @@ export function App() {
     case 'decoder': page = <Decoder />; break;
     case 'transit': page = <Transit />; break;
     case 'numbers': page = <Numbers />; break;
+    case 'units': page = <Units />; break;
     default: page = <Today />;
   }
   const current = IN_MORE.has(p) ? 'more' : NAV.some((n) => n.path === p) ? p : '';

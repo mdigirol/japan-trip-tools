@@ -1,5 +1,6 @@
 // Money and shopping content, from context/money-and-shopping.md.
 export const QUICK_AMOUNTS = [100, 500, 1000, 3000, 5000, 10000, 30000, 50000];
+export const QUICK_USD = [1, 5, 10, 20, 50, 100, 200, 500];
 
 export const TAX = { standard: 0.1, takeawayFood: 0.08 };
 export const TAX_FREE_MIN_YEN = 5000;   // before tax, per store, per day

@@ -100,6 +100,9 @@ test('currency says "Set a rate" with no rate, and works with a manual one', asy
   await page.getByLabel('Yen per dollar').fill('150');
   await page.getByRole('button', { name: 'Use' }).click();
   await expect(page.getByTestId('qref')).toContainText('$67');
+  await page.getByTestId('focus-usd').click();
+  await expect(page.getByTestId('qref')).toContainText('¥1,500');
+  await expect(page.getByRole('heading', { name: 'Units' })).toHaveCount(0);
   await page.getByRole('button', { name: '3', exact: true }).click();
   await page.getByRole('button', { name: '00', exact: true }).click();
   await page.getByRole('button', { name: '0', exact: true }).click();
@@ -107,6 +110,13 @@ test('currency says "Set a rate" with no rate, and works with a manual one', asy
   await expect(page.getByTestId('calc-out')).toHaveText('= $20');
   await page.getByTestId('tax-10').click();
   await expect(page.getByTestId('calc-tax')).toContainText('¥3,300');
+});
+
+test('units has its own screen', async ({ page }) => {
+  await page.goto(at('2026-11-21T08:00+09:00', '#/units'));
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Units');
+  await page.getByPlaceholder('°C').fill('20');
+  await expect(page.getByPlaceholder('°F')).toHaveValue('68');
 });
 
 test('sync is off with no token, and the claim-log checklist ticks', async ({ page }) => {

@@ -1,7 +1,7 @@
 import { JNTO_TAX_FREE_URL, KNIFE_NOTE, SIZE_NOTES, TAX_FREE_RULES, WORTH_BUYING } from '../data/money';
 import { glossary } from '../data/glossary';
 import { href } from '../lib/router';
-import { Units } from '../components/Units';
+import { Sizes } from '../components/Units';
 
 export function Shopping() {
   const knives = glossary.filter((g) => g.category === 'knife');
@@ -28,7 +28,7 @@ export function Shopping() {
 
       <h2>Sizes</h2>
       <ul class="list-plain small">{SIZE_NOTES.map((n) => <li key={n}>{n}</li>)}</ul>
-      <Units />
+      <Sizes />
     </div>
   );
 }

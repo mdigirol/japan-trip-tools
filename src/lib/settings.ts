@@ -10,13 +10,14 @@ export interface Settings {
   bags: string[];
   syncToken: string;
   rateOverride: number | null;     // USD per ¥1, set by hand; wins until cleared
+  tableFocus: 'yen' | 'usd';       // Currency quick table: round yen or round dollars
   favorites: string[];             // phrase ids, local only
 }
 
 const KEY = 'jtc-settings-v1';
 const DEFAULTS: Settings = {
   who: '', tempFirst: 'F', textSize: 'normal', recipients: [], bags: ['Carry-on', 'Big suitcase', 'Backpack'],
-  syncToken: '', rateOverride: null, favorites: []
+  syncToken: '', rateOverride: null, tableFocus: 'yen', favorites: []
 };
 
 function load(): Settings {

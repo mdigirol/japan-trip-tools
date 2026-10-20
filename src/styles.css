@@ -199,7 +199,9 @@ ul.tips li { margin: 4px 0; }
 }
 
 /* ---- currency ---- */
-.rate-line { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.rate-line { display: flex; justify-content: space-between; align-items: baseline; gap: 2px 8px; flex-wrap: wrap; padding: 4px 0 4px 10px; border-left: 3px solid var(--line); }
+.rate-line .label { flex-basis: 100%; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
+.qref { margin-top: 6px; }
 .qref { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
 .qref td { padding: 7px 4px; border-bottom: 1px solid var(--line); font-size: 1.05em; }
 .qref td:last-child { text-align: right; font-weight: 600; }

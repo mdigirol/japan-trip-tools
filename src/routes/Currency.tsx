@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'preact/hooks';
-import { COMMON_PRICES, QUICK_AMOUNTS, TAX } from '../data/money';
+import { COMMON_PRICES, QUICK_AMOUNTS, QUICK_USD, TAX } from '../data/money';
 import { stamp } from '../lib/now';
 import { cachedRate, fmtUsd, fmtYen, refreshRate, usdToYen, withoutTax, withTax, yenToUsd, type Rate } from '../lib/rates';
 import { updateSettings, useSettings } from '../lib/settings';
 import { useOnline } from '../lib/online';
-import { Units } from '../components/Units';
 
 // The rate to use: a manual override wins until cleared; otherwise the last good fetched rate.
 export function useRate() {
@@ -35,15 +34,14 @@ export function Currency() {
       <table class="tbl small">
         <tbody>{COMMON_PRICES.map((p) => <tr key={p.what}><td>{p.what}</td><td style="text-align:right;white-space:nowrap">{p.yen}</td></tr>)}</tbody>
       </table>
-      <h2>Units</h2>
-      <Units />
     </div>
   );
 }
 
 function RateLine({ usdPerYen, rate, override, loading }: { usdPerYen?: number; rate?: Rate; override: number | null; loading: boolean }) {
   return (
-    <div class="card tight rate-line" data-testid="rate-line">
+    <div class="rate-line" data-testid="rate-line">
+      <span class="label">Current conversion rate</span>
       {usdPerYen ? (
         <>
           <b>¥1,000 = {fmtUsd(1000 * usdPerYen)}</b>
@@ -58,11 +56,21 @@ function RateLine({ usdPerYen, rate, override, loading }: { usdPerYen?: number; 
   );
 }
 
+// Yen focus lists round yen; dollar focus lists round dollars, with yen to the nearest ¥10.
 function QuickTable({ usdPerYen }: { usdPerYen: number }) {
+  const focus = useSettings().tableFocus;
   return (
-    <table class="qref card" style="margin-top:10px;padding:4px 12px" data-testid="qref">
-      <tbody>{QUICK_AMOUNTS.map((y) => <tr key={y}><td>{fmtYen(y)}</td><td>{fmtUsd(yenToUsd(y, usdPerYen))}</td></tr>)}</tbody>
-    </table>
+    <section class="card" style="margin-top:10px;padding:8px 12px 4px">
+      <div class="seg" role="group" aria-label="Table amounts">
+        <button aria-pressed={focus === 'yen'} onClick={() => updateSettings({ tableFocus: 'yen' })}>¥ amounts</button>
+        <button aria-pressed={focus === 'usd'} onClick={() => updateSettings({ tableFocus: 'usd' })} data-testid="focus-usd">$ amounts</button>
+      </div>
+      <table class="qref" data-testid="qref">
+        <tbody>{focus === 'usd'
+          ? QUICK_USD.map((d) => <tr key={d}><td>${d}</td><td>{fmtYen(Math.round(usdToYen(d, usdPerYen) / 10) * 10)}</td></tr>)
+          : QUICK_AMOUNTS.map((y) => <tr key={y}><td>{fmtYen(y)}</td><td>{fmtUsd(yenToUsd(y, usdPerYen))}</td></tr>)}</tbody>
+      </table>
+    </section>
   );
 }
 
@@ -127,8 +135,8 @@ function Override({ override }: { override: number | null }) {
   const [v, setV] = useState(override ? String(Math.round(1 / override * 100) / 100) : '');
   return (
     <section class="card" style="margin-top:10px">
-      <h3>Your card’s rate</h3>
-      <p class="small muted">Enter yen per dollar from a recent card charge. It wins until you clear it.</p>
+      <h3>Use a different rate</h3>
+      <p class="small muted">Enter yen per dollar, e.g. from a card charge or an exchange counter. It wins until you clear it.</p>
       <div class="row">
         <input type="number" inputMode="decimal" placeholder="e.g. 152.40" value={v} onInput={(e) => setV(e.currentTarget.value)} aria-label="Yen per dollar" />
         <button class="btn primary" onClick={() => { const n = parseFloat(v); if (n > 0) updateSettings({ rateOverride: 1 / n }); }}>Use</button>

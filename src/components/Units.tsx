@@ -22,13 +22,15 @@ function Pair({ p }: { p: typeof PAIRS[number] }) {
   );
 }
 
-export function Units() {
+export function Measurements() {
+  return <div class="card">{PAIRS.map((p) => <Pair p={p} key={p.id} />)}</div>;
+}
+
+export function Sizes() {
   const [us, setUs] = useState('9');
   const n = parseFloat(us);
   return (
     <div class="card">
-      {PAIRS.map((p) => <Pair p={p} key={p.id} />)}
-      <hr />
       <h3>Shoes (rough guide)</h3>
       <div class="row">
         <label class="grow"><span class="small muted">US size</span>
