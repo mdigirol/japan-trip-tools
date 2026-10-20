@@ -101,9 +101,14 @@ p { margin: .4em 0; }
 }
 .chip[aria-pressed="true"], .chip.on { background: var(--indigo); border-color: var(--indigo); color: #fff; }
 @media (prefers-color-scheme: dark) { .chip[aria-pressed="true"], .chip.on { color: #111; } }
+select {
+  appearance: none; -webkit-appearance: none; padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center;
+}
 input[type="text"], input[type="search"], input[type="number"], input[type="password"], input[type="date"], select, textarea {
   width: 100%; min-height: 46px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line);
-  background: var(--surface); font-size: max(16px, 1em);
+  background-color: var(--surface); font-size: max(16px, 1em);
 }
 label.field { display: block; margin: 12px 0; }
 label.field > span { display: block; font-size: .85em; color: var(--muted); margin-bottom: 4px; }
@@ -187,9 +192,13 @@ ul.tips li { margin: 4px 0; }
 /* ---- etiquette ---- */
 .etq h3 { display: flex; align-items: center; gap: 8px; justify-content: space-between; }
 .etq ul { margin: 6px 0; padding-left: 0; list-style: none; }
-.etq li { padding-left: 26px; position: relative; margin: 3px 0; }
-.etq li.do::before { content: '✓'; position: absolute; left: 4px; color: var(--moss); font-weight: 700; }
-.etq li.dont::before { content: '✕'; position: absolute; left: 4px; color: var(--must); font-weight: 700; }
+.etq li { position: relative; margin: 6px 0; }
+
+.etq .tag { display: inline-block; font-size: .68em; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; padding: 1px 7px; margin-right: 8px; border-radius: 999px; color: #fff; vertical-align: .08em; }
+.etq .tag.do { background: var(--moss); }
+.etq .tag.dont { background: var(--must); }
+.etq-key { font-size: .85em; color: var(--muted); margin: 8px 0; }
+.etq-key .badge { font-size: .8em; }
 .etq .why { font-size: .85em; color: var(--muted); margin-top: 6px; }
 .etq ol.steps { margin: 6px 0; padding-left: 0; list-style: none; counter-reset: s; }
 .etq ol.steps li { counter-increment: s; padding-left: 38px; min-height: 30px; margin: 6px 0; }
@@ -229,3 +238,4 @@ ul.tips li { margin: 4px 0; }
 .list-plain { padding-left: 20px; margin: 6px 0; }
 .list-plain li { margin: 4px 0; }
 hr { border: 0; border-top: 1px solid var(--line); margin: 16px 0; }
+@media (prefers-color-scheme: dark) { .etq .tag { color: #111; } }
