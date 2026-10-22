@@ -1,0 +1,6 @@
+834150629025fef777b60725952e9992a3a74cdb  skipped  Add a feedback form to More (public repo only) — public-only: feedback form
+b6d54090331939b725d4ce8d06ac0fa53d2d9d7a  partial  Send feedback through a Cloudflare Worker relay — ported online.ts fix only (in 99820d2); rest is the public-only feedback relay
+7ba43d165edeae7c347006fc5b00a340ec822b26  skipped  Give the public demo its own storage names — public-only: jtc-public- storage names
+3b3974f9a95db6796404f7bf131d26b6bab50243  skipped  Label the public demo BETA — public-only: BETA label
+3db98057147f79a8dbd43035944d551ac09f6892  skipped  Sample trip runs Oct 22 - Nov 10 (20 days, 3 free days added) — sample dates only; private keeps Nov 11-27
+cc0402dcf6598ef1174f677eeaaca50ce42e730d  skipped  Show a persistent sample-itinerary notice in the public demo — public-only: sample-itinerary notice
