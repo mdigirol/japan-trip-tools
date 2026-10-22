@@ -2,6 +2,7 @@ import { useEffect, useState } from 'preact/hooks';
 import type { Place, Purchase } from '../data/schema';
 import { TAX_FREE_MIN_YEN } from '../data/money';
 import { SyncStatus } from '../components/SyncStatus';
+import { DATA_REPO } from '../lib/sync';
 import { now, tokyo, longDate } from '../lib/now';
 import { href, type Route } from '../lib/router';
 import { fmtUsd, fmtYen, yenToUsd } from '../lib/rates';
@@ -218,7 +219,7 @@ function AddForm({ existing }: { existing?: Purchase }) {
       <div class="field"><span class="small muted">Photo of the item or receipt (optional)</span>
         <div class="row wrap" style="margin-top:6px">{(f.photoIds ?? []).map((id) => <PhotoThumb id={id} key={id} />)}
           <label class="btn">📷 Add photo<input type="file" accept="image/*" capture="environment" onChange={onPhoto} class="sr" /></label></div>
-        <span class="small faint">Photos stay on this phone. They don’t sync to the other phone.</span></div>
+        <span class="small faint">Photos stay on this phone.{DATA_REPO && ' They don’t sync to the other phone.'}</span></div>
       <button class="btn primary block" type="submit">{existing ? 'Save changes' : 'Save purchase'}</button>
       {existing && (
         <button type="button" class="btn block" style="margin-top:8px" onClick={async () => { await setDeleted(existing, !existing.deleted); location.hash = href('purchases'); }}>

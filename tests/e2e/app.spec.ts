@@ -134,9 +134,14 @@ test('tool order in Settings drives the tiles and the bottom bar', async ({ page
   await expect(nav.nth(3)).toHaveText('🙇Etiquette');
 });
 
-test('sync is off with no token, and the claim-log checklist ticks', async ({ page }) => {
+test('sync is hidden with no data repo, and the claim-log checklist ticks', async ({ page }) => {
+  await page.goto(at('2026-11-21T08:00+09:00', '#/settings'));
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Settings');
+  await expect(page.getByRole('heading', { name: 'Sync between phones' })).toHaveCount(0);
+  await expect(page.getByText('Names stay on this phone. They’re never in the public site.')).toBeVisible();
   await page.goto(at('2026-11-21T08:00+09:00', '#/purchases?view=add'));
-  await expect(page.getByTestId('sync-status')).toContainText('Sync off — add a token in Settings');
+  await expect(page.locator('input[name=item]')).toBeVisible();
+  await expect(page.getByTestId('sync-status')).toHaveCount(0);
   await page.locator('input[name=item]').fill('Knife');
   await page.locator('input[name=price]').fill('16500');
   await page.locator('input[name=shop]').fill('Kama-asa');

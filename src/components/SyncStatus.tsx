@@ -1,9 +1,10 @@
 import { href } from '../lib/router';
 import { stamp } from '../lib/now';
-import { syncNow, useSyncState } from '../lib/sync';
+import { DATA_REPO, syncNow, useSyncState } from '../lib/sync';
 
 export function SyncStatus({ link }: { link?: boolean }) {
   const s = useSyncState();
+  if (!DATA_REPO) return null;   // built without VITE_DATA_REPO: sync can't run, so don't offer it
   if (s.kind === 'off') {
     return <div class="small" data-testid="sync-status">Sync off — {link ? <a href={href('settings')}>add a token in Settings</a> : 'add a token in Settings'}</div>;
   }

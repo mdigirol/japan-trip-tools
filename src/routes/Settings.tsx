@@ -4,6 +4,7 @@ import { stamp } from '../lib/now';
 import { trip } from '../lib/trip';
 import { SyncStatus } from '../components/SyncStatus';
 import { NAV_TOOLS, moveModule, orderedModules } from '../lib/modules';
+import { DATA_REPO } from '../lib/sync';
 
 
 function ListEditor({ label, items, onChange, placeholder }: { label: string; items: string[]; onChange: (l: string[]) => void; placeholder: string }) {
@@ -88,20 +89,22 @@ export function Settings() {
       <div class="card">
         <ListEditor label="Souvenir recipients" items={s.recipients} onChange={(l) => set({ recipients: l })} placeholder="Add a name" />
         <ListEditor label="Bags (for the claim log)" items={s.bags} onChange={(l) => set({ bags: l })} placeholder="Add a bag" />
-        <p class="small faint">Names stay on this phone and in the private sync repo. They’re never in the public site.</p>
+        <p class="small faint">{DATA_REPO ? 'Names stay on this phone and in the private sync repo.' : 'Names stay on this phone.'} They’re never in the public site.</p>
       </div>
 
-      <h2>Sync between phones</h2>
-      <div class="card">
-        <SyncStatus />
-        <label class="field"><span>Sync token (GitHub, Issues on the data repo only)</span>
-          <div class="row">
-            <input {...{ type: showToken ? 'text' : 'password' } as { type: 'text' }} value={s.syncToken} autoComplete="off" spellcheck={false} placeholder="github_pat_…"
-              onInput={(e) => set({ syncToken: e.currentTarget.value.trim() })} />
-            <button class="btn" onClick={() => setShowToken(!showToken)}>{showToken ? 'Hide' : 'Show'}</button>
-          </div></label>
-        <p class="small faint">Stored only on this phone. Paste it once. Only souvenirs and claim-log items sync; photos stay on the phone that took them.</p>
-      </div>
+      {DATA_REPO && <>
+        <h2>Sync between phones</h2>
+        <div class="card">
+          <SyncStatus />
+          <label class="field"><span>Sync token (GitHub, Issues on the data repo only)</span>
+            <div class="row">
+              <input {...{ type: showToken ? 'text' : 'password' } as { type: 'text' }} value={s.syncToken} autoComplete="off" spellcheck={false} placeholder="github_pat_…"
+                onInput={(e) => set({ syncToken: e.currentTarget.value.trim() })} />
+              <button class="btn" onClick={() => setShowToken(!showToken)}>{showToken ? 'Hide' : 'Show'}</button>
+            </div></label>
+          <p class="small faint">Stored only on this phone. Paste it once. Only souvenirs and claim-log items sync; photos stay on the phone that took them.</p>
+        </div>
+      </>}
 
       <h2>Offline</h2>
       <div class="card" data-testid="offline-ready">
