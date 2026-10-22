@@ -116,7 +116,7 @@ export function PhraseCard({ p }: { p: Phrase }) {
               <button key={o.ja} class={'chip' + (fill?.ja === o.ja ? ' on' : '')} onClick={() => { setFill(o); setTyped(''); }}>{o.en}</button>
             ))}
           </div>
-          <input type="text" placeholder={slot === 'name' ? 'Type the name' : 'Or type a place (Japanese or romaji)'} value={typed}
+          <input type="text" placeholder={slot === 'name' ? 'Type the name' : slot === 'action' ? 'Or type it (Japanese or romaji)' : 'Or type a place (Japanese or romaji)'} value={typed}
             onInput={(e) => { const v = e.currentTarget.value; setTyped(v); setFill(v ? { ja: v, romaji: v, en: v } : undefined); }}
             aria-label={`Fill in ${slot}`} />
         </div>

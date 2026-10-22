@@ -16,7 +16,7 @@ Priority marks for the MVP set: ★ = must ship.
 | ★ I don't understand | わかりません | Wakarimasen | [T] | Not rude. It invites them to slow down or point. |
 | ★ One more time, please | すみません、もう一度お願いします | Sumimasen, mou ichido onegaishimasu | [N] | |
 | No thank you / I'm fine | 大丈夫です | Daijoubu desu | [N] | Polite way to decline a bag, a receipt, or help. |
-| ★ Where is the bathroom? | トイレはどこですか？ | Toire wa doko desu ka? | [N][T] | |
+| ★ Where is the restroom? | トイレはどこですか？ | Toire wa doko desu ka? | [N][T] | Otearai (お手洗い) is the politer word. |
 | ★ How much is it? | いくらですか？ | Ikura desu ka? | [N][T] | |
 | What is this? | これは何ですか？ | Kore wa nan desu ka? | [T] | Point at the menu item or thing. |
 | Where is [X]? | [X]はどこですか？ | [X] wa doko desu ka? | [N] | |
@@ -24,6 +24,37 @@ Priority marks for the MVP set: ★ = must ship.
 | Could you write it down? | 書いていただけますか？ | Kaite itadakemasu ka? | [V] | For prices, times, addresses. |
 | Sorry, I don't speak Japanese | すみません、日本語が話せません | Sumimasen, nihongo ga hanasemasen | [V] | |
 | Good morning / Hello / Good evening | おはようございます / こんにちは / こんばんは | Ohayou gozaimasu / Konnichiwa / Konbanwa | [N] | |
+| Please speak slowly | ゆっくり話してください | Yukkuri hanashite kudasai | [V] | |
+| Got it / understood | わかりました | Wakarimashita | [V] | |
+| Do you have a moment? | ちょっといいですか？ | Chotto ii desu ka? | [V] | A soft way to start a question. |
+| Could you help me? | 手伝ってもらえますか？ | Tetsudatte moraemasu ka? | [V] | Everyday help. In danger, use "Tasukete!" (Emergency). |
+| No, thank you | いいえ、結構です | Iie, kekkou desu | [V] | Firmer than daijoubu desu. Good for touts. |
+| I'm sorry | ごめんなさい | Gomen nasai | [V] | For a real apology. Sumimasen covers small bumps. |
+| How do we get to [X]? | [X]にはどうやって行きますか？ | [X] ni wa dou yatte ikimasu ka? | [V] | |
+| Is it OK if I [action]? | [action]もいいですか？ | [action] mo ii desu ka? | [V] | Pick an action, or point and say "Ii desu ka?" |
+| See you again (leaving a place you liked) | またお願いします | Mata onegaishimasu | [V] | |
+
+## Chatting
+
+Small talk with people you meet. Casual lines are marked.
+
+| English | Japanese | Romaji | Tag | Note |
+| --- | --- | --- | --- | --- |
+| Nice to meet you | はじめまして。よろしくお願いします | Hajimemashite. Yoroshiku onegaishimasu | [V] | |
+| How are you? / I'm fine | お元気ですか？ / 元気です | Ogenki desu ka? / Genki desu | [V] | Not a daily greeting. Use it with someone you know. |
+| See you later | またね / また後で | Mata ne / Mata ato de | [V] | Casual. For friends, not staff. |
+| I see | なるほど | Naruhodo | [V] | |
+| That's true / yeah | そうですね | Sou desu ne | [V] | |
+| Is that so? | そうですか | Sou desu ka | [V] | Said with a falling tone, it just means "oh, I see." |
+| Really? | 本当ですか？ | Hontou desu ka? | [V] | Casual: "Hontou?" |
+| Maybe | たぶん | Tabun | [V] | |
+| Of course | もちろん | Mochiron | [V] | |
+| That's nice / sounds good | いいですね | Ii desu ne | [V] | |
+| Same / me too | 同じです | Onaji desu | [V] | Ordering the same? See Restaurant. |
+| I'm happy | 嬉しいです | Ureshii desu | [V] | |
+| No, no, I still have a long way to go | いやいや、まだまだです | Iya iya, mada mada desu | [V] | The reply when told your Japanese is good. Or: "Zenzen shaberemasen" (I can barely speak it). |
+| Good work / thanks for today | お疲れ様です | Otsukaresama desu | [V] | After work or a long day. Friends say "Otsukare!" as a toast. |
+| Awesome! (slang) | やばい / 最高 / すごい / 神 / エグい / 神ってる | Yabai / Saikou / Sugoi / Kami / Egui / Kamitteru | [V] | Casual. Yabai = crazy, good or bad. Kami = godlike. Egui = intense. Kamitteru = on fire. |
 
 ## Restaurant and izakaya
 
@@ -44,6 +75,11 @@ Priority marks for the MVP set: ★ = must ship.
 | Thank you for the meal (leaving) | ごちそうさまでした | Gochisousama deshita | [N] | |
 | (Before eating) | いただきます | Itadakimasu | [V] | |
 | For here / to go | 店内で / 持ち帰りで | Tennai de / Mochikaeri de | [N] | |
+| Table / counter / tatami seating | テーブル席 / カウンター席 / 座敷 | Teeburu seki / Kauntaa seki / Zashiki | [V] | Add "de onegaishimasu" to ask for one. Zashiki means shoes off. |
+| Delicious! | おいしい！ | Oishii! | [V] | |
+| One more, please | もう一つお願いします | Mou hitotsu onegaishimasu | [V] | |
+| The same, please | 同じものをお願いします | Onaji mono o onegaishimasu | [V] | Point at the dish or glass. |
+| That's all (done ordering) | 以上です | Ijou desu | [V] | Done eating? "Onaka ippai desu" means "I'm full." |
 
 ## Sushi counter and omakase
 
@@ -66,6 +102,9 @@ Many of the trip's cocktail bars have a seat charge. See `etiquette.md`.
 | Your recommendation, please | おすすめでお願いします | Osusume de onegaishimasu | [V] | |
 | Neat / on the rocks / highball | ストレートで / ロックで / ハイボールで | Sutoreeto de / Rokku de / Haibooru de | [V] | |
 | Another one, please | おかわりお願いします | Okawari onegaishimasu | [V] | |
+| Cheers! | 乾杯！ | Kanpai! | [V] | |
+| One more drink, please | もう一杯お願いします | Mou ippai onegaishimasu | [V] | |
+| Let's drink together! | 一緒に飲みましょう！ | Issho ni nomimashou! | [V] | |
 
 ## Ryokan and onsen (Hakone, Nov 17–19)
 
@@ -88,6 +127,7 @@ Many of the trip's cocktail bars have a seat charge. See `etiquette.md`.
 | Do you have a bigger size? | 大きいサイズはありますか？ | Ookii saizu wa arimasu ka? | [V] | Japanese sizes run small [T]. |
 | Receipt, please | レシートをください | Reshiito o kudasai | [V] | Keep every receipt for tax-free. |
 | Can you wrap it as a gift? | プレゼント用に包んでもらえますか？ | Purezento-you ni tsutsunde moraemasu ka? | [V] | For the souvenir tracker. |
+| Do you have this? | これはありますか？ | Kore wa arimasu ka? | [V] | Show a photo on your phone. |
 
 ## Konbini
 
@@ -115,6 +155,8 @@ Many of the trip's cocktail bars have a seat charge. See `etiquette.md`.
 | Does this train stop at [X]? | この電車は[X]に止まりますか？ | Kono densha wa [X] ni tomarimasu ka? | [V] | |
 | I lost my ticket | 切符をなくしました | Kippu o nakushimashita | [V] | |
 | I missed my train | 電車に乗り遅れました | Densha ni noriokuremashita | [V] | |
+| Does this train go to [X]? | この電車は[X]に行きますか？ | Kono densha wa [X] ni ikimasu ka? | [V] | |
+| I'm getting off (crowded car) | 降ります | Orimasu | [V] | Say it as you squeeze toward the door. |
 
 ## Temples and shrines
 

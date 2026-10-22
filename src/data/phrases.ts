@@ -3,6 +3,7 @@ import type { Phrase, Place, Situation, Source, Venue } from './schema';
 
 export const PHRASE_TABS = [
   { id: 'basics', label: 'Basics' },
+  { id: 'chat', label: 'Chatting' },
   { id: 'restaurant', label: 'Restaurant' },
   { id: 'bar', label: 'Bar' },
   { id: 'sushi', label: 'Sushi' },
@@ -26,6 +27,7 @@ interface Opts {
 
 const TAB_DEFAULTS: Record<string, { sit: Situation[]; venues: Venue[] }> = {
   basics: { sit: ['asking'], venues: [] },
+  chat: { sit: ['asking'], venues: [] },
   restaurant: { sit: ['ordering'], venues: ['restaurant', 'izakaya', 'yakitori', 'ramen', 'cafe'] },
   bar: { sit: ['ordering'], venues: ['cocktail-bar', 'izakaya'] },
   sushi: { sit: ['ordering'], venues: ['sushi-counter'] },
@@ -62,7 +64,7 @@ export const phrases: Phrase[] = [
   p('basics', 'dont-understand', "I don't understand", 'わかりません', 'Wakarimasen', ['T'], { mvp: true, sit: ['problem'], note: 'Not rude. It invites them to slow down or point.' }),
   p('basics', 'one-more-time', 'One more time, please', 'すみません、もう一度お願いします', 'Sumimasen, mou ichido onegaishimasu', ['N'], { mvp: true }),
   p('basics', 'im-fine', "No thank you / I'm fine", '大丈夫です', 'Daijoubu desu', ['N'], { note: 'Polite way to decline a bag, a receipt, or help.' }),
-  p('basics', 'bathroom', 'Where is the bathroom?', 'トイレはどこですか？', 'Toire wa doko desu ka?', ['N', 'T'], { mvp: true }),
+  p('basics', 'bathroom', 'Where is the restroom?', 'トイレはどこですか？', 'Toire wa doko desu ka?', ['N', 'T'], { mvp: true, note: 'Otearai (お手洗い) is the politer word.' }),
   p('basics', 'how-much', 'How much is it?', 'いくらですか？', 'Ikura desu ka?', ['N', 'T'], { mvp: true, sit: ['paying'] }),
   p('basics', 'what-is-this', 'What is this?', 'これは何ですか？', 'Kore wa nan desu ka?', ['T'], { note: 'Point at the menu item or thing.' }),
   p('basics', 'where-is-x', 'Where is [X]?', '[X]はどこですか？', '[X] wa doko desu ka?', ['N']),
@@ -70,6 +72,32 @@ export const phrases: Phrase[] = [
   p('basics', 'write-it-down', 'Could you write it down?', '書いていただけますか？', 'Kaite itadakemasu ka?', ['V'], { note: 'For prices, times, addresses.' }),
   p('basics', 'no-japanese', "Sorry, I don't speak Japanese", 'すみません、日本語が話せません', 'Sumimasen, nihongo ga hanasemasen', ['V']),
   p('basics', 'greetings', 'Good morning / Hello / Good evening', 'おはようございます / こんにちは / こんばんは', 'Ohayou gozaimasu / Konnichiwa / Konbanwa', ['N'], { sit: ['arriving'] }),
+  p('basics', 'speak-slowly', 'Please speak slowly', 'ゆっくり話してください', 'Yukkuri hanashite kudasai', ['V']),
+  p('basics', 'got-it', 'Got it / understood', 'わかりました', 'Wakarimashita', ['V']),
+  p('basics', 'got-a-moment', 'Do you have a moment?', 'ちょっといいですか？', 'Chotto ii desu ka?', ['V'], { note: 'A soft way to start a question.' }),
+  p('basics', 'help-me', 'Could you help me?', '手伝ってもらえますか？', 'Tetsudatte moraemasu ka?', ['V'], { sit: ['problem'], note: 'Everyday help. In danger, use "Tasukete!" (Emergency).' }),
+  p('basics', 'no-thanks', 'No, thank you', 'いいえ、結構です', 'Iie, kekkou desu', ['V'], { note: 'Firmer than daijoubu desu. Good for touts.' }),
+  p('basics', 'sorry', "I'm sorry", 'ごめんなさい', 'Gomen nasai', ['V'], { note: 'For a real apology. Sumimasen covers small bumps.' }),
+  p('basics', 'how-to-get-to', 'How do we get to [X]?', '[X]にはどうやって行きますか？', '[X] ni wa dou yatte ikimasu ka?', ['V']),
+  p('basics', 'is-it-ok-if', 'Is it OK if I [action]?', '[action]もいいですか？', '[action] mo ii desu ka?', ['V'], { slots: ['action'], note: 'Pick an action, or point and say "Ii desu ka?"' }),
+  p('basics', 'see-you-again', 'See you again (leaving a place you liked)', 'またお願いします', 'Mata onegaishimasu', ['V'], { sit: ['leaving'] }),
+
+  // ---- Chatting ----
+  p('chat', 'nice-to-meet-you', 'Nice to meet you', 'はじめまして。よろしくお願いします', 'Hajimemashite. Yoroshiku onegaishimasu', ['V'], { sit: ['arriving'] }),
+  p('chat', 'how-are-you', "How are you? / I'm fine", 'お元気ですか？ / 元気です', 'Ogenki desu ka? / Genki desu', ['V'], { note: 'Not a daily greeting. Use it with someone you know.' }),
+  p('chat', 'see-you-later', 'See you later', 'またね / また後で', 'Mata ne / Mata ato de', ['V'], { sit: ['leaving'], note: 'Casual. For friends, not staff.' }),
+  p('chat', 'i-see', 'I see', 'なるほど', 'Naruhodo', ['V']),
+  p('chat', 'thats-right', "That's true / yeah", 'そうですね', 'Sou desu ne', ['V']),
+  p('chat', 'is-that-so', 'Is that so?', 'そうですか', 'Sou desu ka', ['V'], { note: 'Said with a falling tone, it just means "oh, I see."' }),
+  p('chat', 'really', 'Really?', '本当ですか？', 'Hontou desu ka?', ['V'], { note: 'Casual: "Hontou?"' }),
+  p('chat', 'maybe', 'Maybe', 'たぶん', 'Tabun', ['V']),
+  p('chat', 'of-course', 'Of course', 'もちろん', 'Mochiron', ['V']),
+  p('chat', 'sounds-good', "That's nice / sounds good", 'いいですね', 'Ii desu ne', ['V']),
+  p('chat', 'same', 'Same / me too', '同じです', 'Onaji desu', ['V'], { note: 'Ordering the same? See Restaurant.' }),
+  p('chat', 'im-happy', "I'm happy", '嬉しいです', 'Ureshii desu', ['V']),
+  p('chat', 'not-good-yet', 'No, no, I still have a long way to go', 'いやいや、まだまだです', 'Iya iya, mada mada desu', ['V'], { note: 'The reply when told your Japanese is good. Or: "Zenzen shaberemasen" (I can barely speak it).' }),
+  p('chat', 'otsukare', 'Good work / thanks for today', 'お疲れ様です', 'Otsukaresama desu', ['V'], { note: 'After work or a long day. Friends say "Otsukare!" as a toast.' }),
+  p('chat', 'slang', 'Awesome! (slang)', 'やばい / 最高 / すごい / 神 / エグい / 神ってる', 'Yabai / Saikou / Sugoi / Kami / Egui / Kamitteru', ['V'], { note: 'Casual. Yabai = crazy, good or bad. Kami = godlike. Egui = intense. Kamitteru = on fire.' }),
 
   // ---- Restaurant and izakaya ----
   p('restaurant', 'two-people', 'Two people', '二人です', 'Futari desu', ['V'], { mvp: true, sit: ['arriving'], note: 'Show two fingers too.' }),
@@ -87,6 +115,11 @@ export const phrases: Phrase[] = [
   p('restaurant', 'gochisousama', 'Thank you for the meal (leaving)', 'ごちそうさまでした', 'Gochisousama deshita', ['N'], { sit: ['leaving'], venues: ['restaurant', 'izakaya', 'yakitori', 'ramen', 'sushi-counter', 'ryokan'] }),
   p('restaurant', 'itadakimasu', '(Before eating)', 'いただきます', 'Itadakimasu', ['V']),
   p('restaurant', 'here-or-to-go', 'For here / to go', '店内で / 持ち帰りで', 'Tennai de / Mochikaeri de', ['N'], { venues: ['cafe', 'restaurant', 'konbini'] }),
+  p('restaurant', 'seating', 'Table / counter / tatami seating', 'テーブル席 / カウンター席 / 座敷', 'Teeburu seki / Kauntaa seki / Zashiki', ['V'], { sit: ['arriving'], note: 'Add "de onegaishimasu" to ask for one. Zashiki means shoes off.' }),
+  p('restaurant', 'oishii', 'Delicious!', 'おいしい！', 'Oishii!', ['V']),
+  p('restaurant', 'one-more', 'One more, please', 'もう一つお願いします', 'Mou hitotsu onegaishimasu', ['V']),
+  p('restaurant', 'same-please', 'The same, please', '同じものをお願いします', 'Onaji mono o onegaishimasu', ['V'], { note: 'Point at the dish or glass.' }),
+  p('restaurant', 'thats-all', "That's all (done ordering)", '以上です', 'Ijou desu', ['V'], { note: 'Done eating? "Onaka ippai desu" means "I\'m full."' }),
 
   // ---- Sushi ----
   p('sushi', 'omakase', "Chef's choice, please", 'おまかせでお願いします', 'Omakase de onegaishimasu', ['V']),
@@ -101,6 +134,9 @@ export const phrases: Phrase[] = [
   p('bar', 'your-pick', 'Your recommendation, please', 'おすすめでお願いします', 'Osusume de onegaishimasu', ['V']),
   p('bar', 'neat-rocks-highball', 'Neat / on the rocks / highball', 'ストレートで / ロックで / ハイボールで', 'Sutoreeto de / Rokku de / Haibooru de', ['V']),
   p('bar', 'another', 'Another one, please', 'おかわりお願いします', 'Okawari onegaishimasu', ['V']),
+  p('bar', 'cheers', 'Cheers!', '乾杯！', 'Kanpai!', ['V']),
+  p('bar', 'one-more-drink', 'One more drink, please', 'もう一杯お願いします', 'Mou ippai onegaishimasu', ['V']),
+  p('bar', 'drink-together', "Let's drink together!", '一緒に飲みましょう！', 'Issho ni nomimashou!', ['V']),
 
   // ---- Ryokan and onsen ----
   p('ryokan', 'dinner-time', 'What time is dinner?', '夕食は何時ですか？', 'Yuushoku wa nanji desu ka?', ['V'], { places: ['hakone'], note: 'Dinner time is fixed. Be on time.' }),
@@ -117,6 +153,7 @@ export const phrases: Phrase[] = [
   p('shopping', 'bigger-size', 'Do you have a bigger size?', '大きいサイズはありますか？', 'Ookii saizu wa arimasu ka?', ['V'], { sit: ['asking'], note: 'Japanese sizes run small.' }),
   p('shopping', 'receipt', 'Receipt, please', 'レシートをください', 'Reshiito o kudasai', ['V'], { note: 'Keep every receipt for tax-free.' }),
   p('shopping', 'gift-wrap', 'Can you wrap it as a gift?', 'プレゼント用に包んでもらえますか？', 'Purezento-you ni tsutsunde moraemasu ka?', ['V'], { sit: ['asking'] }),
+  p('shopping', 'have-this', 'Do you have this?', 'これはありますか？', 'Kore wa arimasu ka?', ['V'], { sit: ['asking'], note: 'Show a photo on your phone.' }),
 
   // ---- Konbini ----
   p('konbini', 'heat-it', 'Please heat it up', '温めてください', 'Atatamete kudasai', ['V'], { note: 'Staff usually ask: "Atatamemasu ka?" Answer hai (yes) or iie (no).' }),
@@ -135,6 +172,8 @@ export const phrases: Phrase[] = [
   p('trains', 'stops-at', 'Does this train stop at [X]?', 'この電車は[X]に止まりますか？', 'Kono densha wa [X] ni tomarimasu ka?', ['V']),
   p('trains', 'lost-ticket', 'I lost my ticket', '切符をなくしました', 'Kippu o nakushimashita', ['V'], { sit: ['problem'] }),
   p('trains', 'missed-train', 'I missed my train', '電車に乗り遅れました', 'Densha ni noriokuremashita', ['V'], { sit: ['problem'] }),
+  p('trains', 'goes-to', 'Does this train go to [X]?', 'この電車は[X]に行きますか？', 'Kono densha wa [X] ni ikimasu ka?', ['V']),
+  p('trains', 'getting-off', "I'm getting off (crowded car)", '降ります', 'Orimasu', ['V'], { note: 'Say it as you squeeze toward the door.' }),
 
   // ---- Temples and shrines ----
   p('temples', 'photo-ok', 'May I take a photo?', '写真を撮ってもいいですか？', 'Shashin o totte mo ii desu ka?', ['T', 'V'], { note: 'Assume no inside halls.' }),
@@ -172,5 +211,12 @@ export const SLOT_PICKS: Record<string, { en: string; ja: string; romaji: string
     { en: 'Hakone-Yumoto', ja: '箱根湯本', romaji: 'Hakone-Yumoto' },
     { en: 'Haneda Airport', ja: '羽田空港', romaji: 'Haneda kuukou' }
   ],
-  name: []
+  name: [],
+  action: [
+    { en: 'sit here', ja: 'ここに座って', romaji: 'Koko ni suwatte' },
+    { en: 'take a photo', ja: '写真を撮って', romaji: 'Shashin o totte' },
+    { en: 'come in', ja: '入って', romaji: 'Haitte' },
+    { en: 'use this', ja: 'これを使って', romaji: 'Kore o tsukatte' },
+    { en: 'try it', ja: '試して', romaji: 'Tameshite' }
+  ]
 };
