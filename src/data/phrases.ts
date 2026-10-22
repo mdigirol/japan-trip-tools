@@ -98,6 +98,8 @@ export const phrases: Phrase[] = [
   p('chat', 'not-good-yet', 'No, no, I still have a long way to go', 'いやいや、まだまだです', 'Iya iya, mada mada desu', ['V'], { note: 'The reply when told your Japanese is good. Or: "Zenzen shaberemasen" (I can barely speak it).' }),
   p('chat', 'otsukare', 'Good work / thanks for today', 'お疲れ様です', 'Otsukaresama desu', ['V'], { note: 'After work or a long day. Friends say "Otsukare!" as a toast.' }),
   p('chat', 'slang', 'Awesome! (slang)', 'やばい / 最高 / すごい / 神 / エグい / 神ってる', 'Yabai / Saikou / Sugoi / Kami / Egui / Kamitteru', ['V'], { note: 'Casual. Yabai = crazy, good or bad. Kami = godlike. Egui = intense. Kamitteru = on fire.' }),
+  p('chat', 'smart-foreigner', "(Silly) Smart white guy / I'm not a bad white guy", '頭いい白人 / 悪い白人じゃないよ', 'Atama ii hakujin / Warui hakujin janai yo', ['V'], { note: 'A joke about yourself. Friends only.' }),
+  p('chat', 'alcoholic-joke', "(Silly) I get it, I'm an alcoholic", 'わかる、アル中だから', 'Wakaru, aruchuu dakara', ['V'], { note: 'A drinking joke. Friends only.' }),
 
   // ---- Restaurant and izakaya ----
   p('restaurant', 'two-people', 'Two people', '二人です', 'Futari desu', ['V'], { mvp: true, sit: ['arriving'], note: 'Show two fingers too.' }),

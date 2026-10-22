@@ -55,6 +55,8 @@ Small talk with people you meet. Casual lines are marked.
 | No, no, I still have a long way to go | いやいや、まだまだです | Iya iya, mada mada desu | [V] | The reply when told your Japanese is good. Or: "Zenzen shaberemasen" (I can barely speak it). |
 | Good work / thanks for today | お疲れ様です | Otsukaresama desu | [V] | After work or a long day. Friends say "Otsukare!" as a toast. |
 | Awesome! (slang) | やばい / 最高 / すごい / 神 / エグい / 神ってる | Yabai / Saikou / Sugoi / Kami / Egui / Kamitteru | [V] | Casual. Yabai = crazy, good or bad. Kami = godlike. Egui = intense. Kamitteru = on fire. |
+| (Silly) Smart white guy / I'm not a bad white guy | 頭いい白人 / 悪い白人じゃないよ | Atama ii hakujin / Warui hakujin janai yo | [V] | A joke about yourself. Friends only. |
+| (Silly) I get it, I'm an alcoholic | わかる、アル中だから | Wakaru, aruchuu dakara | [V] | A drinking joke. Friends only. |
 
 ## Restaurant and izakaya
 
