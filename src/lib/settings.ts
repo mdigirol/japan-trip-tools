@@ -12,12 +12,13 @@ export interface Settings {
   rateOverride: number | null;     // USD per ¥1, set by hand; wins until cleared
   tableFocus: 'yen' | 'usd';       // Currency quick table: round yen or round dollars
   favorites: string[];             // phrase ids, local only
+  toolOrder: string[];             // module paths; tiles, More and the bottom bar follow it
 }
 
 const KEY = 'jtc-settings-v1';
 const DEFAULTS: Settings = {
   who: '', tempFirst: 'F', textSize: 'normal', recipients: [], bags: ['Carry-on', 'Big suitcase', 'Backpack'],
-  syncToken: '', rateOverride: null, tableFocus: 'yen', favorites: []
+  syncToken: '', rateOverride: null, tableFocus: 'yen', favorites: [], toolOrder: []
 };
 
 function load(): Settings {

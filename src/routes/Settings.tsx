@@ -3,6 +3,7 @@ import { updateSettings, useSettings, applyTextSize, type Settings as S } from '
 import { stamp } from '../lib/now';
 import { trip } from '../lib/trip';
 import { SyncStatus } from '../components/SyncStatus';
+import { NAV_TOOLS, moveModule, orderedModules } from '../lib/modules';
 
 
 function ListEditor({ label, items, onChange, placeholder }: { label: string; items: string[]; onChange: (l: string[]) => void; placeholder: string }) {
@@ -19,6 +20,27 @@ function ListEditor({ label, items, onChange, placeholder }: { label: string; it
         <input type="text" value={v} placeholder={placeholder} onInput={(e) => setV(e.currentTarget.value)} onKeyDown={(e) => e.key === 'Enter' && add()} aria-label={label} />
         <button class="btn" onClick={add}>Add</button>
       </div>
+    </div>
+  );
+}
+
+function ToolOrder({ order, onChange }: { order: string[]; onChange: (l: string[]) => void }) {
+  const list = orderedModules(order).filter((m) => m.path !== 'settings');
+  return (
+    <div class="card" data-testid="tool-order">
+      <p class="small muted" style="margin-top:0">Same order on Today and More. The first {NAV_TOOLS} go in the bottom bar.</p>
+      <ol class="order-list">
+        {list.map((m, i) => (
+          <li key={m.path} class="order-row">
+            <span aria-hidden="true" class="order-ic">{m.ic}</span>
+            <span class="grow">{m.label}{i < NAV_TOOLS && <span class="small faint"> · in bar</span>}</span>
+            <button class="btn order-btn" disabled={i === 0} onClick={() => onChange(moveModule(order, m.path, -1))} aria-label={`Move ${m.label} up`}>↑</button>
+            <button class="btn order-btn" disabled={i === list.length - 1} onClick={() => onChange(moveModule(order, m.path, 1))} aria-label={`Move ${m.label} down`}>↓</button>
+          </li>
+        ))}
+      </ol>
+      <p class="small faint">Settings stays last.</p>
+      <button class="btn block" disabled={!order.length} onClick={() => onChange([])}>Reset order</button>
     </div>
   );
 }
@@ -58,6 +80,9 @@ export function Settings() {
             ))}
           </div></div>
       </div>
+
+      <h2>Tool order</h2>
+      <ToolOrder order={s.toolOrder} onChange={(l) => set({ toolOrder: l })} />
 
       <h2>Souvenirs</h2>
       <div class="card">

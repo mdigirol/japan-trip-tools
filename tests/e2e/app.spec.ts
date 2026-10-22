@@ -119,6 +119,21 @@ test('units has its own screen', async ({ page }) => {
   await expect(page.getByPlaceholder('°F')).toHaveValue('68');
 });
 
+test('tool order in Settings drives the tiles and the bottom bar', async ({ page }) => {
+  await page.goto(at('2026-11-02T08:00+09:00', '#/settings'));
+  const nav = page.getByRole('navigation', { name: 'Main' }).getByRole('link');
+  await expect(nav).toHaveText(['☀︎Today', '💬Phrases', '🪪Cards', '🙇Etiquette', '☰More']);
+  await page.getByRole('button', { name: 'Move Currency up' }).click();
+  await expect(nav.nth(3)).toHaveText('¥Currency');
+  await page.reload();
+  await expect(nav.nth(3)).toHaveText('¥Currency');
+  await page.goto(at('2026-11-02T08:00+09:00', '#/'));
+  await expect(page.locator('.tiles a').nth(2)).toHaveText('¥Currency');
+  await page.goto(at('2026-11-02T08:00+09:00', '#/settings'));
+  await page.getByRole('button', { name: 'Reset order' }).click();
+  await expect(nav.nth(3)).toHaveText('🙇Etiquette');
+});
+
 test('sync is off with no token, and the claim-log checklist ticks', async ({ page }) => {
   await page.goto(at('2026-11-21T08:00+09:00', '#/purchases?view=add'));
   await expect(page.getByTestId('sync-status')).toContainText('Sync off — add a token in Settings');
