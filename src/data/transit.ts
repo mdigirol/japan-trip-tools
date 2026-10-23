@@ -20,7 +20,7 @@ export const transit: TransitSection[] = [
     t('Big stations have 100+ exits. Pick the exit number in Maps before you walk.', 'T'),
     t('Rush hours: about 7:30–9:30 AM and 5:30–7:30 PM.', 'N', 'T'),
     t('Last trains run about midnight. In Google Maps, use "Leave" → "Last".', 'T'),
-    t('Using a restroom outside the gates means paying again to re-enter.', 'T')
+    t('Station restrooms are usually inside the ticket gates. Go before you tap out.', 'T')
   ] },
   { id: 'shinkansen', title: 'Shinkansen', items: [
     t('Reserved guarantees a seat. Non-reserved cars fill fast on Tokyo–Kyoto.', 'N'),

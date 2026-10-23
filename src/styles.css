@@ -123,7 +123,7 @@ label.field > span { display: block; font-size: .85em; color: var(--muted); marg
 .order-btn { width: 44px; padding: 0; font-size: 18px; }
 
 /* ---- badges ---- */
-.badge { display: inline-block; font-size: .72em; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; border: 1.5px solid currentColor; }
+.badge { display: inline-block; white-space: nowrap; font-size: .72em; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; border: 1.5px solid currentColor; }
 .badge.must { color: var(--must); }
 .badge.should { color: var(--should); }
 .badge.nice { color: var(--nice); }
@@ -197,7 +197,9 @@ ul.tips li { margin: 4px 0; }
 @media (orientation: landscape) { .showcard .sc-ja { font-size: max(32px, 5.5vw); } }
 
 /* ---- etiquette ---- */
-.etq h3 { display: flex; align-items: center; gap: 8px; justify-content: space-between; }
+.etq h3 { display: flex; align-items: baseline; gap: 8px; justify-content: space-between; }
+.etq h3 > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.etq h3 .badge { flex-shrink: 0; }
 .etq ul { margin: 6px 0; padding-left: 0; list-style: none; }
 .etq li { position: relative; margin: 6px 0; }
 

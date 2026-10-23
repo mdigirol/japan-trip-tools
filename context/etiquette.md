@@ -14,7 +14,7 @@ Cards by place type. Each card has a severity: **must** (it causes real offense 
 - **nice · Drinking outside: check local rules.** Many places allow it, but rules are local. In the designated area around Shibuya Station, public drinking is banned daily 6 p.m.–5 a.m. Being loudly drunk is not welcome. [N][V]
 - **must · Ignore street touts.** In Shinjuku and Shibuya at night, never follow anyone pulling you into a bar. Why: overcharging and pressure to pay. [T]
 - **should · Carry tissues and a hand towel.** Some restrooms lack paper, and most lack paper towels. [N][T]
-- **should · Use the restroom before leaving the gates.** Exiting means paying again to re-enter. [T]
+- **should · Use the station restroom before you exit.** Station restrooms are usually inside the ticket gates (改札). Leaving the gates means paying a new fare to come back in. [T]
 
 ## Restaurants and izakaya
 
