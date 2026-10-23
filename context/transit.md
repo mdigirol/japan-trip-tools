@@ -19,7 +19,7 @@ How-to content, not routing. Google Maps handles routes [T].
 - Big stations have 100+ exits. Pick the exit number in Maps before you walk. [T]
 - Rush hours: about 7:30–9:30 AM and 5:30–7:30 PM. [N][T]
 - Last trains run about midnight. In Google Maps, use "Leave" → "Last" to see the final train. [T]
-- Using the restroom outside the gates means paying again to re-enter. [T]
+- Station restrooms are usually inside the ticket gates. Go before you tap out. [T]
 - Etiquette for riding is in `etiquette.md` (Trains).
 
 ## Shinkansen

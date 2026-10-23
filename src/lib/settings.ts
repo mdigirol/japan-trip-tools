@@ -1,6 +1,7 @@
 // Small per-device settings in localStorage (try/catch everywhere). Includes the sync token (§8),
 // which never leaves this device except in requests to the GitHub API.
 import { useEffect, useState } from 'preact/hooks';
+import type { ZoneId } from './now';
 
 export interface Settings {
   who: string;
@@ -13,12 +14,13 @@ export interface Settings {
   tableFocus: 'yen' | 'usd';       // Currency quick table: round yen or round dollars
   favorites: string[];             // phrase ids, local only
   toolOrder: string[];             // module paths; tiles, More and the bottom bar follow it
+  timeZone: ZoneId;                // zone for cache ages and sync times; trip days stay JST
 }
 
 const KEY = 'jtc-settings-v1';
 const DEFAULTS: Settings = {
   who: '', tempFirst: 'F', textSize: 'normal', recipients: [], bags: ['Carry-on', 'Big suitcase', 'Backpack'],
-  syncToken: '', rateOverride: null, tableFocus: 'yen', favorites: [], toolOrder: []
+  syncToken: '', rateOverride: null, tableFocus: 'yen', favorites: [], toolOrder: [], timeZone: 'JST'
 };
 
 function load(): Settings {

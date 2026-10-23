@@ -75,8 +75,8 @@ export const etiquette: EtiquetteCard[] = [
   c('everywhere', 'tissues', 'should', 'Carry tissues and a hand towel', ['N', 'T'], {
     do: ['Pack a pocket tissue pack and a small towel'], why: 'Many restrooms lack paper or paper towels.'
   }),
-  c('everywhere', 'restroom-first', 'should', 'Use the restroom before leaving the gates', ['T'], {
-    do: ['Go inside the station gates if you need it'], why: 'Exiting means paying again to re-enter.'
+  c('everywhere', 'restroom-first', 'should', 'Use the station restroom before you exit', ['T'], {
+    do: ['Station restrooms are usually inside the ticket gates (改札)'], why: 'Leaving the gates means paying a new fare to come back in.'
   }),
   c('everywhere', 'perfume', 'nice', 'Keep perfume light', ['N'], {
     why: "Small spaces and crowded trains. The value is meiwaku: don't trouble the people around you."

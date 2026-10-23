@@ -39,6 +39,7 @@ export function Currency() {
 }
 
 function RateLine({ usdPerYen, rate, override, loading }: { usdPerYen?: number; rate?: Rate; override: number | null; loading: boolean }) {
+  const zone = useSettings().timeZone;
   return (
     <div class="rate-line" data-testid="rate-line">
       <span class="label">Current conversion rate</span>
@@ -46,7 +47,7 @@ function RateLine({ usdPerYen, rate, override, loading }: { usdPerYen?: number; 
         <>
           <b>¥1,000 = {fmtUsd(1000 * usdPerYen)}</b>
           <span class="small muted">
-            {override != null ? 'Your rate (manual)' : rate ? `${rate.source}, ${stamp(rate.at)}` : ''}
+            {override != null ? 'Your rate (manual)' : rate ? `${rate.source}, ${stamp(rate.at, zone)}` : ''}
           </span>
         </>
       ) : (
