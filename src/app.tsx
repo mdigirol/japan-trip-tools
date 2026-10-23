@@ -42,7 +42,7 @@ export function App() {
     case 'settings': page = <Settings />; break;
     case 'shopping': page = <Shopping />; break;
     case 'purchases': page = <Purchases route={route} />; break;
-    case 'konbini': page = <Konbini />; break;
+    case 'konbini': page = <Konbini route={route} />; break;
     case 'decoder': page = <Decoder />; break;
     case 'transit': page = <Transit />; break;
     case 'numbers': page = <Numbers />; break;

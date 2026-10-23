@@ -2,13 +2,14 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { z } from 'zod';
-import { AreaTip, EmergencyNumber, EtiquetteCard, GlossaryTerm, Phrase, ShowCard } from '../../src/data/schema';
+import { AreaTip, DRINK_PURPOSES, EmergencyNumber, EtiquetteCard, GlossaryTerm, KonbiniDrink, Phrase, ShowCard } from '../../src/data/schema';
 import { phrases, PHRASE_TABS } from '../../src/data/phrases';
 import { etiquette } from '../../src/data/etiquette';
 import { showCards } from '../../src/data/showCards';
 import { glossary } from '../../src/data/glossary';
 import { areaTips } from '../../src/data/places';
 import { numbers } from '../../src/data/emergency';
+import { DRINK_PURPOSE_LABELS, konbiniDrinks } from '../../src/data/konbiniDrinks';
 import trip from '@data/trip.json';
 import { matchPhrase } from '../../src/routes/Phrases';
 
@@ -18,7 +19,8 @@ const unique = (ids: string[]) => new Set(ids).size === ids.length;
 describe('schemas', () => {
   it.each([
     ['phrases', Phrase, phrases], ['etiquette', EtiquetteCard, etiquette], ['showCards', ShowCard, showCards],
-    ['glossary', GlossaryTerm, glossary], ['places', AreaTip, areaTips], ['emergency', EmergencyNumber, numbers]
+    ['glossary', GlossaryTerm, glossary], ['places', AreaTip, areaTips], ['emergency', EmergencyNumber, numbers],
+    ['konbiniDrinks', KonbiniDrink, konbiniDrinks]
   ] as const)('%s', (_n, schema, data) => {
     const r = z.array(schema as z.ZodTypeAny).safeParse(data);
     if (!r.success) console.error(r.error.issues.slice(0, 5));
@@ -30,7 +32,7 @@ describe('schemas', () => {
     for (const p of phrases) expect(tabs.has(p.tab), p.id).toBe(true);
   });
   it('all Japanese ships as unreviewed drafts until the native-speaker check', () => {
-    expect([...phrases, ...etiquette, ...showCards, ...glossary].every((x) => typeof x.reviewed === 'boolean')).toBe(true);
+    expect([...phrases, ...etiquette, ...showCards, ...glossary, ...konbiniDrinks].every((x) => typeof x.reviewed === 'boolean')).toBe(true);
   });
 });
 
@@ -62,6 +64,19 @@ describe('etiquette ACs', () => {
   });
   it('the shrine card has the numbered washing sequence', () => {
     expect(etiquette.find((c) => c.id === 'temizuya')?.steps?.length).toBe(5);
+  });
+});
+
+describe('konbini drinks', () => {
+  it('every purpose has a label', () => {
+    for (const p of DRINK_PURPOSES) expect(DRINK_PURPOSE_LABELS[p], p).toBeTruthy();
+  });
+  it('notes and looks make no effect or dose claims', () => {
+    const claim = /\b(cure|treat|prevent|heal|remedy|reliev|detox|mg)\b/i;
+    for (const d of konbiniDrinks) {
+      expect(d.note, d.id).not.toMatch(claim);
+      expect(d.look, d.id).not.toMatch(claim);
+    }
   });
 });
 

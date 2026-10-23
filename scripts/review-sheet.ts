@@ -6,6 +6,7 @@ import { phrases } from '../src/data/phrases';
 import { etiquette } from '../src/data/etiquette';
 import { showCards, TAXI_HEADER } from '../src/data/showCards';
 import { glossary } from '../src/data/glossary';
+import { konbiniDrinks } from '../src/data/konbiniDrinks';
 
 const esc = (s = '') => /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 const rows: string[][] = [['kind', 'id', 'english', 'japanese', 'romaji', 'note', 'reviewed', 'corrected_japanese', 'corrected_romaji']];
@@ -13,6 +14,7 @@ for (const p of phrases) rows.push(['phrase', p.id, p.en, p.ja, p.romaji, p.note
 for (const c of showCards) rows.push(['showCard', c.id, c.en, c.ja, c.romaji, '', String(c.reviewed), '', '']);
 rows.push(['showCard', 'taxi-header', TAXI_HEADER.en, TAXI_HEADER.ja, TAXI_HEADER.romaji, 'Header on every hotel taxi card', String(TAXI_HEADER.reviewed), '', '']);
 for (const g of glossary) rows.push(['glossary', g.id, g.en, g.ja, g.romaji, g.note ?? '', String(g.reviewed), '', '']);
+for (const d of konbiniDrinks) rows.push(['drink', d.id, d.brand, d.ja, d.romaji, d.note, String(d.reviewed), '', '']);
 // Etiquette cards are English, but some quote Japanese words; list those for a look.
 for (const e of etiquette) {
   const text = [e.title, ...e.do, ...e.dont, ...(e.steps ?? []), e.why].join(' / ');
