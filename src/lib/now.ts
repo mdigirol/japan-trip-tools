@@ -39,10 +39,17 @@ export function longDate(ymd: string): string {
   return new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: 'short', month: 'short', day: 'numeric' }).format(dt);
 }
 
-// "Nov 14, 9:02 AM" in Tokyo time, for cache ages.
-export function stamp(iso: string | number): string {
-  const d = new Date(iso);
-  return new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Tokyo', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(d);
+// Zones a phone can show cache ages and sync times in (Settings → Times shown in).
+// Trip-day logic stays on Tokyo time whatever this is set to.
+export type ZoneId = 'JST' | 'ET';
+export const ZONES: Record<ZoneId, string> = { JST: 'Asia/Tokyo', ET: 'America/New_York' };
+
+const stampFmt: Partial<Record<ZoneId, Intl.DateTimeFormat>> = {};
+
+// "Nov 14, 9:02 AM JST" (or "… ET"), for cache ages and sync times.
+export function stamp(iso: string | number, zone: ZoneId = 'JST'): string {
+  const f = stampFmt[zone] ??= new Intl.DateTimeFormat('en-US', { timeZone: ZONES[zone], month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+  return `${f.format(new Date(iso))} ${zone}`;
 }
 
 export function daysBetween(a: string, b: string): number {

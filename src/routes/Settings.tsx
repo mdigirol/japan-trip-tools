@@ -74,6 +74,11 @@ export function Settings() {
             <button aria-pressed={s.tempFirst === 'F'} onClick={() => set({ tempFirst: 'F' })}>°F</button>
             <button aria-pressed={s.tempFirst === 'C'} onClick={() => set({ tempFirst: 'C' })}>°C</button>
           </div></div>
+        <div class="field"><span class="small muted">Times shown in</span>
+          <div class="seg" role="group" aria-label="Times shown in">
+            <button aria-pressed={s.timeZone === 'JST'} onClick={() => set({ timeZone: 'JST' })}>Japan (JST)</button>
+            <button aria-pressed={s.timeZone === 'ET'} onClick={() => set({ timeZone: 'ET' })}>US Eastern (ET)</button>
+          </div></div>
         <div class="field"><span class="small muted">Text size</span>
           <div class="seg" role="group" aria-label="Text size">
             {(['normal', 'large', 'xl'] as const).map((t) => (
@@ -109,7 +114,7 @@ export function Settings() {
       <h2>Offline</h2>
       <div class="card" data-testid="offline-ready">
         {ready ? <b>Ready for offline ✓</b> : ready === false ? <b>Not ready for offline yet. Open once while online.</b> : '…'}
-        <div class="small muted">Version {__APP_VERSION__} · built {__BUILT_AT__ === 'test' ? 'test' : stamp(__BUILT_AT__)} · trip data {stamp(trip.generatedAt)}</div>
+        <div class="small muted">Version {__APP_VERSION__} · built {__BUILT_AT__ === 'test' ? 'test' : stamp(__BUILT_AT__, s.timeZone)} · trip data {stamp(trip.generatedAt, s.timeZone)}</div>
       </div>
     </div>
   );

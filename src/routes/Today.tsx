@@ -126,9 +126,9 @@ function Weather({ ymd, day }: { ymd: string; day?: TodayState['day'] }) {
             <div class="small faint">{hi2} / {lo2}</div>
             <div class="small">
               {w.day.rainPct != null && <>Rain {w.day.rainPct}% · </>}
-              {w.day.sunset && <>Sunset {fmtClock(w.day.sunset)}</>}
+              {w.day.sunset && <>Sunset {fmtClock(w.day.sunset)} JST</>}
             </div>
-            {w.at && <div class="small faint">Forecast from {stamp(w.at)}</div>}
+            {w.at && <div class="small faint">Forecast from {stamp(w.at, s.timeZone)}</div>}
             {w.typical && <div class="small faint">Mid-November average. No forecast yet.</div>}
             <div class="small" style="color:var(--indigo)">JMA forecast, {area.name} ↗</div>
           </a>

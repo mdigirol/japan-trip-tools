@@ -3,10 +3,12 @@ import { cachedRate } from '../lib/rates';
 import { cacheGet } from '../lib/db';
 import { stamp } from '../lib/now';
 import { useOnline } from '../lib/online';
+import { useSettings } from '../lib/settings';
 
 // "Offline" plus the age of the cached rate and weather. Only shown when the network is off.
 export function StatusPills() {
   const online = useOnline();
+  const zone = useSettings().timeZone;
   const [ages, setAges] = useState<{ rate?: number; wx?: number }>({});
   useEffect(() => {
     if (online) return;
@@ -19,8 +21,8 @@ export function StatusPills() {
   return (
     <div class="pills" role="status">
       <span class="pill off">Offline</span>
-      {ages.rate && <span class="pill">rate from {stamp(ages.rate)}</span>}
-      {ages.wx && <span class="pill">weather from {stamp(ages.wx)}</span>}
+      {ages.rate && <span class="pill">rate from {stamp(ages.rate, zone)}</span>}
+      {ages.wx && <span class="pill">weather from {stamp(ages.wx, zone)}</span>}
     </div>
   );
 }
