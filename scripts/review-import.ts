@@ -14,7 +14,7 @@ function parseCsv(text: string): string[][] {
   return rows;
 }
 
-const FILES: Record<string, string> = { phrase: 'src/data/phrases.ts', showCard: 'src/data/showCards.ts', glossary: 'src/data/glossary.ts' };
+const FILES: Record<string, string> = { phrase: 'src/data/phrases.ts', showCard: 'src/data/showCards.ts', glossary: 'src/data/glossary.ts', drink: 'src/data/konbiniDrinks.ts' };
 const [head, ...rows] = parseCsv(readFileSync('review/japanese-strings.csv', 'utf8').replace(/^﻿/, ''));
 const col = (n: string) => head.indexOf(n);
 const src: Record<string, string> = {};

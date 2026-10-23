@@ -167,6 +167,17 @@ test('konbini "Near me" degrades to the saved list with a message', async ({ pag
   await expect(page.getByRole('heading', { name: /Near today’s areas/ })).toBeVisible();
 });
 
+test('konbini Drinks tab lists drinks, groups by use, and keeps the Stores tab', async ({ page }) => {
+  await page.goto(at('2026-11-21T08:00+09:00', '#/konbini?tab=drinks'));
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Konbini');
+  await expect(page.locator('[data-testid^="drink-"]').first()).toBeVisible();
+  await page.getByRole('button', { name: 'By use' }).click();
+  await expect(page.getByRole('button', { name: 'By use' })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByRole('heading', { level: 2, name: /^(After drinking|Stomach|Sleep \/ relax|Energy|Warm-up|Hydration)$/ }).first()).toBeVisible();
+  await page.getByRole('tab', { name: 'Stores' }).click();
+  await expect(page.getByRole('heading', { name: 'Which chain for what' })).toBeVisible();
+});
+
 test('weather cards link to the JMA page for the day’s area', async ({ page }) => {
   await page.goto(at('2026-11-15T08:00+09:00'));
   const card = page.getByTestId('wx-tokyo');
