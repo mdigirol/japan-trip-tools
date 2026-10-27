@@ -23,7 +23,7 @@ Phone-first offline web app for Matt and Katherine's Japan trip, Nov 11–27, 20
 - Safety-relevant `[V]` facts (emergency numbers, tax-free rules, transit rules) need an official `sourceUrl` before the freeze (Nov 8). Phone numbers are verified before the trip; set `verified: true` only with an official URL.
 - All Japanese ships as a draft, `reviewed: false` (D9). `npm run review-sheet` exports it; `npm run review-import` applies the native speaker's corrections. Dev builds show an amber dot on unreviewed strings.
 - Copyright: never paste text from the purchased guides. Paraphrase only. The guides stay in Dropbox.
-- No dietary or allergy content (D10). One exception: the konbini drinks' "Has caffeine" flag. No flashcards (D4). No shared favorites (D6).
+- No flashcards (D4). No shared favorites (D6).
 - UI copy: short, plain, specific. One idea per line on cards.
 
 ## Code

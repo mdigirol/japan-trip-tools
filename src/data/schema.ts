@@ -66,7 +66,7 @@ export const KonbiniDrink = z.strictObject({
   purposes: z.array(z.enum(DRINK_PURPOSES)).min(1),   // what it's sold for, never a claimed effect
   look: z.string().min(1),        // one line: bottle/can/carton, size, label color
   note: z.string().min(1),        // one line, paraphrased
-  caffeine: z.boolean(),          // the one D10 exception: a "Has caffeine" flag
+  caffeine: z.boolean(),          // shows a "Has caffeine" pill
   productUrl: url,                // the maker's official product page (has a photo; needs a connection)
   source: sources, reviewed: z.boolean()
 });
