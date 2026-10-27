@@ -31,7 +31,7 @@ The Konbini screen has two tabs: Stores (the finder, chains and uses above) and 
 - A glossary of teas and functional drinks, sorted A–Z by brand or grouped By use, with a filter by purpose.
 - Purposes say how a drink is sold (After drinking, Stomach, Sleep / relax, Energy, Warm-up, Hydration), not what it does. The tab says so at the top: for orientation, not medical advice.
 - No effect or dose claims in `note` or `look` (no cure, treat, prevent, relieve, detox, mg). `tests/unit/content.test.ts` checks this.
-- `caffeine: true` shows a "Has caffeine" pill. It is the one exception to D10 (no dietary content).
+- `caffeine: true` shows a "Has caffeine" pill.
 - No photos in the app. Each card links to the maker's official product page, which has the photo and needs a connection.
 - Japanese ships unreviewed (D9), like every other string.
 

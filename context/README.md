@@ -21,15 +21,14 @@ Every item carries one tag. Keep the tag when you turn the item into data (`sour
 
 1. **Japanese is checked after the build.** All Japanese here, sourced or not, ships as a draft (`reviewed: false`) and gets a native-speaker check after the build. Romaji uses Hepburn with long vowels written out (ou, uu, ee).
 2. **`[V]` items are drafts.** Confirm them against an official source (JNTO, JR, the venue's own site) or drop them. Emergency numbers, tax-free rules and transit rules are confirmed before the trip.
-3. **No dietary or allergy content.** It was dropped from the app on 2026-10-18.
-4. **Don't trust the guides on everything.** Some claims are dated or dubious, and these notes leave them out or flag them:
+3. **Don't trust the guides on everything.** Some claims are dated or dubious, and these notes leave them out or flag them:
    - The Kyoto guide's ¥700 city-bus day pass. Kyoto ended the bus-only day pass in 2023 `[V]`.
    - The Tokyo guide's claim that sunglasses read as yakuza. Left out.
    - The Tokyo guide's claim that Wise has 0% fees on everything. Left out; fees vary.
    - The Kyoto guide says "okini". The usual spelling is ookini (おおきに). It is used mostly by older shopkeepers. Fine to say, optional.
    - Konbini specialties: Nina and the Tokyo guide disagree on whose egg sandwich is best. Both views are recorded.
-5. **Write in American English.**
-6. **Write for one glance.** Keep cards to a title, three to five short do/don't lines, and a one-line why.
+4. **Write in American English.**
+5. **Write for one glance.** Keep cards to a title, three to five short do/don't lines, and a one-line why.
 
 ## Files
 

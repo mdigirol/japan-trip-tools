@@ -58,7 +58,7 @@ These came from Matt's comments on the scoping doc and his final notes. Don't re
 | D7 | American English everywhere (code comments, UI, docs). |
 | D8 | **No password or encryption.** The app holds nothing confidential and is published openly on GitHub Pages. |
 | D9 | **The Japanese is checked after the build**, not before. Ship draft content, flagged `reviewed: false`. |
-| D10 | **No dietary or allergy content.** No allergy card, no diet phrases. |
+| D10 | *Withdrawn 2026-10-27.* (Was: no dietary or allergy content.) |
 
 ## 4. Modules and priority
 
@@ -509,7 +509,6 @@ All have defaults; build on them and confirm in the first PR.
 
 - Itinerary content: stops, times, bookings, maps of the day.
 - Passwords and encryption (D8).
-- Dietary and allergy content (D10).
 - Translation of free text. Link to Google Translate or DeepL.
 - Building OCR. Link to Google Lens.
 - Flashcards and practice (D4).
