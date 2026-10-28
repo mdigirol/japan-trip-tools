@@ -1,7 +1,7 @@
 import { useState } from 'preact/hooks';
 import offline from '@data/konbini-near-stops.json';
 import { CHAINS, KONBINI_USES } from '../data/konbini';
-import { DRINK_PURPOSE_LABELS, konbiniDrinks } from '../data/konbiniDrinks';
+import { DRINK_KIND_LABELS, DRINK_PURPOSE_LABELS, DRINK_TIPS, konbiniDrinks } from '../data/konbiniDrinks';
 import { DRINK_PURPOSES, type KonbiniDrink } from '../data/schema';
 import { Dot } from '../components/Dot';
 import { drinkGroups, type DrinkPurpose, type DrinkSort } from '../lib/drinks';
@@ -90,8 +90,17 @@ function Drinks() {
   return (
     <div>
       <p class="small faint" style="margin-top:0">{DRINKS_NOTE}</p>
+      <details class="card tight drink-tips" data-testid="konbini-drink-tips">
+        <summary>Buying tips</summary>
+        <ul class="list-plain small">
+          {DRINK_TIPS.map((t) => (
+            <li key={t.text}>{t.text}{t.sourceUrl && <> <a href={t.sourceUrl} target="_blank" rel="noopener">Source ↗</a></>}</li>
+          ))}
+        </ul>
+      </details>
       <div class="seg" role="group" aria-label="Sort drinks">
         <button aria-pressed={sort === 'az'} onClick={() => setSort('az')}>A–Z</button>
+        <button aria-pressed={sort === 'type'} onClick={() => setSort('type')}>By type</button>
         <button aria-pressed={sort === 'use'} onClick={() => setSort('use')}>By use</button>
       </div>
       <div class="chips drink-filter" role="group" aria-label="Sold for" style="margin-top:10px">
@@ -102,7 +111,8 @@ function Drinks() {
       </div>
       {!groups.length && <div class="empty">No drinks for this use.</div>}
       {groups.map((g) => (
-        <section key={g.purpose ?? 'all'}>
+        <section key={g.kind ?? g.purpose ?? 'all'}>
+          {g.kind && <h2>{DRINK_KIND_LABELS[g.kind]}</h2>}
           {g.purpose && <h2>{DRINK_PURPOSE_LABELS[g.purpose]}</h2>}
           {g.drinks.map((d) => <DrinkCard d={d} key={d.id} />)}
         </section>
@@ -119,9 +129,14 @@ function DrinkCard({ d }: { d: KonbiniDrink }) {
       <div class="ro">{d.romaji}</div>
       <div class="small">{d.look}</div>
       <div class="small">{d.note}</div>
-      <div class="small muted">Sold for: {d.purposes.map((p) => DRINK_PURPOSE_LABELS[p]).join(' · ')}</div>
-      {d.caffeine && <div class="pills" style="margin:6px 0 0"><span class="pill">Has caffeine</span></div>}
-      <div class="small" style="margin-top:6px"><a href={d.productUrl} target="_blank" rel="noopener">See the product ↗</a> <span class="faint">· Needs a connection</span></div>
+      {d.purposes.length > 0 && <div class="small muted">Sold for: {d.purposes.map((p) => DRINK_PURPOSE_LABELS[p]).join(' · ')}</div>}
+      {(d.caffeine || d.abv !== undefined) && (
+        <div class="pills" style="margin:6px 0 0">
+          {d.abv !== undefined && <span class="pill">Contains alcohol · {d.abv}%</span>}
+          {d.caffeine && <span class="pill">Has caffeine</span>}
+        </div>
+      )}
+      <div class="small" style="margin-top:6px"><a href={d.productUrl} target="_blank" rel="noopener">Photo on the maker’s site ↗</a> <span class="faint">· Needs internet</span></div>
     </div>
   );
 }

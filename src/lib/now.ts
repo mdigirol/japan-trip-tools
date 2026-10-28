@@ -52,6 +52,13 @@ export function stamp(iso: string | number, zone: ZoneId = 'JST'): string {
   return `${f.format(new Date(iso))} ${zone}`;
 }
 
+// "Nov 12–17", or "Nov 30–Dec 2" across a month, for a stay's check-in and check-out dates.
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+export function dateRange(from: string, to: string): string {
+  const mon = (ymd: string) => MONTHS[+ymd.slice(5, 7) - 1];
+  return `${mon(from)} ${+from.slice(8)}–${mon(to) === mon(from) ? '' : `${mon(to)} `}${+to.slice(8)}`;
+}
+
 export function daysBetween(a: string, b: string): number {
   const t = (s: string) => Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10));
   return Math.round((t(b) - t(a)) / 86400000);

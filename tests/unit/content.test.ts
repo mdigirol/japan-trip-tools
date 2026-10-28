@@ -2,14 +2,14 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { z } from 'zod';
-import { AreaTip, DRINK_PURPOSES, EmergencyNumber, EtiquetteCard, GlossaryTerm, KonbiniDrink, Phrase, ShowCard } from '../../src/data/schema';
+import { AreaTip, DRINK_KINDS, DRINK_PURPOSES, DrinkTip, EmergencyNumber, EtiquetteCard, GlossaryTerm, KonbiniDrink, Phrase, ShowCard } from '../../src/data/schema';
 import { phrases, PHRASE_TABS } from '../../src/data/phrases';
 import { etiquette } from '../../src/data/etiquette';
 import { showCards } from '../../src/data/showCards';
 import { glossary } from '../../src/data/glossary';
 import { areaTips } from '../../src/data/places';
 import { numbers } from '../../src/data/emergency';
-import { DRINK_PURPOSE_LABELS, konbiniDrinks } from '../../src/data/konbiniDrinks';
+import { DRINK_KIND_LABELS, DRINK_PURPOSE_LABELS, DRINK_TIPS, konbiniDrinks } from '../../src/data/konbiniDrinks';
 import trip from '@data/trip.json';
 import { matchPhrase } from '../../src/routes/Phrases';
 
@@ -70,6 +70,27 @@ describe('etiquette ACs', () => {
 describe('konbini drinks', () => {
   it('every purpose has a label', () => {
     for (const p of DRINK_PURPOSES) expect(DRINK_PURPOSE_LABELS[p], p).toBeTruthy();
+  });
+  it('every kind has a label', () => {
+    for (const k of DRINK_KINDS) expect(DRINK_KIND_LABELS[k], k).toBeTruthy();
+  });
+  it('alcohol has a listed ABV, and nothing else does', () => {
+    for (const d of konbiniDrinks) expect(d.kind === 'alcohol', d.id).toBe(d.abv !== undefined);
+    expect(konbiniDrinks.some((d) => d.kind === 'alcohol')).toBe(true);
+  });
+  it('energy drinks are sold for energy and have caffeine', () => {
+    for (const d of konbiniDrinks.filter((x) => x.kind === 'energy')) {
+      expect(d.purposes, d.id).toContain('energy');
+      expect(d.caffeine, d.id).toBe(true);
+    }
+  });
+  it('buying tips match the schema, and the rules link to an official page', () => {
+    for (const t of DRINK_TIPS) expect(() => DrinkTip.parse(t), t.text).not.toThrow();
+    for (const t of DRINK_TIPS.filter((x) => /age is 20|banned/.test(x.text))) expect(t.sourceUrl, t.text).toMatch(/\.go\.jp\/|\.tokyo\.jp\//);
+  });
+  it('ids and brands are unique', () => {
+    expect(new Set(konbiniDrinks.map((d) => d.id)).size).toBe(konbiniDrinks.length);
+    expect(new Set(konbiniDrinks.map((d) => d.brand.toLowerCase())).size).toBe(konbiniDrinks.length);
   });
   it('notes and looks make no effect or dose claims', () => {
     const claim = /\b(cure|treat|prevent|heal|remedy|reliev|detox|mg)\b/i;

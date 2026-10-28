@@ -134,6 +134,15 @@ test('tool order in Settings drives the tiles and the bottom bar', async ({ page
   await expect(nav.nth(3)).toHaveText('🙇Etiquette');
 });
 
+test('a hash change before the router subscribes still routes', async ({ page }) => {
+  await page.addInitScript(() => { window.requestAnimationFrame = () => 0; }); // effects wait for Preact's timeout fallback
+  await page.goto(at('2026-11-21T08:00+09:00', '#/settings'));
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Settings');
+  await page.reload();
+  await page.goto(at('2026-11-21T08:00+09:00', '#/'));
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Sat, Nov 21 · Kyoto');
+});
+
 test('sync is hidden with no data repo, and the claim-log checklist ticks', async ({ page }) => {
   await page.goto(at('2026-11-21T08:00+09:00', '#/settings'));
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Settings');
@@ -167,10 +176,17 @@ test('konbini "Near me" degrades to the saved list with a message', async ({ pag
   await expect(page.getByRole('heading', { name: /Near today’s areas/ })).toBeVisible();
 });
 
-test('konbini Drinks tab lists drinks, groups by use, and keeps the Stores tab', async ({ page }) => {
+test('konbini Drinks tab lists drinks, groups by type and by use, and keeps the Stores tab', async ({ page }) => {
   await page.goto(at('2026-11-21T08:00+09:00', '#/konbini?tab=drinks'));
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Konbini');
   await expect(page.locator('[data-testid^="drink-"]').first()).toBeVisible();
+  await expect(page.locator('[data-testid^="drink-"]').first()).toContainText('Needs internet');
+  await page.getByRole('button', { name: 'By type' }).click();
+  await expect(page.getByRole('heading', { level: 2, name: 'Coffee' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 2, name: 'Soda and juice' })).toBeVisible();
+  await expect(page.getByTestId('drink-strong-zero')).toContainText('Contains alcohol · 9%');
+  await page.getByText('Buying tips').click();
+  await expect(page.getByTestId('konbini-drink-tips')).toContainText('The drinking age is 20');
   await page.getByRole('button', { name: 'By use' }).click();
   await expect(page.getByRole('button', { name: 'By use' })).toHaveAttribute('aria-pressed', 'true');
   await expect(page.getByRole('heading', { level: 2, name: /^(After drinking|Stomach|Sleep \/ relax|Energy|Warm-up|Hydration)$/ }).first()).toBeVisible();
