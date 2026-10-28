@@ -4,6 +4,7 @@ import { phrases, PHRASE_TABS, SLOT_PICKS } from '../data/phrases';
 import { Dot } from '../components/Dot';
 import { now } from '../lib/now';
 import { href, type Route } from '../lib/router';
+import { matchesAll } from '../lib/search';
 import { getSettings, updateSettings, useSettings } from '../lib/settings';
 import { showCard } from '../lib/showcard';
 import { speak } from '../lib/speech';
@@ -11,14 +12,8 @@ import { todayState, trip } from '../lib/trip';
 
 interface Fill { ja: string; romaji: string; en: string }
 
-const norm = (s: string) => s.toLowerCase().normalize('NFKC').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
-
 export function matchPhrase(p: Phrase, q: string): boolean {
-  const n = norm(q);
-  if (!n) return true;
-  const hay = norm([p.en, p.romaji, p.ja, p.note ?? ''].join(' '));
-  const squashed = hay.replace(/ /g, '');
-  return n.split(' ').every((w) => hay.includes(w) || squashed.includes(w));
+  return matchesAll([p.en, p.romaji, p.ja, p.note ?? ''], q);
 }
 
 export function fillText(text: string, slots: string[] | undefined, fill: Fill | undefined, field: keyof Fill): string {

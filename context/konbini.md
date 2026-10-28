@@ -28,7 +28,9 @@ Also seen: Daily Yamazaki (fewer stores) [T]. Late-night bento and dessert disco
 
 The Konbini screen has two tabs: Stores (the finder, chains and uses above) and Drinks (`#/konbini?tab=drinks`). Data: `src/data/konbiniDrinks.ts`, schema `KonbiniDrink`.
 
-- A glossary of teas, coffee, sodas, juices, energy drinks, functional drinks and alcohol, sorted A–Z by brand, grouped By type (Tea, Coffee, Soda and juice, Energy drinks, Sports and functional, Beer/chuhai/highballs) or grouped By use, with a filter by purpose.
+- A glossary of water, teas, coffee, milk and yogurt drinks, sodas, juices, energy drinks, functional drinks and alcohol (beer, chuhai, highballs, sake, wine), sorted A–Z by brand, grouped By type or grouped By use.
+- Type chips (#40) filter every view: Water, Tea, Coffee, Milk, Soda / juice, Energy, Sports, Alcohol. Use is a sort, not a chip.
+- A search box (#40) matches brand, Japanese, romaji, `look`, `note`, type and use, so you can find a drink by what's on the shelf ("blue can", "polka dots"). Write `look` with the label color or logo where it's distinctive, checked against the maker's photo.
 - Alcohol (#35): `kind: 'alcohol'` needs `abv`, the maker's listed % for the can in `look`. The card shows a "Contains alcohol · N%" pill. The schema rejects `abv` on anything else.
 - Energy drinks are `kind: 'energy'`, sold for Energy, with the caffeine flag.
 - Buying tips (`DRINK_TIPS`) sit in a collapsed "Buying tips" box at the top of the tab: hot drinks, coffee machines, the age-20 rule, ABV, the Shibuya street-drinking ban, empties. Rules link to an official page (e-Gov for the age law, Shibuya City for the ban).
