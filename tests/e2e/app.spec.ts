@@ -211,7 +211,7 @@ test('konbini Drinks search finds drinks by label color and the type chips filte
 
 test('Signs & menus and Phrases offer Kuli Kuli for camera translate', async ({ page }) => {
   await page.goto(at('2026-11-21T08:00+09:00', '#/decoder'));
-  await expect(page.getByTestId('kuli-kuli')).toHaveAttribute('href', 'https://menu-gpt-orpin.vercel.app/');
+  await expect(page.getByTestId('kuli-kuli')).toHaveAttribute('href', 'https://apps.apple.com/app/id6458146511');
   await expect(page.getByRole('link', { name: 'Google Translate ↗' })).toBeVisible();
   await page.goto(at('2026-11-21T08:00+09:00', '#/phrases'));
   await expect(page.getByTestId('kuli-kuli')).toContainText('Open Kuli Kuli');
