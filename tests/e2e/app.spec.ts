@@ -134,6 +134,15 @@ test('tool order in Settings drives the tiles and the bottom bar', async ({ page
   await expect(nav.nth(3)).toHaveText('🙇Etiquette');
 });
 
+test('a hash change before the router subscribes still routes', async ({ page }) => {
+  await page.addInitScript(() => { window.requestAnimationFrame = () => 0; }); // effects wait for Preact's timeout fallback
+  await page.goto(at('2026-11-21T08:00+09:00', '#/settings'));
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Settings');
+  await page.reload();
+  await page.goto(at('2026-11-21T08:00+09:00', '#/'));
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Sat, Nov 21 · Kyoto');
+});
+
 test('sync is hidden with no data repo, and the claim-log checklist ticks', async ({ page }) => {
   await page.goto(at('2026-11-21T08:00+09:00', '#/settings'));
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Settings');

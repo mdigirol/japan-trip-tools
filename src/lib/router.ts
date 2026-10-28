@@ -14,6 +14,8 @@ export function useRoute(): Route {
   useEffect(() => {
     const f = () => { set(parse()); window.scrollTo(0, 0); };
     window.addEventListener('hashchange', f);
+    // Effects run a frame after the first render; catch a hash change made before we listened.
+    set((cur) => { const n = parse(); return n.path === cur.path && `${n.params}` === `${cur.params}` ? cur : n; });
     return () => window.removeEventListener('hashchange', f);
   }, []);
   return r;
