@@ -90,6 +90,8 @@ p { margin: .4em 0; }
 }
 .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
 .btn.block { width: 100%; }
+.phrases-kuli { margin-top: 20px; }
+.more-translate .btn { padding: 0 10px; font-size: .92em; white-space: nowrap; }
 .btn:disabled { opacity: .5; }
 .chips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 8px; scrollbar-width: none; margin: 0 -16px; padding-left: 16px; padding-right: 16px; }
 .chips::-webkit-scrollbar { display: none; }
@@ -127,6 +129,7 @@ label.field > span { display: block; font-size: .85em; color: var(--muted); marg
 .drink .ro { font-size: .9em; color: var(--indigo); font-style: italic; margin-bottom: 4px; }
 .drink a { display: inline-flex; align-items: center; min-height: 44px; }
 .drink-filter .chip { min-height: 44px; }
+.drink-search { margin: 10px 0; }
 .drink-tips { margin: 10px 0 0; }
 .drink-tips > summary { min-height: 44px; }
 .drink-tips li + li { margin-top: 6px; }

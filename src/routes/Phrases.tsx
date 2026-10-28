@@ -2,8 +2,10 @@ import { useMemo, useRef, useState } from 'preact/hooks';
 import type { Phrase } from '../data/schema';
 import { phrases, PHRASE_TABS, SLOT_PICKS } from '../data/phrases';
 import { Dot } from '../components/Dot';
+import { KuliKuli } from '../components/KuliKuli';
 import { now } from '../lib/now';
 import { href, type Route } from '../lib/router';
+import { matchesAll } from '../lib/search';
 import { getSettings, updateSettings, useSettings } from '../lib/settings';
 import { showCard } from '../lib/showcard';
 import { speak } from '../lib/speech';
@@ -11,14 +13,8 @@ import { todayState, trip } from '../lib/trip';
 
 interface Fill { ja: string; romaji: string; en: string }
 
-const norm = (s: string) => s.toLowerCase().normalize('NFKC').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
-
 export function matchPhrase(p: Phrase, q: string): boolean {
-  const n = norm(q);
-  if (!n) return true;
-  const hay = norm([p.en, p.romaji, p.ja, p.note ?? ''].join(' '));
-  const squashed = hay.replace(/ /g, '');
-  return n.split(' ').every((w) => hay.includes(w) || squashed.includes(w));
+  return matchesAll([p.en, p.romaji, p.ja, p.note ?? ''], q);
 }
 
 export function fillText(text: string, slots: string[] | undefined, fill: Fill | undefined, field: keyof Fill): string {
@@ -60,6 +56,10 @@ export function Phrases({ route }: { route: Route }) {
       {list.length === 0 && <div class="empty">No phrases match “{q}”.</div>}
       {list.map((p) => <PhraseCard p={p} key={p.id} />)}
       {tab === 'pharmacy' && !q && <p class="small"><a href={href('emergency')}>Pharmacy brands and emergency numbers →</a></p>}
+      <section class="phrases-kuli">
+        <p class="small muted" style="margin-bottom:6px">Not here? Kuli Kuli translates by voice, text or camera.</p>
+        <KuliKuli />
+      </section>
     </div>
   );
 }

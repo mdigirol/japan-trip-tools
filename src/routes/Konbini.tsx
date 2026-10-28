@@ -1,10 +1,10 @@
 import { useState } from 'preact/hooks';
 import offline from '@data/konbini-near-stops.json';
 import { CHAINS, KONBINI_USES } from '../data/konbini';
-import { DRINK_KIND_LABELS, DRINK_PURPOSE_LABELS, DRINK_TIPS, konbiniDrinks } from '../data/konbiniDrinks';
-import { DRINK_PURPOSES, type KonbiniDrink } from '../data/schema';
+import { DRINK_KIND_CHIPS, DRINK_KIND_LABELS, DRINK_PURPOSE_LABELS, DRINK_TIPS, konbiniDrinks } from '../data/konbiniDrinks';
+import { DRINK_KINDS, type KonbiniDrink } from '../data/schema';
 import { Dot } from '../components/Dot';
-import { drinkGroups, type DrinkPurpose, type DrinkSort } from '../lib/drinks';
+import { drinkGroups, type DrinkKind, type DrinkSort } from '../lib/drinks';
 import { now } from '../lib/now';
 import { href, type Route } from '../lib/router';
 import { distM, mapsLink, MAPS_SEARCH_KONBINI, nearMe, type Konbini as K } from '../lib/overpass';
@@ -85,8 +85,9 @@ function Stores() {
 
 function Drinks() {
   const [sort, setSort] = useState<DrinkSort>('az');
-  const [only, setOnly] = useState<DrinkPurpose | undefined>();
-  const groups = drinkGroups(konbiniDrinks, sort, only);
+  const [only, setOnly] = useState<DrinkKind | undefined>();
+  const [q, setQ] = useState('');
+  const groups = drinkGroups(konbiniDrinks, sort, only, q);
   return (
     <div>
       <p class="small faint" style="margin-top:0">{DRINKS_NOTE}</p>
@@ -98,18 +99,19 @@ function Drinks() {
           ))}
         </ul>
       </details>
+      <input type="search" class="drink-search" placeholder="Search name, color, can, bottle" value={q} onInput={(e) => setQ(e.currentTarget.value)} aria-label="Search drinks" />
       <div class="seg" role="group" aria-label="Sort drinks">
         <button aria-pressed={sort === 'az'} onClick={() => setSort('az')}>A–Z</button>
         <button aria-pressed={sort === 'type'} onClick={() => setSort('type')}>By type</button>
         <button aria-pressed={sort === 'use'} onClick={() => setSort('use')}>By use</button>
       </div>
-      <div class="chips drink-filter" role="group" aria-label="Sold for" style="margin-top:10px">
+      <div class="chips drink-filter" role="group" aria-label="Type" style="margin-top:10px">
         <button class={'chip' + (!only ? ' on' : '')} aria-pressed={!only} onClick={() => setOnly(undefined)}>All</button>
-        {DRINK_PURPOSES.filter((p) => konbiniDrinks.some((d) => d.purposes.includes(p))).map((p) => (
-          <button key={p} class={'chip' + (only === p ? ' on' : '')} aria-pressed={only === p} onClick={() => setOnly(p)}>{DRINK_PURPOSE_LABELS[p]}</button>
+        {DRINK_KINDS.filter((k) => konbiniDrinks.some((d) => d.kind === k)).map((k) => (
+          <button key={k} class={'chip' + (only === k ? ' on' : '')} aria-pressed={only === k} onClick={() => setOnly(k)}>{DRINK_KIND_CHIPS[k]}</button>
         ))}
       </div>
-      {!groups.length && <div class="empty">No drinks for this use.</div>}
+      {!groups.length && <div class="empty">{q ? `No drinks match “${q}”.` : sort === 'use' ? 'None of these are sold for a use.' : 'No drinks here.'}</div>}
       {groups.map((g) => (
         <section key={g.kind ?? g.purpose ?? 'all'}>
           {g.kind && <h2>{DRINK_KIND_LABELS[g.kind]}</h2>}

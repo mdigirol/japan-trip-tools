@@ -194,6 +194,29 @@ test('konbini Drinks tab lists drinks, groups by type and by use, and keeps the 
   await expect(page.getByRole('heading', { name: 'Which chain for what' })).toBeVisible();
 });
 
+test('konbini Drinks search finds drinks by label color and the type chips filter', async ({ page }) => {
+  await page.goto(at('2026-11-21T08:00+09:00', '#/konbini?tab=drinks'));
+  await page.getByRole('searchbox', { name: 'Search drinks' }).fill('polka dots');
+  await expect(page.locator('[data-testid^="drink-"]')).toHaveCount(1);
+  await expect(page.getByTestId('drink-calpis-water')).toBeVisible();
+  await page.getByRole('searchbox', { name: 'Search drinks' }).fill('zzzz');
+  await expect(page.getByText('No drinks match “zzzz”.')).toBeVisible();
+  await page.getByRole('searchbox', { name: 'Search drinks' }).fill('');
+  await page.getByRole('group', { name: 'Type' }).getByRole('button', { name: 'Water' }).click();
+  await expect(page.getByTestId('drink-wilkinson')).toBeVisible();
+  await expect(page.getByTestId('drink-strong-zero')).toHaveCount(0);
+  await page.getByRole('group', { name: 'Type' }).getByRole('button', { name: 'Alcohol' }).click();
+  await expect(page.getByTestId('drink-one-cup-ozeki')).toContainText('Contains alcohol · 15%');
+});
+
+test('Signs & menus and Phrases offer Kuli Kuli for camera translate', async ({ page }) => {
+  await page.goto(at('2026-11-21T08:00+09:00', '#/decoder'));
+  await expect(page.getByTestId('kuli-kuli')).toHaveAttribute('href', 'https://apps.apple.com/app/id6458146511');
+  await expect(page.getByRole('link', { name: 'Google Translate ↗' })).toBeVisible();
+  await page.goto(at('2026-11-21T08:00+09:00', '#/phrases'));
+  await expect(page.getByTestId('kuli-kuli')).toContainText('Open Kuli Kuli');
+});
+
 test('weather cards link to the JMA page for the day’s area', async ({ page }) => {
   await page.goto(at('2026-11-15T08:00+09:00'));
   const card = page.getByTestId('wx-tokyo');
