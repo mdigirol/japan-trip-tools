@@ -28,7 +28,10 @@ Also seen: Daily Yamazaki (fewer stores) [T]. Late-night bento and dessert disco
 
 The Konbini screen has two tabs: Stores (the finder, chains and uses above) and Drinks (`#/konbini?tab=drinks`). Data: `src/data/konbiniDrinks.ts`, schema `KonbiniDrink`.
 
-- A glossary of teas, coffee, sodas, juices and functional drinks, sorted A–Z by brand, grouped By type (Tea, Coffee, Soda and juice, Sports and functional) or grouped By use, with a filter by purpose.
+- A glossary of teas, coffee, sodas, juices, energy drinks, functional drinks and alcohol, sorted A–Z by brand, grouped By type (Tea, Coffee, Soda and juice, Energy drinks, Sports and functional, Beer/chuhai/highballs) or grouped By use, with a filter by purpose.
+- Alcohol (#35): `kind: 'alcohol'` needs `abv`, the maker's listed % for the can in `look`. The card shows a "Contains alcohol · N%" pill. The schema rejects `abv` on anything else.
+- Energy drinks are `kind: 'energy'`, sold for Energy, with the caffeine flag.
+- Buying tips (`DRINK_TIPS`) sit in a collapsed "Buying tips" box at the top of the tab: hot drinks, coffee machines, the age-20 rule, ABV, the Shibuya street-drinking ban, empties. Rules link to an official page (e-Gov for the age law, Shibuya City for the ban).
 - Everyday drinks (most teas, coffee, sodas, juices) have no purpose and show no "Sold for" line. By use leaves them out.
 - Purposes say how a drink is sold (After drinking, Stomach, Sleep / relax, Energy, Warm-up, Hydration), not what it does. The tab says so at the top: for orientation, not medical advice.
 - No effect or dose claims in `note` or `look` (no cure, treat, prevent, relieve, detox, mg). `tests/unit/content.test.ts` checks this.

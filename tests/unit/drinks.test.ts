@@ -8,7 +8,7 @@ const d = (id: string, brand: string, purposes: KonbiniDrink['purposes'], kind: 
   caffeine: false, productUrl: 'https://example.com/', source: ['N'], reviewed: false
 });
 const list = [d('c', 'zeta', ['energy']), d('a', 'Alpha', ['after-drinking', 'stomach']), d('b', 'beta', ['hydration'])];
-const mixed = [...list, d('t', 'Tango', [], 'tea'), d('s', 'Sierra', [], 'soft-drink')];
+const mixed = [...list, d('t', 'Tango', [], 'tea'), d('s', 'Sierra', [], 'soft-drink'), { ...d('x', 'Xray', [], 'alcohol'), abv: 5 }];
 
 describe('drinkGroups', () => {
   it('A–Z sorts by brand, ignoring case, in one group with no heading', () => {
@@ -24,8 +24,8 @@ describe('drinkGroups', () => {
   });
   it('By type groups in kind order, sorted A–Z inside, and skips empty kinds', () => {
     const g = drinkGroups(mixed, 'type');
-    expect(g.map((x) => x.kind)).toEqual(['tea', 'soft-drink', 'functional']);
-    expect(g.map((x) => x.drinks.map((y) => y.id))).toEqual([['t'], ['s'], ['a', 'b', 'c']]);
+    expect(g.map((x) => x.kind)).toEqual(['tea', 'soft-drink', 'functional', 'alcohol']);
+    expect(g.map((x) => x.drinks.map((y) => y.id))).toEqual([['t'], ['s'], ['a', 'b', 'c'], ['x']]);
   });
   it('By use leaves out everyday drinks with no purpose', () => {
     expect(drinkGroups(mixed, 'use').flatMap((x) => x.drinks.map((y) => y.id))).not.toContain('t');

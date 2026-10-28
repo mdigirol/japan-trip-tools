@@ -1,7 +1,7 @@
 import { useState } from 'preact/hooks';
 import offline from '@data/konbini-near-stops.json';
 import { CHAINS, KONBINI_USES } from '../data/konbini';
-import { DRINK_KIND_LABELS, DRINK_PURPOSE_LABELS, konbiniDrinks } from '../data/konbiniDrinks';
+import { DRINK_KIND_LABELS, DRINK_PURPOSE_LABELS, DRINK_TIPS, konbiniDrinks } from '../data/konbiniDrinks';
 import { DRINK_PURPOSES, type KonbiniDrink } from '../data/schema';
 import { Dot } from '../components/Dot';
 import { drinkGroups, type DrinkPurpose, type DrinkSort } from '../lib/drinks';
@@ -90,6 +90,14 @@ function Drinks() {
   return (
     <div>
       <p class="small faint" style="margin-top:0">{DRINKS_NOTE}</p>
+      <details class="card tight drink-tips" data-testid="konbini-drink-tips">
+        <summary>Buying tips</summary>
+        <ul class="list-plain small">
+          {DRINK_TIPS.map((t) => (
+            <li key={t.text}>{t.text}{t.sourceUrl && <> <a href={t.sourceUrl} target="_blank" rel="noopener">Source ↗</a></>}</li>
+          ))}
+        </ul>
+      </details>
       <div class="seg" role="group" aria-label="Sort drinks">
         <button aria-pressed={sort === 'az'} onClick={() => setSort('az')}>A–Z</button>
         <button aria-pressed={sort === 'type'} onClick={() => setSort('type')}>By type</button>
@@ -122,7 +130,12 @@ function DrinkCard({ d }: { d: KonbiniDrink }) {
       <div class="small">{d.look}</div>
       <div class="small">{d.note}</div>
       {d.purposes.length > 0 && <div class="small muted">Sold for: {d.purposes.map((p) => DRINK_PURPOSE_LABELS[p]).join(' · ')}</div>}
-      {d.caffeine && <div class="pills" style="margin:6px 0 0"><span class="pill">Has caffeine</span></div>}
+      {(d.caffeine || d.abv !== undefined) && (
+        <div class="pills" style="margin:6px 0 0">
+          {d.abv !== undefined && <span class="pill">Contains alcohol · {d.abv}%</span>}
+          {d.caffeine && <span class="pill">Has caffeine</span>}
+        </div>
+      )}
       <div class="small" style="margin-top:6px"><a href={d.productUrl} target="_blank" rel="noopener">Photo on the maker’s site ↗</a> <span class="faint">· Needs internet</span></div>
     </div>
   );

@@ -56,8 +56,8 @@ export const GlossaryTerm = z.strictObject({
 });
 export type GlossaryTerm = z.infer<typeof GlossaryTerm>;
 
-// Konbini drinks glossary (#23, #34): sorted by name, by type, or by what they're sold for.
-export const DRINK_KINDS = ['tea', 'coffee', 'soft-drink', 'functional'] as const;
+// Konbini drinks glossary (#23, #34, #35): sorted by name, by type, or by what they're sold for.
+export const DRINK_KINDS = ['tea', 'coffee', 'soft-drink', 'energy', 'functional', 'alcohol'] as const;
 export const DRINK_PURPOSES = ['after-drinking', 'stomach', 'sleep-relax', 'energy', 'warm-up', 'hydration'] as const;
 export const KonbiniDrink = z.strictObject({
   id, brand: z.string().min(1),   // as printed on the shelf, in English letters
@@ -68,10 +68,15 @@ export const KonbiniDrink = z.strictObject({
   look: z.string().min(1),        // one line: bottle/can/carton, size, label color
   note: z.string().min(1),        // one line, paraphrased
   caffeine: z.boolean(),          // shows a "Has caffeine" pill
+  abv: z.number().positive().max(20).optional(),   // alcohol by volume (%), as the maker lists it; alcohol only
   productUrl: url,                // the maker's official product page (has a photo; needs a connection)
   source: sources, reviewed: z.boolean()
-});
+}).refine((d) => (d.kind === 'alcohol') === (d.abv !== undefined), { message: 'abv is required for alcohol, and only for alcohol' });
 export type KonbiniDrink = z.infer<typeof KonbiniDrink>;
+
+// Buying tips on the Drinks tab (#35). Rules (age, where you can drink) carry an official sourceUrl.
+export const DrinkTip = z.strictObject({ text: z.string().min(1), source: sources, sourceUrl: url.optional() });
+export type DrinkTip = z.infer<typeof DrinkTip>;
 
 export const AreaTip = z.strictObject({
   slug: id, name: z.string(), place: Place, tips: z.array(z.string()).min(1), source: sources

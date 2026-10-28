@@ -184,6 +184,9 @@ test('konbini Drinks tab lists drinks, groups by type and by use, and keeps the 
   await page.getByRole('button', { name: 'By type' }).click();
   await expect(page.getByRole('heading', { level: 2, name: 'Coffee' })).toBeVisible();
   await expect(page.getByRole('heading', { level: 2, name: 'Soda and juice' })).toBeVisible();
+  await expect(page.getByTestId('drink-strong-zero')).toContainText('Contains alcohol · 9%');
+  await page.getByText('Buying tips').click();
+  await expect(page.getByTestId('konbini-drink-tips')).toContainText('The drinking age is 20');
   await page.getByRole('button', { name: 'By use' }).click();
   await expect(page.getByRole('button', { name: 'By use' })).toHaveAttribute('aria-pressed', 'true');
   await expect(page.getByRole('heading', { level: 2, name: /^(After drinking|Stomach|Sleep \/ relax|Energy|Warm-up|Hydration)$/ }).first()).toBeVisible();

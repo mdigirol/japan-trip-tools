@@ -127,6 +127,9 @@ label.field > span { display: block; font-size: .85em; color: var(--muted); marg
 .drink .ro { font-size: .9em; color: var(--indigo); font-style: italic; margin-bottom: 4px; }
 .drink a { display: inline-flex; align-items: center; min-height: 44px; }
 .drink-filter .chip { min-height: 44px; }
+.drink-tips { margin: 10px 0 0; }
+.drink-tips > summary { min-height: 44px; }
+.drink-tips li + li { margin-top: 6px; }
 
 /* ---- badges ---- */
 .badge { display: inline-block; white-space: nowrap; font-size: .72em; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; border: 1.5px solid currentColor; }

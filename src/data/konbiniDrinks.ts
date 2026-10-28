@@ -1,11 +1,23 @@
-// Konbini drinks glossary (#23, #34): teas, coffee, sodas, juices and functional drinks. Notes are
+// Konbini drinks glossary (#23, #34, #35): teas, coffee, sodas, juices, energy, functional and alcohol. Notes are
 // paraphrased; Japanese is unreviewed. Purposes say what a drink is sold for, never what it does;
 // everyday drinks have none. See context/konbini.md.
-import type { KonbiniDrink as D } from './schema';
+import type { DrinkTip, KonbiniDrink as D } from './schema';
 
 export const DRINK_KIND_LABELS: Record<D['kind'], string> = {
-  tea: 'Tea', coffee: 'Coffee', 'soft-drink': 'Soda and juice', functional: 'Sports and functional'
+  tea: 'Tea', coffee: 'Coffee', 'soft-drink': 'Soda and juice', energy: 'Energy drinks',
+  functional: 'Sports and functional', alcohol: 'Beer, chuhai and highballs'
 };
+
+// Buying tips (#35). The age and Shibuya rules link to the law and the ward's own page.
+export const DRINK_TIPS: DrinkTip[] = [
+  { text: 'Hot drinks sit in a heated case, often by the register, from fall to spring. Hot-safe bottles have orange caps.', source: ['V'] },
+  { text: 'Coffee machines (Seven Cafe and the like): pay for the cup at the register, then brew it yourself.', source: ['V'] },
+  { text: 'The drinking age is 20. Buying alcohol, you tap the register screen to confirm your age.', source: ['V'], sourceUrl: 'https://laws.e-gov.go.jp/law/211AC1000000020' },
+  { text: 'Check the % on the can. Chuhai runs from about 3% to 9%, and the strong ones go down easily.', source: ['V'] },
+  { text: 'Around Shibuya Station, drinking on streets and in parks is banned from 6 pm to 5 am, all year.', source: ['V'], sourceUrl: 'https://www.city.shibuya.tokyo.jp/kusei/shisaku/jorei-toshin/sbykankyo.html' },
+  { text: 'Elsewhere it’s legal to drink outside, but most people don’t drink while walking.', source: ['V'] },
+  { text: 'Empties go in the bins by the door. Cans and PET bottles have their own slots.', source: ['V'] }
+];
 
 export const DRINK_PURPOSE_LABELS: Record<D['purposes'][number], string> = {
   'after-drinking': 'After drinking', stomach: 'Stomach', 'sleep-relax': 'Sleep / relax',
@@ -42,5 +54,18 @@ export const konbiniDrinks: D[] = [
   { id: 'natchan', brand: 'Natchan! Orange', ja: 'なっちゃん！ オレンジ', romaji: 'natchan orenji', kind: 'soft-drink', purposes: [], look: 'PET bottle', note: 'Sweet orange juice drink.', caffeine: false, productUrl: 'https://www.suntory.co.jp/softdrink/natchan/', source: ['V'], reviewed: false },
   // Several makers sell ramune; Sangaria's is one with an official product page.
   { id: 'ramune', brand: 'Ramune', ja: 'ラムネ', romaji: 'ramune', kind: 'soft-drink', purposes: [], look: 'Glass bottle, about 200 ml, sealed with a marble', note: 'Lemon-lime soda. Push the marble down to open.', caffeine: false, productUrl: 'https://sangaria.co.jp/products/nihonnoaji-ramunebin/', source: ['V'], reviewed: false },
-  { id: 'mitsuya-cider', brand: 'Mitsuya Cider', ja: '三ツ矢サイダー', romaji: 'mitsuya saidā', kind: 'soft-drink', purposes: [], look: 'PET bottle, 500 ml', note: 'Clear lemon-lime soda. Not apple cider.', caffeine: false, productUrl: 'https://www.asahiinryo.co.jp/products/carbonated/mitsuya_cider/', source: ['V'], reviewed: false }
+  { id: 'mitsuya-cider', brand: 'Mitsuya Cider', ja: '三ツ矢サイダー', romaji: 'mitsuya saidā', kind: 'soft-drink', purposes: [], look: 'PET bottle, 500 ml', note: 'Clear lemon-lime soda. Not apple cider.', caffeine: false, productUrl: 'https://www.asahiinryo.co.jp/products/carbonated/mitsuya_cider/', source: ['V'], reviewed: false },
+  // #35: alcohol. abv is the maker's listed figure for the can named in look. Checked Oct 2026.
+  { id: 'strong-zero', brand: 'Strong Zero (-196) Double Lemon', ja: '－196 ストロングゼロ〈ダブルレモン〉', romaji: 'ichi kyū roku sutorongu zero daburu remon', kind: 'alcohol', purposes: [], look: 'Can, 350 or 500 ml', note: 'Lemon chuhai. One of the strongest on the shelf.', caffeine: false, abv: 9, productUrl: 'https://products.suntory.co.jp/d/4901777192607/', source: ['V'], reviewed: false },
+  { id: 'kodawari-sakaba', brand: 'Kodawari Sakaba Lemon Sour', ja: 'こだわり酒場のレモンサワー', romaji: 'kodawari sakaba no remon sawā', kind: 'alcohol', purposes: [], look: 'Can, 350 ml', note: 'Lemon sour made to taste like an izakaya’s.', caffeine: false, abv: 7, productUrl: 'https://products.suntory.co.jp/d/4901777332508/', source: ['V'], reviewed: false },
+  { id: 'horoyoi', brand: 'Horoyoi White Sour', ja: 'ほろよい〈白いサワー〉', romaji: 'horoyoi shiroi sawā', kind: 'alcohol', purposes: [], look: 'Can, 350 ml; many flavors', note: 'Light, sweet chuhai. Tastes like Calpis.', caffeine: false, abv: 3, productUrl: 'https://products.suntory.co.jp/d/4901777204706/', source: ['V'], reviewed: false },
+  { id: 'kaku-highball', brand: 'Kaku Highball', ja: '角ハイボール', romaji: 'kaku haibōru', kind: 'alcohol', purposes: [], look: 'Can, 350 ml, yellow label', note: 'Whisky and soda with a hint of lemon.', caffeine: false, abv: 7, productUrl: 'https://products.suntory.co.jp/d/4901777201439/', source: ['V'], reviewed: false },
+  { id: 'premium-malts', brand: 'The Premium Malt’s', ja: 'ザ・プレミアム・モルツ', romaji: 'za puremiamu morutsu', kind: 'alcohol', purposes: [], look: 'Can, 350 ml', note: 'Suntory’s pilsner. Rich and malty.', caffeine: false, abv: 5.5, productUrl: 'https://products.suntory.co.jp/d/4901777393370/', source: ['V'], reviewed: false },
+  { id: 'super-dry', brand: 'Asahi Super Dry', ja: 'アサヒスーパードライ', romaji: 'asahi sūpā dorai', kind: 'alcohol', purposes: [], look: 'Silver can, 350 or 500 ml', note: 'Crisp, dry lager.', caffeine: false, abv: 5, productUrl: 'https://www.asahibeer.co.jp/products/beer/superdry/', source: ['V'], reviewed: false },
+  { id: 'ichiban', brand: 'Kirin Ichiban', ja: 'キリン一番搾り生ビール', romaji: 'kirin ichiban shibori nama bīru', kind: 'alcohol', purposes: [], look: 'Can, 350 or 500 ml', note: 'Smooth, malty lager. Malt and hops only.', caffeine: false, abv: 5, productUrl: 'https://www.kirin.co.jp/alcohol/beer/ichiban/', source: ['V'], reviewed: false },
+  { id: 'black-label', brand: 'Sapporo Black Label', ja: 'サッポロ生ビール黒ラベル', romaji: 'sapporo nama bīru kuro raberu', kind: 'alcohol', purposes: [], look: 'Can, 350 or 500 ml', note: 'Malty lager with a crisp finish.', caffeine: false, abv: 5, productUrl: 'https://www.sapporobeer.jp/product/beer/kurolabel/', source: ['V'], reviewed: false },
+  // #35: energy drinks. Sold for energy; all have caffeine.
+  { id: 'lipovitan-d', brand: 'Lipovitan D', ja: 'リポビタンD', romaji: 'ripobitan dī', kind: 'energy', purposes: ['energy'], look: 'Small brown bottle, 100 ml', note: 'Sweet, fruity tonic in a shot-size bottle.', caffeine: true, productUrl: 'https://brand.taisho.co.jp/lipovitan/lipod/about/', source: ['V'], reviewed: false },
+  { id: 'oronamin-c', brand: 'Oronamin C', ja: 'オロナミンCドリンク', romaji: 'oronamin shī dorinku', kind: 'energy', purposes: ['energy'], look: 'Small brown bottle, 120 ml', note: 'Fizzy, sweet vitamin drink.', caffeine: true, productUrl: 'https://www.otsuka.co.jp/nutraceutical/products/oronaminc/', source: ['V'], reviewed: false },
+  { id: 'red-bull', brand: 'Red Bull', ja: 'レッドブル エナジードリンク', romaji: 'reddo buru enajī dorinku', kind: 'energy', purposes: ['energy'], look: 'Can, 250 ml', note: 'The same Red Bull as back home.', caffeine: true, productUrl: 'https://www.redbull.com/jp-ja/energydrink/products/red-bull-energy-drink-ingredients-list', source: ['V'], reviewed: false }
 ];
