@@ -3,15 +3,13 @@ import type { ShowCard } from '../data/schema';
 import { LOST_ITEMS, showCards } from '../data/showCards';
 import { Dot } from '../components/Dot';
 import { hotelCard } from '../lib/hotelCard';
-import { now } from '../lib/now';
+import { dateRange, now } from '../lib/now';
 import { showCard, telDisplay } from '../lib/showcard';
 import { todayState, trip } from '../lib/trip';
 
 const KINDS: { kind: ShowCard['kind']; label: string }[] = [
   { kind: 'dining', label: 'Dining' }, { kind: 'bath', label: 'Bath' }, { kind: 'other', label: 'Other' }
 ];
-
-const fmtRange = (from: string, to: string) => `Nov ${+from.slice(8)}–${+to.slice(8)}`;
 
 export function Cards() {
   const tonight = todayState(now()).primary?.id;
@@ -22,7 +20,7 @@ export function Cards() {
       <h2>Taxi: hotels</h2>
       {trip.stays.map((s) => (
         <button class={'card card-btn hotel-compact' + (s.id === tonight ? '' : ' secondary')} key={s.id} onClick={() => showCard(hotelCard(s))} data-testid={`card-hotel-${s.id}`}>
-          <div class="small muted">{fmtRange(s.from, s.to)}{s.id === tonight ? ' · tonight' : ''}</div>
+          <div class="small muted">{dateRange(s.from, s.to)}{s.id === tonight ? ' · tonight' : ''}</div>
           <div class="ja" lang="ja">{s.nameJa}</div>
           <div class="small" lang="ja">{s.addrJa}</div>
           <div class="small faint">{s.name} · ☎ {telDisplay(s.tel)}</div>

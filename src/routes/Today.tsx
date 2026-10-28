@@ -3,7 +3,7 @@ import type { Stay } from '../data/schema';
 import { etiquette, ETIQUETTE_GROUPS } from '../data/etiquette';
 import { phrases, PHRASE_TABS } from '../data/phrases';
 import { KYOTO_GENERAL, tipsBySlug } from '../data/places';
-import { longDate, now } from '../lib/now';
+import { dateRange, longDate, now } from '../lib/now';
 import { href } from '../lib/router';
 import { useSettings } from '../lib/settings';
 import { showCard, telDisplay } from '../lib/showcard';
@@ -213,7 +213,7 @@ function HotelCompact({ s, label, secondary }: { s: Stay; label: string; seconda
 function Hotels({ st }: { st: TodayState }) {
   if (st.phase === 'before' || st.phase === 'air-out') {
     const first = stayById(trip.stays[0]?.id);
-    return first ? <section><h2>First hotel</h2><HotelCompact s={first} label="Nov 12–17" /></section> : null;
+    return first ? <section><h2>First hotel</h2><HotelCompact s={first} label={dateRange(first.from, first.to)} /></section> : null;
   }
   if (!st.primary) return null;
   if (st.flightHome) {
