@@ -1,6 +1,7 @@
 import { useState } from 'preact/hooks';
 import { glossary, GLOSSARY_CATEGORIES } from '../data/glossary';
 import { Dot } from '../components/Dot';
+import { KuliKuli } from '../components/KuliKuli';
 
 const norm = (s: string) => s.toLowerCase().normalize('NFKC').replace(/[^\p{L}\p{N}]+/gu, '');
 
@@ -12,8 +13,9 @@ export function Decoder() {
   return (
     <div>
       <h1>Signs & menus</h1>
-      <div class="row" style="margin-bottom:10px">
-        <a class="btn grow" href="https://translate.google.com/?sl=ja&tl=en&op=images" target="_blank" rel="noopener">📷 Camera translate ↗</a>
+      <KuliKuli label="📷 Camera translate in Kuli Kuli ↗" />
+      <div class="row more-translate" style="margin:10px 0">
+        <a class="btn grow" href="https://translate.google.com/?sl=ja&tl=en&op=images" target="_blank" rel="noopener">Google Translate ↗</a>
         <a class="btn grow" href="https://lens.google/" target="_blank" rel="noopener">Google Lens ↗</a>
       </div>
       <p class="small faint" style="margin-top:0">For anything not listed. Lens works best from the Google app.</p>

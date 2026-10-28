@@ -2,6 +2,8 @@
 
 Format: kanji/kana · romaji · meaning · tag. The decoder groups these by category and makes them searchable by romaji and English. Most are general knowledge `[V]`. The check is for correctness, not sourcing.
 
+For anything not listed, Signs & menus opens Kuli Kuli first (camera translate for menus, labels and handwriting), then Google Translate and Google Lens. Phrases has the same Kuli Kuli button at the bottom (#41). On iPhone the button is Kuli Kuli's universal link (`menu-gpt-orpin.vercel.app`, the maker's domain on the App Store listing). It opens the app if installed, else the maker's web page. Android has no app link, so it opens the Play Store listing. `src/components/KuliKuli.tsx`.
+
 ## Signs
 
 | Japanese | Romaji | Meaning | Tag |

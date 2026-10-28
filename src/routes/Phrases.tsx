@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from 'preact/hooks';
 import type { Phrase } from '../data/schema';
 import { phrases, PHRASE_TABS, SLOT_PICKS } from '../data/phrases';
 import { Dot } from '../components/Dot';
+import { KuliKuli } from '../components/KuliKuli';
 import { now } from '../lib/now';
 import { href, type Route } from '../lib/router';
 import { matchesAll } from '../lib/search';
@@ -55,6 +56,10 @@ export function Phrases({ route }: { route: Route }) {
       {list.length === 0 && <div class="empty">No phrases match “{q}”.</div>}
       {list.map((p) => <PhraseCard p={p} key={p.id} />)}
       {tab === 'pharmacy' && !q && <p class="small"><a href={href('emergency')}>Pharmacy brands and emergency numbers →</a></p>}
+      <section class="phrases-kuli">
+        <p class="small muted" style="margin-bottom:6px">Not here? Kuli Kuli translates by voice, text or camera.</p>
+        <KuliKuli />
+      </section>
     </div>
   );
 }

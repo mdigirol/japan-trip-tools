@@ -209,6 +209,14 @@ test('konbini Drinks search finds drinks by label color and the type chips filte
   await expect(page.getByTestId('drink-one-cup-ozeki')).toContainText('Contains alcohol · 15%');
 });
 
+test('Signs & menus and Phrases offer Kuli Kuli for camera translate', async ({ page }) => {
+  await page.goto(at('2026-11-21T08:00+09:00', '#/decoder'));
+  await expect(page.getByTestId('kuli-kuli')).toHaveAttribute('href', 'https://menu-gpt-orpin.vercel.app/');
+  await expect(page.getByRole('link', { name: 'Google Translate ↗' })).toBeVisible();
+  await page.goto(at('2026-11-21T08:00+09:00', '#/phrases'));
+  await expect(page.getByTestId('kuli-kuli')).toContainText('Open Kuli Kuli');
+});
+
 test('weather cards link to the JMA page for the day’s area', async ({ page }) => {
   await page.goto(at('2026-11-15T08:00+09:00'));
   const card = page.getByTestId('wx-tokyo');
