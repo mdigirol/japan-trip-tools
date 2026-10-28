@@ -1,6 +1,11 @@
-// Konbini drinks glossary (#23): teas and functional drinks. Notes are paraphrased; Japanese is unreviewed.
-// Purposes say what a drink is sold for, never what it does. See context/konbini.md.
+// Konbini drinks glossary (#23, #34): teas, coffee, sodas, juices and functional drinks. Notes are
+// paraphrased; Japanese is unreviewed. Purposes say what a drink is sold for, never what it does;
+// everyday drinks have none. See context/konbini.md.
 import type { KonbiniDrink as D } from './schema';
+
+export const DRINK_KIND_LABELS: Record<D['kind'], string> = {
+  tea: 'Tea', coffee: 'Coffee', 'soft-drink': 'Soda and juice', functional: 'Sports and functional'
+};
 
 export const DRINK_PURPOSE_LABELS: Record<D['purposes'][number], string> = {
   'after-drinking': 'After drinking', stomach: 'Stomach', 'sleep-relax': 'Sleep / relax',
@@ -21,5 +26,21 @@ export const konbiniDrinks: D[] = [
   { id: 'pocari-sweat', brand: 'Pocari Sweat', ja: 'ポカリスエット', romaji: 'pokari suetto', kind: 'functional', purposes: ['hydration'], look: 'PET bottle, 500 ml (also smaller and larger)', note: 'Lightly sweet electrolyte drink.', caffeine: false, productUrl: 'https://www.otsuka.co.jp/nutraceutical/products/pocarisweat/', source: ['V'], reviewed: false },
   { id: 'pocari-ion-water', brand: 'Pocari Sweat Ion Water', ja: 'ポカリスエット イオンウォーター', romaji: 'pokari suetto ion wōtā', kind: 'functional', purposes: ['hydration'], look: 'PET bottle, 500 ml', note: 'Lighter, less sweet version of Pocari.', caffeine: false, productUrl: 'https://www.otsuka.co.jp/nutraceutical/products/ionwater/', source: ['V'], reviewed: false },
   { id: 'os-1', brand: 'OS-1', ja: 'オーエスワン', romaji: 'ō esu wan', kind: 'functional', purposes: ['hydration'], look: 'PET bottle, 500 or 300 ml', note: 'Salty oral rehydration drink. Plain or apple.', caffeine: false, productUrl: 'https://www.otsuka.co.jp/nutraceutical/products/os-1/', source: ['V'], reviewed: false },
-  { id: 'aquarius', brand: 'Aquarius', ja: 'アクエリアス', romaji: 'akueriasu', kind: 'functional', purposes: ['hydration'], look: 'PET bottle, 500 ml', note: 'Sports drink. Lighter than Pocari.', caffeine: false, productUrl: 'https://www.cocacola.co.jp/brands/aquarius', source: ['V'], reviewed: false }
+  { id: 'aquarius', brand: 'Aquarius', ja: 'アクエリアス', romaji: 'akueriasu', kind: 'functional', purposes: ['hydration'], look: 'PET bottle, 500 ml', note: 'Sports drink. Lighter than Pocari.', caffeine: false, productUrl: 'https://www.cocacola.co.jp/brands/aquarius', source: ['V'], reviewed: false },
+  // #34: everyday teas, coffee, sodas and juices. No purpose, so they show under A–Z and By type only.
+  { id: 'oi-ocha', brand: 'Oi Ocha', ja: 'お～いお茶', romaji: 'ōi ocha', kind: 'tea', purposes: [], look: 'PET bottle, in every konbini fridge', note: 'ITO EN’s everyday green tea. Clean and grassy.', caffeine: true, productUrl: 'https://www.itoen.jp/oiocha/', source: ['V'], reviewed: false },
+  { id: 'ayataka', brand: 'Ayataka', ja: '綾鷹', romaji: 'ayataka', kind: 'tea', purposes: [], look: 'PET bottle, cloudy green tea inside', note: 'Green tea with a rich, rounded taste.', caffeine: true, productUrl: 'https://www.coca-cola.com/jp/ja/brands/ayataka/products', source: ['V'], reviewed: false },
+  { id: 'gogo-no-kocha', brand: 'Gogo no Kocha Milk Tea', ja: '午後の紅茶 ミルクティー', romaji: 'gogo no kōcha miruku tī', kind: 'tea', purposes: [], look: 'PET bottle; a hot version in the warmer', note: 'Sweet milk tea. Straight and lemon versions too.', caffeine: true, productUrl: 'https://www.kirin.co.jp/softdrink/gogo/products/', source: ['V'], reviewed: false },
+  { id: 'suntory-oolong', brand: 'Suntory Oolong Tea', ja: 'サントリー烏龍茶', romaji: 'santorī ūroncha', kind: 'tea', purposes: [], look: 'PET bottle', note: 'Unsweetened oolong tea. Crisp and roasty.', caffeine: true, productUrl: 'https://www.suntory.co.jp/softdrink/oolongtea/', source: ['V'], reviewed: false },
+  { id: 'georgia', brand: 'Georgia', ja: 'ジョージア', romaji: 'jōjia', kind: 'coffee', purposes: [], look: 'Small can or PET bottle, hot or cold', note: 'Canned coffee, from black to sweet and milky.', caffeine: true, productUrl: 'https://www.coca-cola.com/jp/ja/brands/georgia', source: ['V'], reviewed: false },
+  { id: 'boss', brand: 'BOSS', ja: 'ボス', romaji: 'bosu', kind: 'coffee', purposes: [], look: 'Small can, or a tall PET bottle (Craft Boss)', note: 'Suntory’s canned coffee. Craft Boss is lighter.', caffeine: true, productUrl: 'https://www.suntory.co.jp/softdrink/boss/', source: ['V'], reviewed: false },
+  { id: 'mt-rainier', brand: 'Mt. Rainier', ja: 'マウントレーニア', romaji: 'maunto rēnia', kind: 'coffee', purposes: [], look: 'Chilled cup with a straw, in the fridge case', note: 'Milky cafe latte. There is a decaf version.', caffeine: true, productUrl: 'https://www.mtrainier.jp/', source: ['V'], reviewed: false },
+  { id: 'seven-cafe', brand: 'Seven Cafe', ja: 'セブンカフェ', romaji: 'sebun kafe', kind: 'coffee', purposes: [], look: 'Cup from the self-serve machine at 7-Eleven', note: 'Pay for the cup at the register, then brew it yourself.', caffeine: true, productUrl: 'https://www.sej.co.jp/products/sevencafe/choice/', source: ['V'], reviewed: false },
+  { id: 'cc-lemon', brand: 'C.C. Lemon', ja: 'C.C.レモン', romaji: 'shī shī remon', kind: 'soft-drink', purposes: [], look: 'PET bottle, 600 ml at konbini', note: 'Lightly fizzy, sweet lemon soda.', caffeine: false, productUrl: 'https://www.suntory.co.jp/softdrink/cclemon/', source: ['V'], reviewed: false },
+  { id: 'calpis-water', brand: 'Calpis Water', ja: 'カルピスウォーター', romaji: 'karupisu wōtā', kind: 'soft-drink', purposes: [], look: 'PET bottle, 500 ml', note: 'Sweet-tart milky drink. Sold abroad as Calpico.', caffeine: false, productUrl: 'https://www.asahiinryo.co.jp/products/milkybeverage/calpis_water/', source: ['V'], reviewed: false },
+  { id: 'qoo', brand: 'Minute Maid Qoo', ja: 'ミニッツメイド Qoo', romaji: 'minittsu meido kū', kind: 'soft-drink', purposes: [], look: 'Small PET bottle', note: 'Sweet fruit drink, such as white grape.', caffeine: false, productUrl: 'https://www.coca-cola.com/jp/ja/brands/qoo/products', source: ['V'], reviewed: false },
+  { id: 'natchan', brand: 'Natchan! Orange', ja: 'なっちゃん！ オレンジ', romaji: 'natchan orenji', kind: 'soft-drink', purposes: [], look: 'PET bottle', note: 'Sweet orange juice drink.', caffeine: false, productUrl: 'https://www.suntory.co.jp/softdrink/natchan/', source: ['V'], reviewed: false },
+  // Several makers sell ramune; Sangaria's is one with an official product page.
+  { id: 'ramune', brand: 'Ramune', ja: 'ラムネ', romaji: 'ramune', kind: 'soft-drink', purposes: [], look: 'Glass bottle, about 200 ml, sealed with a marble', note: 'Lemon-lime soda. Push the marble down to open.', caffeine: false, productUrl: 'https://sangaria.co.jp/products/nihonnoaji-ramunebin/', source: ['V'], reviewed: false },
+  { id: 'mitsuya-cider', brand: 'Mitsuya Cider', ja: '三ツ矢サイダー', romaji: 'mitsuya saidā', kind: 'soft-drink', purposes: [], look: 'PET bottle, 500 ml', note: 'Clear lemon-lime soda. Not apple cider.', caffeine: false, productUrl: 'https://www.asahiinryo.co.jp/products/carbonated/mitsuya_cider/', source: ['V'], reviewed: false }
 ];

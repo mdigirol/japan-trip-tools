@@ -56,14 +56,15 @@ export const GlossaryTerm = z.strictObject({
 });
 export type GlossaryTerm = z.infer<typeof GlossaryTerm>;
 
-// Konbini drinks glossary (#23): teas and functional drinks, sorted by name or by what they're sold for.
+// Konbini drinks glossary (#23, #34): sorted by name, by type, or by what they're sold for.
+export const DRINK_KINDS = ['tea', 'coffee', 'soft-drink', 'functional'] as const;
 export const DRINK_PURPOSES = ['after-drinking', 'stomach', 'sleep-relax', 'energy', 'warm-up', 'hydration'] as const;
 export const KonbiniDrink = z.strictObject({
   id, brand: z.string().min(1),   // as printed on the shelf, in English letters
   ja: z.string().min(1),          // the Japanese on the label
   romaji: z.string().min(1),
-  kind: z.enum(['tea', 'functional']),
-  purposes: z.array(z.enum(DRINK_PURPOSES)).min(1),   // what it's sold for, never a claimed effect
+  kind: z.enum(DRINK_KINDS),
+  purposes: z.array(z.enum(DRINK_PURPOSES)),   // what it's sold for, never a claimed effect; empty for everyday drinks
   look: z.string().min(1),        // one line: bottle/can/carton, size, label color
   note: z.string().min(1),        // one line, paraphrased
   caffeine: z.boolean(),          // shows a "Has caffeine" pill
