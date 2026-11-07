@@ -10,8 +10,8 @@ export default defineConfig({
   use: { baseURL: `http://localhost:4173${basePath()}`, ...devices['iPhone 13'], browserName: 'chromium', serviceWorkers: 'allow' },
   webServer: {
     command: 'npx vite build --outDir dist-e2e && npx vite preview --outDir dist-e2e --port 4173 --strictPort',
-    // No sync repo, whatever a local .env says.
-    env: { TRIP_DATA: 'sample', VITE_DATA_REPO: '' },
+    // No sync repo and a fake where-to-buy relay (routed in the test), whatever a local .env says.
+    env: { TRIP_DATA: 'sample', VITE_DATA_REPO: '', VITE_SHOPPING_URL: 'https://shopping.test/' },
     port: 4173,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000
