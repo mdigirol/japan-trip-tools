@@ -5,6 +5,7 @@ dev-dist/
 .env*
 review/
 test-results/
+.wrangler/
 playwright-report/
 .DS_Store
 # Real itinerary data. Untracked here on purpose; see tests/unit/data-local.test.ts
