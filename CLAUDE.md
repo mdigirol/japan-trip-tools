@@ -16,6 +16,12 @@ Phone-first offline web app for Matt and Katherine's Japan trip, Nov 11–27, 20
 - Real data lives in `data/local/` (tracked here via `data/local/.tracked-ok`). Build settings are in the tracked `.env` (`VITE_DATA_REPO`, `VITE_ITINERARY_URL`).
 - Checks that only apply to this itinerary go in files public doesn't have (`tests/unit/local-trip.test.ts`), so merges never conflict on them.
 
+## Private-only features (never in `japan-trip-tools-public`)
+
+- **To buy** (where-to-buy suggestions from Claude): `src/lib/wants.ts`, `src/lib/wantAdvice.ts`, `src/routes/ToBuy.tsx`, `worker/shopping/`, `tests/unit/wants.test.ts`, the To buy e2e test, the `tobuy` tile and route, `ToBuyHint` on Today, the `item` prefill in Purchases, `@anthropic-ai/sdk`, and `"worker"` in `tsconfig.json`.
+- It adds the `wants` store as IndexedDB **version 2** in `src/lib/db.ts`. When a port from public touches `db.ts`, keep `wants` and give any new public store the next version here, with its own `oldVersion` step.
+- The relay is a Cloudflare Worker (`worker/shopping/README.md`). Its Anthropic key is a Cloudflare secret only. `VITE_SHOPPING_URL` is public and lives in the tracked `.env`. Pushing to `main` doesn't deploy the Worker; run `npx wrangler@4 deploy` in `worker/shopping/`.
+
 ## Content
 
 - American English in UI copy, comments and docs.
@@ -34,6 +40,7 @@ Phone-first offline web app for Matt and Katherine's Japan trip, Nov 11–27, 20
 - Today's logic lives in `src/lib/trip.ts` (`todayState`). Today shows no stop names or times from the itinerary.
 - Storage: IndexedDB via `src/lib/db.ts` (purchases, photos, sync queue, API cache); `localStorage` via `src/lib/settings.ts` (try/catch).
 - Sync (`src/lib/sync.ts`): pull, merge (last write wins by `updatedAt`), then push the queue. Photos never sync.
+- To buy (`src/lib/wants.ts`): per phone only, never synced. Each item is looked up once through the `worker/shopping` relay (Claude Sonnet 5.5) and the answer is saved on it. Pending items retry on add, app start, coming online, returning to the foreground, and every 5 minutes while open.
 - Service worker: `vite-plugin-pwa` (generateSW) in `vite.config.ts`. Live APIs (rates, weather, Overpass) are network-first with cache fallback; GitHub is never cached.
 - Every phone-facing screen must work at 375 px wide, in both themes, with the network off. Tap targets ≥ 44 px.
 
