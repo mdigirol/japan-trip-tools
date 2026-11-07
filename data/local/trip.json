@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T03:26:30.946Z",
+  "generatedAt": "2026-11-07T02:38:11.112Z",
   "stays": [
     {
       "id": "prince",
@@ -200,8 +200,8 @@
       ],
       "venues": [
         "temple",
-        "restaurant",
         "cafe",
+        "restaurant",
         "sushi-counter",
         "shrine",
         "izakaya",
@@ -213,24 +213,28 @@
           "lng": 139.79666
         },
         {
-          "lat": 35.71161,
-          "lng": 139.79373
+          "lat": 35.71202,
+          "lng": 139.79512
         },
         {
-          "lat": 35.71634,
-          "lng": 139.79694
+          "lat": 35.71161,
+          "lng": 139.79373
         },
         {
           "lat": 35.71289,
           "lng": 139.79297
         },
         {
-          "lat": 35.72116,
-          "lng": 139.77072
+          "lat": 35.71634,
+          "lng": 139.79694
         },
         {
           "lat": 35.72014,
           "lng": 139.76077
+        },
+        {
+          "lat": 35.71982,
+          "lng": 139.76289
         },
         {
           "lat": 35.6927,
@@ -238,7 +242,7 @@
         },
         {
           "lat": 35.68948,
-          "lng": 139.69661
+          "lng": 139.69665
         },
         {
           "lat": 35.69411,
@@ -338,7 +342,8 @@
         "cafe",
         "shop",
         "restaurant",
-        "cocktail-bar"
+        "cocktail-bar",
+        "sushi-counter"
       ],
       "points": [
         {
@@ -366,8 +371,8 @@
           "lng": 139.69923
         },
         {
-          "lat": 35.64732,
-          "lng": 139.71045
+          "lat": 35.65077,
+          "lng": 139.7219
         },
         {
           "lat": 35.64649,
@@ -650,6 +655,10 @@
           "lng": 135.49857
         },
         {
+          "lat": 34.66963,
+          "lng": 135.49873
+        },
+        {
           "lat": 34.66835,
           "lng": 135.50322
         },
@@ -762,7 +771,7 @@
         },
         {
           "name": "Kameoka and the Hozu gorge",
-          "blurb": "A rural town over the mountain, reached by the Sagano train and left by river boat through the gorge.",
+          "blurb": "A rural town over the mountain, ten minutes by JR, where the river boat sets off through the gorge. Only if you take the bonus boat.",
           "slug": "hozu"
         },
         {
@@ -790,16 +799,12 @@
           "lng": 135.67377
         },
         {
-          "lat": 35.01857,
-          "lng": 135.68078
+          "lat": 35.01671,
+          "lng": 135.66992
         },
         {
-          "lat": 35.01317,
-          "lng": 135.60676
-        },
-        {
-          "lat": 35.0172,
-          "lng": 135.58686
+          "lat": 35.01981,
+          "lng": 135.66864
         },
         {
           "lat": 35.01288,
