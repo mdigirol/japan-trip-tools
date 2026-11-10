@@ -88,6 +88,18 @@ async function waitDeploy(sha: string) {
       seen = true;
       if (run.status === 'completed') {
         if (run.conclusion === 'success') { console.log(`Deployed: ${sha.slice(0, 7)} is live`); return; }
+        // A newer push cancels the older deploy. Follow the newest deploy of main, if it contains this commit.
+        if (run.conclusion === 'cancelled') {
+          const latest = await gh<{ workflow_runs: { head_sha: string }[] }>('GET',
+            `https://api.github.com/repos/${APP_REPO}/actions/workflows/deploy.yml/runs?branch=main&event=push&per_page=1`);
+          const next = latest.workflow_runs[0]?.head_sha;
+          if (next && next !== sha) {
+            execSync('git fetch -q origin main');
+            try { execSync(`git merge-base --is-ancestor ${sha} ${next}`); } catch { next && console.log(`!! Deploy cancelled for ${sha.slice(0, 7)}, and the newest deploy doesn't contain it`); process.exit(1); }
+            console.log(`Superseded by ${next.slice(0, 7)}; following that deploy`);
+            return waitDeploy(next);
+          }
+        }
         console.log(`!! Deploy ${run.conclusion} for ${sha.slice(0, 7)}: ${run.html_url}`); process.exit(1);
       }
     }
