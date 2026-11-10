@@ -9,7 +9,7 @@ Same pattern as the itinerary's comment loop in `japan-trip-2026`.
 | `src/lib/noteThread.ts` | Issue format, kinds and status rules, shared by the app and the script |
 | `notes.ts` | Lists actionable notes, claims them, posts tagged replies, waits for the Pages deploy, sends Pushover notifications |
 | `urgent-workflow.yml` | GitHub Action for Broken / Wrong info / Glitch notes; lives in the data repo as `.github/workflows/urgent.yml` |
-| `routine-prompt.md` | Prompt for the hourly cloud routine (6 AM–midnight Japan time, Nov 10–28 = `0 21-23,0-15 10-28 11 *` UTC) |
+| `routine-prompt.md` | Prompt for the hourly cloud routine (6 AM–midnight Japan time, Nov 10–28 = `0 21-23,0-15 10-28 11 *` UTC): https://claude.ai/code/routines/trig_014F2KWRY9dUhyG2dir4uxfu, no connectors, its own environment "Japan app loop" |
 
 ## Secrets (Matt adds these; never paste them in chat)
 
