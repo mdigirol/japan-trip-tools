@@ -35,7 +35,7 @@ test('each MVP route renders', async ({ page }) => {
   page.on('pageerror', (e) => errors.push(e.message));
   for (const [hash, h1] of [['', 'Sat, Nov 21 · Kyoto'], ['#/phrases', 'Phrases'], ['#/cards', 'Show cards'], ['#/etiquette', 'Etiquette'],
     ['#/currency', 'Currency'], ['#/emergency', 'Emergency'], ['#/more', 'More'], ['#/settings', 'Settings'], ['#/shopping', 'Shopping guide'], ['#/purchases', 'Purchases & tax refund'],
-    ['#/tobuy', 'To buy'], ['#/konbini', 'Konbini'], ['#/decoder', 'Signs & menus'], ['#/transit', 'Transit'], ['#/numbers', 'Numbers']]) {
+    ['#/tobuy', 'Wish list'], ['#/konbini', 'Konbini'], ['#/decoder', 'Signs & menus'], ['#/transit', 'Transit'], ['#/numbers', 'Numbers']]) {
     await page.goto(at('2026-11-21T08:00+09:00', hash));
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(h1);
   }

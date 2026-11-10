@@ -201,14 +201,14 @@ function Hoods({ day }: { day: NonNullable<TodayState['day']> }) {
   );
 }
 
-// Items on the To buy list with a suggested place in today's neighborhoods or cities. No stop names or times.
+// Items on the Wish list with a suggested place in today's neighborhoods or cities. No stop names or times.
 function ToBuyHint({ day }: { day: NonNullable<TodayState['day']> }) {
   const list = useWants();
   const hits = list ? todayWants(list, day) : [];
   if (!hits.length) return null;
   return (
     <section data-testid="tobuy-hint">
-      <h2>On your to-buy list</h2>
+      <h2>On your wish list</h2>
       <a class="card card-btn" href={href('tobuy')} style="color:inherit;text-decoration:none">
         <ul class="list-plain small" style="margin:0">{hits.map(({ want, place }) => (
           <li key={want.id}><b>{want.item}</b>: {place.name} <span class="muted">· {areaLabel(place.area)}</span></li>

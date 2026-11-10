@@ -1,4 +1,4 @@
-// The To buy list: things we still want to find, with where to buy each one.
+// The Wish list (the tobuy route): things we still want to find, with where to buy each one.
 // Per phone only (IndexedDB, never synced). Where-to-buy comes from the relay in worker/shopping, which asks Claude.
 //
 // When the lookup runs: every new item starts "pending". The queue works through pending items one at a time

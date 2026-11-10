@@ -9,7 +9,7 @@ export const MODULES: ModuleInfo[] = [
   { path: 'currency', label: 'Currency', ic: '¥', blurb: 'Rate, table, calculator', ready: true },
   { path: 'emergency', label: 'Emergency', ic: '🚑', blurb: 'Numbers, pharmacy, earthquakes', ready: true },
   { path: 'purchases', label: 'Purchases & tax refund', short: 'Purchases', ic: '🛍️', blurb: 'For us or gifts · tax refund log', ready: true },
-  { path: 'tobuy', label: 'To buy', ic: '📝', blurb: 'Our list, where to find it', ready: true },
+  { path: 'tobuy', label: 'Wish list', ic: '📝', blurb: 'Our list, where to find it', ready: true },
   { path: 'konbini', label: 'Konbini', ic: '🏪', blurb: 'Nearest stores', ready: true },
   { path: 'decoder', label: 'Signs & menus', short: 'Signs', ic: '🔤', blurb: 'Decode words', ready: true },
   { path: 'transit', label: 'Transit', ic: '🚄', blurb: 'Tickets, IC cards, taxis', ready: true },

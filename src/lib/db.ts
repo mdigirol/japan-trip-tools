@@ -1,4 +1,4 @@
-// IndexedDB: purchases, photos, the sync queue, cached API results, and the To buy list.
+// IndexedDB: purchases, photos, the sync queue, cached API results, and the Wish list.
 import { openDB, type DBSchema, type IDBPDatabase } from 'idb';
 import type { Purchase } from '../data/schema';
 import type { Want } from './wants';
@@ -11,7 +11,7 @@ interface CompanionDB extends DBSchema {
   photos: { key: string; value: { id: string; purchaseId: string; blob: Blob; at: string } };
   queue: { key: number; value: QueueEntry };
   cache: { key: string; value: CacheEntry };
-  wants: { key: string; value: Want };     // v2: the To buy list, this phone only
+  wants: { key: string; value: Want };     // v2: the Wish list, this phone only
 }
 
 let dbp: Promise<IDBPDatabase<CompanionDB>> | null = null;

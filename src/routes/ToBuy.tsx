@@ -13,7 +13,7 @@ export function ToBuy() {
   const waiting = open.filter((w) => w.lookup === 'pending').length;
   return (
     <div>
-      <h1>To buy</h1>
+      <h1>Wish list</h1>
       <p class="small muted">Things we want to find on the trip. Each item gets suggestions for where to buy it.</p>
       <AddForm />
       {!SHOPPING_URL && <p class="small faint" data-testid="lookups-off">Where-to-buy suggestions are off in this build.</p>}
