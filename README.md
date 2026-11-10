@@ -21,9 +21,9 @@ A phone-first, offline web app for Nov 11–27, 2026: what to say, do, or pay, r
 | Etiquette | Do/don't cards by place type and area, must-first |
 | Currency | Live rate (cached), manual override, quick table, calculator with 税込/税抜, units |
 | Emergency | Tap-to-call numbers, ambulance card with tonight's hotel, earthquakes, pharmacy |
-| Souvenirs & tax-free | One purchase store: souvenir view by recipient, claim log by bag, Nov 27 customs checklist |
+| Purchases & tax refund | One purchase store: by person (for us or gifts), tax refund log by bag, Nov 27 customs checklist |
 | Konbini | Offline list near each day's areas and hotel; live "near me" |
-| Signs & menus, Transit, Numbers, Shopping | Reference |
+| Signs & menus, Transit, Numbers, Shopping guide | Reference |
 
 ## Sync between the phones
 
