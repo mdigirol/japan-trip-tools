@@ -2,6 +2,7 @@ import { ShowCardOverlay } from './components/ShowCardOverlay';
 import { StatusPills } from './components/StatusPills';
 import { UpdatePrompt } from './components/UpdatePrompt';
 import { MODULES, navModules } from './lib/modules';
+import { notesEnabled } from './lib/notes';
 import { href, useRoute } from './lib/router';
 import { useSettings } from './lib/settings';
 import { Cards } from './routes/Cards';
@@ -11,6 +12,7 @@ import { Emergency } from './routes/Emergency';
 import { Etiquette } from './routes/Etiquette';
 import { Konbini } from './routes/Konbini';
 import { More } from './routes/More';
+import { Notes } from './routes/Notes';
 import { Numbers } from './routes/Numbers';
 import { Phrases } from './routes/Phrases';
 import { Purchases } from './routes/Purchases';
@@ -49,6 +51,7 @@ export function App() {
     case 'transit': page = <Transit />; break;
     case 'numbers': page = <Numbers />; break;
     case 'units': page = <Units />; break;
+    case 'notes': page = <Notes route={route} />; break;
     default: page = <Today />;
   }
   const current = nav.some((n) => n.path === p) ? p : p === 'more' || TOOL_PATHS.has(p) ? 'more' : '';
@@ -57,6 +60,7 @@ export function App() {
       <main>
         <StatusPills />
         {page}
+        {p !== 'notes' && notesEnabled() && <a class="report-link" href={href('notes', { from: p || 'today' })}>Report a problem with this screen</a>}
       </main>
       <nav class="nav" aria-label="Main">
         {nav.map((n) => (

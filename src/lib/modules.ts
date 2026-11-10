@@ -16,6 +16,7 @@ export const MODULES: ModuleInfo[] = [
   { path: 'numbers', label: 'Numbers', ic: '🔢', blurb: 'Prices aloud, counters', ready: true },
   { path: 'units', label: 'Units', ic: '📏', blurb: '°C/°F, kg/lb, mL/fl oz', ready: true },
   { path: 'shopping', label: 'Shopping guide', short: 'Shopping', ic: '🧾', blurb: 'Tax-free rules, sizes', ready: true },
+  { path: 'notes', label: 'Report a problem', short: 'Report', ic: '🛠️', blurb: 'Tell Claude what to fix', ready: true },
   { path: 'settings', label: 'Settings', ic: '⚙️', blurb: 'Name, units, sync', ready: true }
 ];
 

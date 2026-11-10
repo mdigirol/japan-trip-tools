@@ -107,7 +107,7 @@ export function Settings() {
                 onInput={(e) => set({ syncToken: e.currentTarget.value.trim() })} />
               <button class="btn" onClick={() => setShowToken(!showToken)}>{showToken ? 'Hide' : 'Show'}</button>
             </div></label>
-          <p class="small faint">Stored only on this phone. Paste it once. Only purchases sync; photos stay on the phone that took them.</p>
+          <p class="small faint">Stored only on this phone. Paste it once. Only purchases sync; photos stay on the phone that took them. Report a problem uses it to send notes to Claude.</p>
         </div>
       </>}
 

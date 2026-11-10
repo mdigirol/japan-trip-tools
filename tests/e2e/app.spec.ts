@@ -295,3 +295,54 @@ test('to buy: an item added offline is looked up once online, and shows on Today
   await page.getByRole('link', { name: 'Log the purchase' }).click();
   await expect(page.locator('input[name=item]')).toHaveValue('Ceremonial matcha');
 });
+
+test('report a problem: an offline note waits, sends once online, and Matt can approve Claude’s plan', async ({ page, context }) => {
+  const issues: { number: number; state: string; body: string; created_at: string; labels: { name: string }[] }[] = [];
+  const comments: { body: string; created_at: string; issue_url: string }[] = [];
+  await page.route(/api\.github\.com\/repos\/test\/notes/, async (r) => {
+    const u = new URL(r.request().url()), m = r.request().method();
+    if (m === 'GET' && u.pathname.endsWith('/issues')) return r.fulfill({ json: issues });
+    if (m === 'GET' && u.pathname.endsWith('/issues/comments')) return r.fulfill({ json: comments });
+    if (m === 'POST' && u.pathname.endsWith('/issues')) {
+      const b = r.request().postDataJSON();
+      const is = { number: issues.length + 1, state: 'open', body: b.body, created_at: new Date().toISOString(), labels: b.labels.map((name: string) => ({ name })) };
+      issues.push(is);
+      return r.fulfill({ status: 201, json: is });
+    }
+    const cm = /\/issues\/(\d+)\/comments$/.exec(u.pathname);
+    if (m === 'POST' && cm) {
+      comments.push({ body: r.request().postDataJSON().body, created_at: new Date().toISOString(), issue_url: `https://api.github.com/repos/test/notes/issues/${cm[1]}` });
+      return r.fulfill({ status: 201, json: {} });
+    }
+    return r.abort();
+  });
+  await page.addInitScript(() => localStorage.setItem('jtc-settings-v1', JSON.stringify({ who: 'Matt', syncToken: 'github_pat_test' })));
+  await page.goto(at('2026-11-21T08:00+09:00', '#/currency'));
+  await page.getByRole('link', { name: 'Report a problem with this screen' }).click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Report a problem');
+  await expect(page.getByLabel('About')).toHaveValue('currency');
+
+  await context.setOffline(true);
+  await page.getByRole('button', { name: 'Glitch' }).click();
+  await expect(page.getByText('Claude starts on it right away.')).toBeVisible();
+  await page.getByLabel('What happened?').fill('The rate pill overlaps the title');
+  await page.getByRole('button', { name: 'Send to Claude' }).click();
+  await expect(page.getByTestId('note-unsent')).toContainText('Not sent yet');
+
+  await context.setOffline(false);
+  await expect(page.getByTestId('note')).toContainText('Waiting for Claude');
+  await expect(page.getByTestId('note-unsent')).toHaveCount(0);
+  expect(issues).toHaveLength(1);
+  expect(issues[0].labels.map((l) => l.name)).toEqual(['note', 'k:glitch']);
+  expect(issues[0].body).toContain('"scr":"currency"');
+
+  comments.push({ body: '<!-- jtc-note {"by":"Claude","st":"needs"} -->\nMove the pill below the title? Approve to go ahead.', created_at: new Date().toISOString(), issue_url: 'https://api.github.com/repos/test/notes/issues/1' });
+  await page.reload();
+  const note = page.getByTestId('note');
+  await expect(note).toContainText('Needs Matt');
+  await expect(note).toContainText('Move the pill below the title?');
+  await note.getByText(/^Thread/).click();
+  await note.getByRole('button', { name: 'Approve' }).click();
+  await expect(note).toContainText('Approved');
+  expect(comments.at(-1)!.body).toContain('"ok":1');
+});

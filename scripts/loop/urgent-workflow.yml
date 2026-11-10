@@ -1,0 +1,68 @@
+# Source of .github/workflows/urgent.yml in mdigirol/japan-trip-tools-data (private).
+# Edit here, then copy it over (scripts/loop/README.md). Rules: docs/fix-loop.md.
+#
+# Runs Claude Code right away on urgent app notes (Broken, Wrong info, Glitch) and on replies to them,
+# 6 AM–midnight Japan time. Everything else waits for the hourly cloud routine. The same repo holds the
+# purchase-sync issues, so the job only starts for issues labeled "note".
+# Dormant until the ANTHROPIC_API_KEY and LOOP_GH_TOKEN secrets exist.
+name: Urgent app notes
+on:
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+concurrency:
+  group: app-loop
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  urgent:
+    # Claude's own replies (tagged "by":"Claude") must not start another run.
+    if: ${{ contains(github.event.issue.labels.*.name, 'note') && !contains(github.event.comment.body, '"by":"Claude"') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      LOOP_GH_TOKEN: ${{ secrets.LOOP_GH_TOKEN }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+      PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
+      N: ${{ github.event.issue.number }}
+    steps:
+      - name: Gate (secrets set, waking hours in Japan)
+        id: gate
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ] || [ -z "$LOOP_GH_TOKEN" ]; then echo "Secrets not set; skipping."; echo "go=no" >> "$GITHUB_OUTPUT"; exit 0; fi
+          H=$(TZ=Asia/Tokyo date +%H)
+          if [ "$H" -lt 6 ]; then echo "Night in Japan ($H:00); the 6 AM routine picks it up."; echo "go=no" >> "$GITHUB_OUTPUT"; exit 0; fi
+          echo "go=yes" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.go == 'yes'
+        with:
+          repository: mdigirol/japan-trip-tools
+          token: ${{ secrets.LOOP_GH_TOKEN }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.go == 'yes'
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        if: steps.gate.outputs.go == 'yes'
+        run: npm ci
+      - name: Is this note urgent and waiting?
+        id: check
+        if: steps.gate.outputs.go == 'yes'
+        run: |
+          OUT=$(npx tsx scripts/loop/notes.ts list --urgent --issue "$N")
+          if [ "$OUT" = "[]" ]; then echo "Not urgent, or nothing to do."; echo "go=no" >> "$GITHUB_OUTPUT"; else echo "go=yes" >> "$GITHUB_OUTPUT"; fi
+      - name: Claude works the note
+        if: steps.check.outputs.go == 'yes'
+        run: |
+          git config user.name "Claude (fix loop)"; git config user.email "noreply@anthropic.com"
+          npm install -g @anthropic-ai/claude-code >/dev/null
+          claude -p "You are the URGENT runner of the Japan trip app fix loop. Read docs/fix-loop.md and CLAUDE.md in full and follow them exactly. Work only notes-repo issue #$N (start with: npx tsx scripts/loop/notes.ts list --issue $N). Be quick and economical." \
+            --model claude-sonnet-5-5 --max-turns 60 --dangerously-skip-permissions
+      - name: Tell Matt if the run failed
+        if: failure() && steps.check.outputs.go == 'yes'
+        run: echo "The urgent runner failed on this note; the hourly routine will retry it." | npx tsx scripts/loop/notes.ts notify 1 "App loop error · #$N"
