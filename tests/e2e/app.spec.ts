@@ -260,7 +260,8 @@ test('to buy: an item added offline is looked up once online, and shows on Today
   await page.route(/shopping\.test/, async (r) => {
     asked.push(JSON.parse(r.request().postData()!));
     await r.fulfill({ status: 200, headers: { 'Access-Control-Allow-Origin': '*' }, contentType: 'application/json', body: JSON.stringify({
-      ok: true, advice: { summary: 'Buy from a tea specialist, not a souvenir stall.', places: [{ name: 'Ippodo Tea', area: 'kyoto-downtown', why: 'Wide range of grades.' }] }
+      ok: true, advice: { summary: 'Buy from a tea specialist, not a souvenir stall.', places: [{ name: 'Ippodo Tea', area: 'kyoto-downtown', why: 'Wide range of grades.' }],
+      picks: [{ name: 'Ippodo Ummon-no-mukashi', why: 'Their top ceremonial grade.' }] }
     }) });
   });
   await page.goto(at('2026-11-19T09:00+09:00', '#/tobuy'));
@@ -279,6 +280,8 @@ test('to buy: an item added offline is looked up once online, and shows on Today
   await context.setOffline(false);
   await expect(page.getByText('Ippodo Tea')).toBeVisible();
   await expect(page.getByTestId('advice')).toContainText('Downtown Kyoto');
+  await page.getByTestId('picks').locator('summary').click();
+  await expect(page.getByText('Ippodo Ummon-no-mukashi')).toBeVisible();
   expect(asked[0]).toMatchObject({ item: 'Ceremonial matcha', note: 'Two tins' });
   expect((asked[0].areas as { slug: string }[]).map((a) => a.slug)).toContain('kyoto-downtown');
 

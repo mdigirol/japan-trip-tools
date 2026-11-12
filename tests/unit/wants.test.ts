@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { db } from '../../src/lib/db';
-import { cleanRequest, PLACES_MAX, shorten, tidyAdvice, tripAreas, userPrompt, type WantAdvice } from '../../src/lib/wantAdvice';
+import { cleanRequest, PICKS_MAX, PLACES_MAX, SYSTEM_PROMPT, shorten, tidyAdvice, tripAreas, userPrompt, type WantAdvice } from '../../src/lib/wantAdvice';
 import { allWants, applyResult, AREAS, lookupWant, MAX_TRIES, newWant, runWants, saveWant, todayWants, type Want } from '../../src/lib/wants';
 import { trip } from '../../src/lib/trip';
 import { handle, type Ask, type Env } from '../../worker/shopping/src/index';
@@ -32,6 +32,13 @@ describe('request and answer cleanup', () => {
   it('rejects an empty item or a non-object', () => {
     expect(cleanRequest({ item: '   ' })).toBeNull();
     expect(cleanRequest('matcha')).toBeNull();
+  });
+  it('keeps at most ten brand picks, and reads answers saved before picks existed', () => {
+    const picks = Array.from({ length: 12 }, (_, i) => ({ name: `Brand ${i}`, why: 'w' }));
+    expect(tidyAdvice({ summary: 's', places: [], picks }, []).picks).toHaveLength(PICKS_MAX);
+    expect(tidyAdvice({ summary: 's', places: [], picks: [{ name: ' ', why: 'w' }] }, []).picks).toEqual([]);
+    expect(tidyAdvice({ summary: 's', places: [] }, []).picks).toEqual([]);
+    expect(SYSTEM_PROMPT).toContain('5 to 10');
   });
   it('keeps at most three places and maps unknown areas to anywhere', () => {
     const many = { summary: ' s ', places: Array.from({ length: 5 }, (_, i) => ({ name: `Shop ${i}`, area: i ? 'nowhere' : 'gion', why: 'w' })) };
@@ -65,6 +72,8 @@ describe('one lookup', () => {
   it('retries network trouble and odd answers, but not a rejected item', async () => {
     expect(await lookupWant({ item: 'x' }, [], { url: URL_, fetcher: async () => { throw new TypeError('offline'); } })).toMatchObject({ ok: false, retry: true });
     expect(await lookupWant({ item: 'x' }, [], { url: URL_, fetcher: async () => json(200, { advice: { nope: 1 } }) })).toMatchObject({ ok: false, retry: true });
+    const withPicks = { ...advice, picks: [{ name: 'Anessa', why: 'Water-resistant.' }] };
+    expect(await lookupWant({ item: 'x' }, [], { url: URL_, fetcher: async () => json(200, { ok: true, advice: withPicks }) })).toEqual({ ok: true, advice: withPicks });
     expect(await lookupWant({ item: 'x' }, [], { url: URL_, fetcher: async () => json(400, {}) })).toMatchObject({ ok: false, retry: false });
     expect(await lookupWant({ item: 'x' }, [], { url: URL_, fetcher: async () => json(422, {}) })).toMatchObject({ ok: false, retry: false });
   });

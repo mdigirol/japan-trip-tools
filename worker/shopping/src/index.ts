@@ -3,7 +3,7 @@
 // Setup: worker/shopping/README.md.
 import Anthropic from '@anthropic-ai/sdk';
 import { betaZodOutputFormat } from '@anthropic-ai/sdk/helpers/beta/zod';
-import { cleanRequest, SYSTEM_PROMPT, tidyAdvice, userPrompt, WantAdvice, type LookupRequest } from '../../../src/lib/wantAdvice';
+import { cleanRequest, ModelAdvice, SYSTEM_PROMPT, tidyAdvice, userPrompt, type LookupRequest, type WantAdvice } from '../../../src/lib/wantAdvice';
 
 export interface Env {
   ANTHROPIC_API_KEY?: string;   // secret
@@ -24,7 +24,7 @@ export const askClaude: Ask = async (env, req) => {
     model: env.MODEL || DEFAULT_MODEL,
     max_tokens: 8000,   // room for medium-effort thinking plus the answer
     // Medium effort: a little reasoning about which trip areas fit, without the cost of high.
-    output_config: { effort: 'medium', format: betaZodOutputFormat(WantAdvice) },
+    output_config: { effort: 'medium', format: betaZodOutputFormat(ModelAdvice) },
     // If a safety classifier declines, the API reruns the request on its recommended fallback model.
     betas: ['server-side-fallback-2026-07-01'],
     fallbacks: 'default',

@@ -87,6 +87,14 @@ function Advice({ w }: { w: Want }) {
           <ul class="list-plain small">{w.advice.places.map((p) => (
             <li key={p.name}><b>{p.name}</b> <span class="muted">· {areaLabel(p.area)}</span><div class="muted">{p.why}</div></li>
           ))}</ul>
+          {!!w.advice.picks?.length && (
+            <details data-testid="picks">
+              <summary class="small">Brands to consider <span class="muted">· {w.advice.picks.length}</span></summary>
+              <ul class="list-plain small">{w.advice.picks.map((p) => (
+                <li key={p.name}><b>{p.name}</b><div class="muted">{p.why}</div></li>
+              ))}</ul>
+            </details>
+          )}
         </>
       )}
       {w.lookup === 'pending' && !w.error && <p class="small faint" style="margin:0">{w.advice ? 'Looking again…' : 'Looking up where to buy…'}</p>}

@@ -7,6 +7,7 @@ export const ITEM_MAX = 120;
 export const NOTE_MAX = 300;
 export const AREAS_MAX = 80;
 export const PLACES_MAX = 3;
+export const PICKS_MAX = 10;
 
 // An area the answer can point at: a trip neighborhood slug (as in trip.json hoods) or a city id.
 export interface Area { slug: string; name: string }
@@ -16,11 +17,21 @@ export const WantPlace = z.object({
   area: z.string(),   // one of the request's area slugs, or "anywhere"
   why: z.string()     // one short line
 });
+// A brand or specific product to consider, only for a generic item (e.g. "sunscreen", not "Anessa Perfect UV").
+export const WantPick = z.object({
+  name: z.string(),   // brand or product, e.g. "Anessa Perfect UV Skincare Milk"
+  why: z.string()     // one short line
+});
+// What the app stores and reads. picks is optional: answers saved before it existed don't have it.
 export const WantAdvice = z.object({
   summary: z.string(),
-  places: z.array(WantPlace)
+  places: z.array(WantPlace),
+  picks: z.array(WantPick).optional()
 });
+// What the model must return: picks is always there, empty when the item already names a brand or product.
+export const ModelAdvice = WantAdvice.extend({ picks: z.array(WantPick) });
 export type WantPlace = z.infer<typeof WantPlace>;
+export type WantPick = z.infer<typeof WantPick>;
 export type WantAdvice = z.infer<typeof WantAdvice>;
 
 export interface LookupRequest { item: string; note?: string; areas: Area[] }
@@ -75,7 +86,11 @@ Mention tax-free when it matters, and any rule that affects bringing the item ho
 Don't invent store names or addresses. If you aren't sure a specific store exists, name the type of store instead.
 Write plain, short American English. The summary is one or two sentences, under ${SUMMARY_MAX - 100} characters. Give at most ${PLACES_MAX} places.
 Keep each place's name under ${NAME_MAX - 20} characters and its "why" to one or two short sentences, under ${WHY_MAX - 40} characters.
-For each place, "area" must be one of the given area slugs, or "anywhere" when it isn't tied to one.`;
+For each place, "area" must be one of the given area slugs, or "anywhere" when it isn't tied to one.
+"picks": if the item is generic and names no brand or specific product (like "sunscreen", "matcha", "chef's knife", "face masks"),
+list 5 to ${PICKS_MAX} well-known brands or specific products sold in Japan that are worth considering, best first.
+Each pick's "why" is one short line, under ${WHY_MAX - 80} characters, on what sets it apart (style, price level, who it suits).
+If the item already names a brand or a specific product, leave "picks" empty. Only name brands and products you are confident exist.`;
 
 export function userPrompt(r: LookupRequest): string {
   const areas = r.areas.length ? r.areas.map((a) => `${a.slug}: ${a.name}`).join('\n') : '(none given)';
@@ -90,6 +105,10 @@ export function tidyAdvice(a: WantAdvice, areas: Area[]): WantAdvice {
     places: a.places.slice(0, PLACES_MAX).map((p) => ({
       name: shorten(p.name, NAME_MAX),
       area: known.has(p.area) ? p.area : 'anywhere',
+      why: shorten(p.why, WHY_MAX)
+    })).filter((p) => p.name),
+    picks: (a.picks ?? []).slice(0, PICKS_MAX).map((p) => ({
+      name: shorten(p.name, NAME_MAX),
       why: shorten(p.why, WHY_MAX)
     })).filter((p) => p.name)
   };
