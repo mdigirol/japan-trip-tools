@@ -8,6 +8,7 @@ export const PHRASE_TABS = [
   { id: 'bar', label: 'Bar' },
   { id: 'sushi', label: 'Sushi' },
   { id: 'hotel', label: 'Hotel' },
+  { id: 'customs', label: 'Customs' },
   { id: 'ryokan', label: 'Ryokan & onsen' },
   { id: 'shopping', label: 'Shopping' },
   { id: 'konbini', label: 'Konbini' },
@@ -33,6 +34,7 @@ const TAB_DEFAULTS: Record<string, { sit: Situation[]; venues: Venue[] }> = {
   bar: { sit: ['ordering'], venues: ['cocktail-bar', 'izakaya'] },
   sushi: { sit: ['ordering'], venues: ['sushi-counter'] },
   hotel: { sit: ['asking'], venues: [] },
+  customs: { sit: ['arriving'], venues: [] },
   ryokan: { sit: ['asking'], venues: ['ryokan', 'onsen'] },
   shopping: { sit: ['paying'], venues: ['shop', 'department-store', 'market'] },
   konbini: { sit: ['paying'], venues: ['konbini'] },
@@ -176,6 +178,22 @@ export const phrases: Phrase[] = [
   p('hotel', 'hotel-broken', "Something in my room is broken", '部屋の設備が壊れています', 'Heya no setsubi ga kowarete imasu', ['V'], { sit: ['problem'] }),
   p('hotel', 'hotel-ac', "The heating or A/C isn’t working", '暖房かエアコンが動きません', 'Danbou ka eakon ga ugokimasen', ['V'], { sit: ['problem'] }),
   p('hotel', 'hotel-key', "I locked myself out", '部屋に鍵を置いたまま閉め出されました', 'Heya ni kagi o oita mama shimedasaremashita', ['V'], { sit: ['problem'] }),
+
+  // ---- Customs and immigration ----
+  p('customs', 'customs-sightseeing', "I'm here for sightseeing", '観光で来ました', 'Kankou de kimashita', ['V'], { mvp: true, sit: ['arriving'], note: 'The usual answer to "purpose of visit."' }),
+  p('customs', 'customs-stay-length', "I'm staying for 17 days", '17日間滞在します', 'Juunana-nichikan taizai shimasu', ['V'], { sit: ['arriving'], note: 'Our trip is Nov 11–27.' }),
+  p('customs', 'customs-hotel', "I'm staying at a hotel", 'ホテルに泊まります', 'Hoteru ni tomarimasu', ['V'], { sit: ['arriving'], note: 'Have the first hotel name and address ready.' }),
+  p('customs', 'customs-travel-with', "I'm traveling with my wife", '妻と旅行しています', 'Tsuma to ryokou shite imasu', ['V'], { sit: ['arriving'] }),
+  p('customs', 'customs-first-time', "This is my first time in Japan", '日本は初めてです', 'Nihon wa hajimete desu', ['V'], { sit: ['arriving'] }),
+  p('customs', 'customs-return-ticket', "I have a return ticket", '帰りの航空券があります', 'Kaeri no koukuuken ga arimasu', ['V'], { sit: ['arriving'] }),
+  p('customs', 'customs-nothing-declare', "I have nothing to declare", '申告するものはありません', 'Shinkoku suru mono wa arimasen', ['V'], { sit: ['arriving'] }),
+  p('customs', 'customs-personal', "These are personal items", '個人用の物です', 'Kojin-you no mono desu', ['V'], { sit: ['arriving'] }),
+  p('customs', 'customs-gift', "This is a gift", 'これはお土産です', 'Kore wa omiyage desu', ['V'], { sit: ['arriving'] }),
+  p('customs', 'customs-medicine', "This is my prescription medicine", 'これは処方薬です', 'Kore wa shohouyaku desu', ['V'], { sit: ['arriving'], note: 'Carry it in the original labeled package.' }),
+  p('customs', 'customs-open-bag', "Should I open my bag?", 'かばんを開けますか？', 'Kaban o akemasu ka?', ['V'], { sit: ['arriving'] }),
+  p('customs', 'customs-english', "Do you speak English?", '英語は話せますか？', 'Eigo wa hanasemasu ka?', ['V'], { sit: ['problem'] }),
+  p('customs', 'customs-slowly', "Please speak slowly", 'ゆっくり話してください', 'Yukkuri hanashite kudasai', ['V'], { sit: ['problem'] }),
+  p('customs', 'customs-tax-free', "I'd like to claim tax-free", '免税をお願いします', 'Menzei o onegaishimasu', ['V'], { sit: ['leaving'], note: 'Departure: show the receipts and goods if asked.' }),
 
   // ---- Ryokan and onsen ----
   p('ryokan', 'dinner-time', 'What time is dinner?', '夕食は何時ですか？', 'Yuushoku wa nanji desu ka?', ['V'], { places: ['hakone'], note: 'Dinner time is fixed. Be on time.' }),
