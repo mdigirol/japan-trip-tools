@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { dataFile } from '../../scripts/build-env';
 
 const trip = JSON.parse(readFileSync(dataFile('trip.json', 'sample'), 'utf8')) as {
@@ -345,4 +345,51 @@ test('report a problem: an offline note waits, sends once online, and Matt can a
   await note.getByRole('button', { name: 'Approve' }).click();
   await expect(note).toContainText('Approved');
   expect(comments.at(-1)!.body).toContain('"ok":1');
+});
+
+test('Force refresh in Settings installs a new version and reloads onto it', async ({ page, context }) => {
+  await page.goto(at('2026-11-21T08:00+09:00', '#/settings'));
+  await page.evaluate(async () => { await navigator.serviceWorker.ready; });
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true);
+
+  // Offline: says so and stays put.
+  await context.setOffline(true);
+  await page.getByTestId('force-refresh').click();
+  await expect(page.getByText('You’re offline. Connect, then try again.')).toBeVisible();
+  await context.setOffline(false);
+
+  // A "new deploy": rewrite index.html's precache revision in the served sw.js (same length, so the
+  // preview server's cached file size still matches). Put the original back afterwards.
+  const swPath = 'dist-e2e/sw.js';
+  const original = readFileSync(swPath, 'utf8');
+  const rev = /\{url:"index\.html",revision:"([0-9a-f]+)"\}/.exec(original)![1];
+  const next = rev.split('').reverse().join('') === rev ? rev.replace(/^./, (c) => (c === '0' ? '1' : '0')) : rev.split('').reverse().join('');
+  try {
+    writeFileSync(swPath, original.replace(`revision:"${rev}"`, `revision:"${next}"`));
+    await page.evaluate(() => { (window as unknown as { beforeRefresh: boolean }).beforeRefresh = true; });
+    await page.getByTestId('force-refresh').click();
+    await expect.poll(() => page.evaluate(() => !!(window as unknown as { beforeRefresh?: boolean }).beforeRefresh).catch(() => true), { timeout: 20_000 }).toBe(false);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Settings');
+    // The new worker took over: its precache has the new index.html revision and the old one is gone.
+    const keys = () => page.evaluate(async () => {
+      const out: string[] = [];
+      for (const n of await caches.keys()) for (const k of await (await caches.open(n)).keys()) if (k.url.includes('index.html')) out.push(k.url);
+      return out.join(' ');
+    });
+    await expect.poll(keys).toContain(`__WB_REVISION__=${next}`);
+    expect(await keys()).not.toContain(`__WB_REVISION__=${rev}`);
+    expect(await page.evaluate(async () => !!(await navigator.serviceWorker.getRegistration())?.waiting)).toBe(false);
+  } finally {
+    writeFileSync(swPath, original);
+  }
+});
+
+test('Force refresh with nothing new just reloads', async ({ page }) => {
+  await page.goto(at('2026-11-21T08:00+09:00', '#/settings'));
+  await page.evaluate(async () => { await navigator.serviceWorker.ready; });
+  await page.evaluate(() => { (window as unknown as { beforeRefresh: boolean }).beforeRefresh = true; });
+  await page.getByTestId('force-refresh').click();
+  await expect.poll(() => page.evaluate(() => !!(window as unknown as { beforeRefresh?: boolean }).beforeRefresh).catch(() => true), { timeout: 20_000 }).toBe(false);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Settings');
 });
