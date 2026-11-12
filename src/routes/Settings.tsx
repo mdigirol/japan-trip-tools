@@ -5,6 +5,7 @@ import { trip } from '../lib/trip';
 import { SyncStatus } from '../components/SyncStatus';
 import { NAV_TOOLS, moveModule, orderedModules } from '../lib/modules';
 import { DATA_REPO } from '../lib/sync';
+import { forceRefresh, type RefreshStep } from '../lib/appUpdate';
 
 
 function ListEditor({ label, items, onChange, placeholder }: { label: string; items: string[]; onChange: (l: string[]) => void; placeholder: string }) {
@@ -56,6 +57,26 @@ function useOfflineReady() {
     }).catch(() => setReady(false));
   }, []);
   return ready;
+}
+
+const STEP: Record<RefreshStep, string> = { checking: 'Checking for an update…', installing: 'Downloading the update…', reloading: 'Reloading…' };
+
+function ForceRefresh() {
+  const [msg, setMsg] = useState('');
+  const [busy, setBusy] = useState(false);
+  const run = async () => {
+    setBusy(true);
+    const r = await forceRefresh((s) => setMsg(STEP[s])).catch(() => 'failed' as const);
+    if (r === 'offline') setMsg('You’re offline. Connect, then try again.');
+    if (r === 'failed') setMsg('Couldn’t refresh. Close the app and open it again.');
+    if (r !== 'reloaded') setBusy(false);
+  };
+  return (
+    <div style="margin-top:12px">
+      <button class="btn block" onClick={run} disabled={busy} data-testid="force-refresh">Force refresh</button>
+      <p class="small faint" role="status" style="margin-bottom:0">{msg || 'Gets the newest version. Use it if the update bar doesn’t show.'}</p>
+    </div>
+  );
 }
 
 export function Settings() {
@@ -115,6 +136,7 @@ export function Settings() {
       <div class="card" data-testid="offline-ready">
         {ready ? <b>Ready for offline ✓</b> : ready === false ? <b>Not ready for offline yet. Open once while online.</b> : '…'}
         <div class="small muted">Version {__APP_VERSION__} · built {__BUILT_AT__ === 'test' ? 'test' : stamp(__BUILT_AT__, s.timeZone)} · trip data {stamp(trip.generatedAt, s.timeZone)}</div>
+        <ForceRefresh />
       </div>
     </div>
   );
