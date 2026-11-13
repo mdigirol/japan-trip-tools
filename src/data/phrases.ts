@@ -138,7 +138,8 @@ export const phrases: Phrase[] = [
   p('restaurant', 'oishii', 'Delicious!', 'おいしい！', 'Oishii!', ['V']),
   p('restaurant', 'one-more', 'One more, please', 'もう一つお願いします', 'Mou hitotsu onegaishimasu', ['V']),
   p('restaurant', 'same-please', 'The same, please', '同じものをお願いします', 'Onaji mono o onegaishimasu', ['V'], { note: 'Point at the dish or glass.' }),
-  p('restaurant', 'thats-all', "That's all (done ordering)", '以上です', 'Ijou desu', ['V'], { note: 'Done eating? "Onaka ippai desu" means "I\'m full."' }),
+  p('restaurant', 'thats-all', "That's all (done ordering)", '以上です', 'Ijou desu', ['V']),
+  p('restaurant', 'onaka-ippai', "I'm full", 'お腹いっぱいです', 'Onaka ippai desu', ['V'], { sit: ['leaving'], note: 'A polite way to decline more food or drink.' }),
 
   // ---- Sushi ----
   p('sushi', 'omakase', "Chef's choice, please", 'おまかせでお願いします', 'Omakase de onegaishimasu', ['V']),
