@@ -91,6 +91,7 @@ function Calculator({ usdPerYen }: { usdPerYen?: number }) {
   const yen = dir === 'yen' ? n : usdPerYen ? usdToYen(n, usdPerYen) : NaN;
   const taxed = tax === 'add10' ? withTax(yen, TAX.standard) : tax === 'add8' ? withTax(yen, TAX.takeawayFood) : yen;
   const input = dir === 'yen' ? fmtYen(n) : '$' + (entry || '0');
+  const usd = (y: number) => (usdPerYen ? ` (${fmtUsd(yenToUsd(y, usdPerYen))})` : '');
 
   return (
     <section class="card" style="margin-top:10px" aria-label="Calculator">
@@ -107,11 +108,11 @@ function Calculator({ usdPerYen }: { usdPerYen?: number }) {
         </div>
         {dir === 'yen' && tax !== 'none' && n > 0 && (
           <div class="small" data-testid="calc-tax">
-            税抜 {fmtYen(n)} → 税込 <b>{fmtYen(taxed)}</b> ({tax === 'add8' ? '8%' : '10%'} added)
+            税抜 {fmtYen(n)}{usd(n)} → 税込 <b>{fmtYen(taxed)}</b>{usd(taxed)} ({tax === 'add8' ? '8%' : '10%'} added)
           </div>
         )}
         {dir === 'yen' && tax === 'none' && n > 0 && (
-          <div class="small faint">If this tag says 税込, tax is in. Before tax: {fmtYen(withoutTax(n))}</div>
+          <div class="small faint">If this tag says 税込, tax is in. Before tax: {fmtYen(withoutTax(n))}{usd(withoutTax(n))}</div>
         )}
       </div>
       {dir === 'yen' && (
