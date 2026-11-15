@@ -289,3 +289,7 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 16px 0; }
 .note-full { white-space: pre-wrap; overflow-wrap: anywhere; margin: 4px 0 8px; }
 .note-msg { border-top: 1px solid var(--line); padding-top: 6px; }
 .report-link { display: flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 24px; font-size: .85em; color: var(--faint); }
+
+/* flex children (Where/Date row) may shrink; iOS date inputs have a wide intrinsic size */
+.row > label.field { min-width: 0; }
+input[type="date"] { min-width: 0; max-width: 100%; box-sizing: border-box; -webkit-appearance: none; appearance: none; text-align: left; }
