@@ -162,7 +162,7 @@ label.field > span { display: block; font-size: .85em; color: var(--muted); marg
 
 /* ---- status pills ---- */
 .pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; min-height: 0; }
-.pill { font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--surface-2); color: var(--muted); border: 1px solid var(--line); }
+.pill { white-space: nowrap; font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--surface-2); color: var(--muted); border: 1px solid var(--line); }
 .pill.off { background: var(--text); color: var(--bg); border-color: var(--text); font-weight: 600; }
 .update-bar { position: fixed; left: 12px; right: 12px; bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 10px); z-index: 30; }
 

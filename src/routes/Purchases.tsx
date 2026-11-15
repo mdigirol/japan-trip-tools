@@ -44,7 +44,8 @@ function Row({ p }: { p: Purchase }) {
   return (
     <div class="card tight row" data-testid={`purchase-${p.id}`}>
       <div class="grow">
-        <b>{p.item}</b>{p.taxFree && <span class="pill" style="margin-left:6px">tax-free</span>}
+        <b>{p.item}</b>
+        {p.taxFree && <div class="pills" style="margin:4px 0"><span class="pill">tax-free</span></div>}
         <div class="small muted">{[p.shop, p.place && PLACE_LABEL[p.place], longDate(p.date), p.bag, p.by && `added by ${p.by}`].filter(Boolean).join(' · ')}</div>
         {p.forWhom?.length ? <div class="small">For {p.forWhom.join(', ')}</div> : null}
       </div>
