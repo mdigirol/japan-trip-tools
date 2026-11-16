@@ -54,6 +54,7 @@ body {
   line-height: 1.4; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none;
 }
 button, input, select, textarea { font: inherit; color: inherit; }
+html, body, button, a, input, select, textarea, label, summary { touch-action: manipulation; }
 a { color: var(--indigo); }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
