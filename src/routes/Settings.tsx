@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
-import { updateSettings, useSettings, applyTextSize, type Settings as S } from '../lib/settings';
+import { setRecipients, updateSettings, useSettings, applyTextSize, type Settings as S } from '../lib/settings';
 import { stamp } from '../lib/now';
 import { trip } from '../lib/trip';
 import { SyncStatus } from '../components/SyncStatus';
@@ -113,7 +113,7 @@ export function Settings() {
 
       <h2>Purchases</h2>
       <div class="card">
-        <ListEditor label="People you’re buying for" items={s.recipients} onChange={(l) => set({ recipients: l })} placeholder="Add a name" />
+        <ListEditor label="People you’re buying for" items={s.recipients} onChange={setRecipients} placeholder="Add a name" />
         <ListEditor label="Bags (for the tax refund log)" items={s.bags} onChange={(l) => set({ bags: l })} placeholder="Add a bag" />
         <p class="small faint">{DATA_REPO ? 'Names stay on this phone and in the private sync repo.' : 'Names stay on this phone.'} They’re never in the public site.</p>
       </div>

@@ -7,7 +7,8 @@ import type { Purchase } from '../data/schema';
 import { Purchase as PurchaseSchema } from '../data/schema';
 import { cacheGet, cachePut, db } from './db';
 import { mergePurchase, notifyPurchases } from './purchases';
-import { getSettings } from './settings';
+import { getSettings, updateSettings } from './settings';
+import { RECIPIENTS_TITLE, decodeRecipients, encodeRecipients, mergeRecipients } from './recipients';
 
 // Set VITE_DATA_REPO=owner/repo at build time to turn sync on; without it the app stays local-only.
 export const DATA_REPO: string = import.meta.env.VITE_DATA_REPO ?? '';
@@ -77,7 +78,19 @@ async function pull(token: string, map: Record<string, number>): Promise<number>
     const q = `?state=all&per_page=100&page=${page}&sort=updated&direction=asc${since ? '&since=' + encodeURIComponent(since) : ''}`;
     const issues: Issue[] = await (await gh(`/repos/${DATA_REPO}/issues${q}`, token)).json();
     for (const is of issues) {
-      if (is.pull_request || !is.title.startsWith('purchase:')) continue;
+      if (is.pull_request) continue;
+      if (is.title === RECIPIENTS_TITLE) {
+        map[RECIPIENTS_TITLE] = is.number;
+        const remote = decodeRecipients(is.body);
+        if (remote) {
+          const st = getSettings();
+          const m = mergeRecipients({ recipients: st.recipients, at: st.recipientsAt, dirty: st.recipientsDirty }, remote);
+          if (m.at !== st.recipientsAt || m.dirty !== st.recipientsDirty || m.recipients.length !== st.recipients.length || m.recipients.some((r, i) => r !== st.recipients[i]))
+            updateSettings({ recipients: m.recipients, recipientsAt: m.at, recipientsDirty: m.dirty });
+        }
+        continue;
+      }
+      if (!is.title.startsWith('purchase:')) continue;
       const id = is.title.slice('purchase:'.length);
       map[id] = is.number;
       const remote = decodeBody(is.body);
@@ -117,8 +130,30 @@ async function push(token: string, map: Record<string, number>) {
   }
 }
 
+async function pushRecipients(token: string, map: Record<string, number>) {
+  const st = getSettings();
+  // Never synced and nothing typed here: nothing to push.
+  const first = !st.recipientsAt && st.recipients.length > 0;
+  if (!st.recipientsDirty && !first) return;
+  const at = st.recipientsAt || new Date().toISOString();
+  const sent = st.recipients;
+  const body = encodeRecipients({ recipients: sent, at });
+  if (map[RECIPIENTS_TITLE]) {
+    await gh(`/repos/${DATA_REPO}/issues/${map[RECIPIENTS_TITLE]}`, token, { method: 'PATCH', body: JSON.stringify({ body }) });
+  } else {
+    const r = await gh(`/repos/${DATA_REPO}/issues`, token, { method: 'POST', body: JSON.stringify({ title: RECIPIENTS_TITLE, body }) });
+    map[RECIPIENTS_TITLE] = ((await r.json()) as Issue).number;
+    await cachePut(MAP_KEY, map);
+  }
+  // Clear the flag only if the list wasn't edited again while we were sending.
+  if (getSettings().recipients === sent) updateSettings({ recipientsAt: at, recipientsDirty: false });
+}
+
 async function pendingCount() {
-  try { return (await (await db()).getAll('queue')).reduce((s, q) => s.add(q.purchaseId), new Set<string>()).size; } catch { return 0; }
+  try {
+    const n = (await (await db()).getAll('queue')).reduce((s, q) => s.add(q.purchaseId), new Set<string>()).size;
+    return n + (getSettings().recipientsDirty ? 1 : 0);
+  } catch { return 0; }
 }
 
 let running: Promise<void> | null = null;
@@ -138,6 +173,7 @@ export async function syncNow(force = false): Promise<void> {
       const merged = await pull(token, map);
       await cachePut(MAP_KEY, map);
       await push(token, map);
+      await pushRecipients(token, map);
       await cachePut(MAP_KEY, map);
       if (merged) notifyPurchases();
       backoffMs = 60_000;

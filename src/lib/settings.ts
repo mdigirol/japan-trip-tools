@@ -8,6 +8,8 @@ export interface Settings {
   tempFirst: 'F' | 'C';
   textSize: 'normal' | 'large' | 'xl';
   recipients: string[];
+  recipientsAt: string;            // ISO time of the last edit to recipients; '' = never synced
+  recipientsDirty: boolean;        // edited here, not yet pushed
   bags: string[];
   syncToken: string;
   rateOverride: number | null;     // USD per ¥1, set by hand; wins until cleared
@@ -19,7 +21,7 @@ export interface Settings {
 
 const KEY = 'jtc-settings-v1';
 const DEFAULTS: Settings = {
-  who: '', tempFirst: 'F', textSize: 'normal', recipients: [], bags: ['Carry-on', 'Big suitcase', 'Backpack'],
+  who: '', tempFirst: 'F', textSize: 'normal', recipients: [], recipientsAt: '', recipientsDirty: false, bags: ['Carry-on', 'Big suitcase', 'Backpack'],
   syncToken: '', rateOverride: null, tableFocus: 'yen', favorites: [], toolOrder: [], timeZone: 'JST'
 };
 
@@ -40,6 +42,12 @@ export function updateSettings(patch: Partial<Settings>) {
   current = { ...current, ...patch };
   try { localStorage.setItem(KEY, JSON.stringify(current)); } catch { /* storage blocked */ }
   subs.forEach((f) => f(current));
+}
+
+/** Edit the souvenir recipients list: stamps it and asks for a sync. */
+export function setRecipients(list: string[]) {
+  updateSettings({ recipients: list, recipientsAt: new Date().toISOString(), recipientsDirty: true });
+  if (typeof window !== 'undefined') window.dispatchEvent(new Event('jtc-sync-request'));
 }
 
 export function useSettings(): Settings {
